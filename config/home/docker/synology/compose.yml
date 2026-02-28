@@ -1,0 +1,24 @@
+services:
+  dsm:
+    container_name: dsm
+    image: vdsm/virtual-dsm
+    environment:
+      DISK_SIZE: "20G"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 5000:5000
+    volumes:
+      - ./dsm:/storage
+    restart: unless-stopped
+    stop_grace_period: 2m
+    networks:
+      - lan
+
+networks:
+  lan:
+    external: true
+    name: lan

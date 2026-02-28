@@ -1,0 +1,16 @@
+services:
+  ubuntu:
+    container_name: ubuntu
+    build: .
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./home:/root
+    restart: always
+    networks:
+      - lan
+
+networks:
+  lan:
+    name: lan
+    external: true

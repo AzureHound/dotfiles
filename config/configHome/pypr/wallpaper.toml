@@ -1,0 +1,23 @@
+# █   █ ▄▀█ █   █   █▀█ ▄▀█ █▀█ ██▀ █▀█
+# █▄▀▄█ █▀█ █▄▄ █▄▄ █▀▀ █▀█ █▀▀ █▄▄ █▀▄
+
+[pyprland]
+plugins = ["wallpapers"]
+
+[wallpapers]
+path = "~/Developer/Wallpapers/"
+interval = 30
+extensions = ["jpg", "png", "gif", "jpeg", "webp"]
+command = "hyprctl hyprpaper wallpaper \",[file]\" && ln -sf [file] \"$HOME/.config/hypr/lock\""
+# command = "swww img --transition-bezier 0.5,1.19,.8,.4 --transition-type wipe --transition-duration 2 --transition-fps 30 \"[file]\""
+# clear_command = "swww clear"
+
+# ONLINE
+online_ratio = 1.0
+online_folder = "online"
+online_backends = ["unsplash", "wallhaven"]
+online_keywords = ["nature", "minimal"]
+
+cache_days = 30
+cache_max_mb = 500
+cache_max_images = 100

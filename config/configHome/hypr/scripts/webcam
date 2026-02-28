@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+## PIXEL
+# scrcpy --video-source=camera --camera-facing=back --camera-size=1920x1080 --camera-fps=30 --no-audio --v4l2-sink=/dev/video3 --no-playback
+
+## SONY
+# sudo webcamize
+
+## CHECK
+# v4l2-ctl --list-devices
+# lsusb | grep -i Sony
+
+## KILL
+# pkill -f scrcpy
+# sudo pkill -f webcamize
+
+if pgrep -f "Webcam" >/dev/null; then
+  pkill -f "Webcam"
+  exit 0
+fi
+
+if ! pgrep -f "scrcpy.*camera" >/dev/null; then
+  scrcpy --video-source=camera --camera-facing=back --camera-size=1920x1080 --camera-fps=30 --no-audio --v4l2-sink=/dev/video3 --no-playback &
+  sleep 2
+fi
+
+if pgrep -f "scrcpy.*camera" >/dev/null; then
+  VIDEO_DEVICE="/dev/video3"
+else
+  if ! pgrep -f "webcamize" >/dev/null; then
+    pkexec bash -c 'webcamize &'
+    sleep 2
+  fi
+  VIDEO_DEVICE="/dev/video4"
+fi
+
+if [ ! -e "$VIDEO_DEVICE" ]; then
+  notify-send -u critical -h int:transient:1 "No webcam device found"
+  exit 1
+fi
+
+if ! pgrep -f "ffplay.*Webcam" >/dev/null; then
+  ffplay -f v4l2 "$VIDEO_DEVICE" -window_title "Webcam" -noborder -x 600 \
+    -fflags nobuffer -flags low_delay \
+    -probesize 32 -analyzeduration 0 \
+    -loglevel quiet &
+fi

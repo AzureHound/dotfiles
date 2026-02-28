@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+aw=$(hyprctl -j activeworkspace | jq '.id')
+cur=$(hyprctl -j activewindow | jq -r '.address')
+
+mon_w=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true) | .width')
+mon_h=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true) | .height')
+
+hyprctl -j clients | jq -r ".[] | select(.workspace.id == $aw and (.title | test(\"Picture.?in.?[Pp]icture\") | not)) | \"\(.address) \(.floating)\"" | while read -r addr floating; do
+
+  hyprctl dispatch "hl.dsp.focus({window='address:$addr'})"
+
+  if [ "$floating" == "false" ]; then
+    w_px=$((mon_w * 70 / 100))
+    h_px=$((mon_h * 70 / 100))
+
+    hyprctl --batch "dispatch hl.dsp.window.float({action='set'}) ; dispatch hl.dsp.window.resize({x=${w_px}, y=${h_px}})"
+  else
+    hyprctl dispatch "hl.dsp.window.float({action='unset'})"
+  fi
+done
+
+hyprctl --batch "dispatch hl.dsp.focus({window='address:$cur'}) ; dispatch hl.dsp.window.alter_zorder({mode='top'}) ; dispatch hl.dsp.window.center()"

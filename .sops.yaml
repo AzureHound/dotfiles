@@ -1,0 +1,17 @@
+keys:
+  - &eden age1cqn2lzacjwhtpecsnhjc2nf659va465sa2evdw37jahkg03jaavs2slpq0
+
+  - &Orion age107mvx47vn5sfp7clw75e6v2m4p4s9wrj22zhvmml50y9l0lmsyuq9q3szp
+
+creation_rules:
+  - path_regex: secrets/eden\.yaml
+    key_groups:
+      - age:
+          - *eden
+
+  - path_regex: secrets/services/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *eden
+
+          - *Orion

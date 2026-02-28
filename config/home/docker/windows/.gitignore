@@ -1,0 +1,8 @@
+*
+!.gitignore
+!autounattend.xml
+!compose.yml
+
+!LAN/
+!LAN/apps.ps1
+!LAN/README.md

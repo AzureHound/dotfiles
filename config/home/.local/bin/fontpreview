@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+# https://github.com/sdushantha/fontpreview
+# Dependencies: imagemagick, fzf, chafa
+
+VERSION=1.0.7
+
+SEARCH_PROMPT="❯ "
+SIZE=1000x1000
+FONT_SIZE=80
+BG_COLOR="#24273a"
+FG_COLOR="#b7bdf8"
+PREVIEW_TEXT="ABCDEFGHIJKLM\nNOPQRSTUVWXYZ\nabcdefghijklm\nnopqrstuvwxyz\n1234567890\n!@$\%(){}[]\nالسلام عليكم"
+
+show_help() {
+  printf "%s" "\
+usage: fontpreview [-h] [--font-size \"FONT_SIZE\"] [--bg-color \"BG_COLOR\"] 
+                   [--fg-color \"FG_COLOR\"] [--preview-text \"PREVIEW_TEXT\"]
+
+▗▄▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖    ▗▄▄▖ ▗▄▄▖ ▗▄▄▄▖▗▖  ▗▖▗▄▄▄▖▗▄▄▄▖▗▖ ▗▖
+▐▌   ▐▌ ▐▌▐▛▚▖▐▌  █      ▐▌ ▐▌▐▌ ▐▌▐▌   ▐▌  ▐▌  █  ▐▌   ▐▌ ▐▌
+▐▛▀▀▘▐▌ ▐▌▐▌ ▝▜▌  █      ▐▛▀▘ ▐▛▀▚▖▐▛▀▀▘▐▌  ▐▌  █  ▐▛▀▀▘▐▌ ▐▌
+▐▌   ▝▚▄▞▘▐▌  ▐▌  █      ▐▌   ▐▌ ▐▌▐▙▄▄▖ ▝▚▞▘ ▗▄█▄▖▐▙▄▄▖▐▙█▟▌
+
+optional arguments:
+   -h, --help            show this help message and exit
+   --font-size           font size (default: 80)
+   --bg-color            background color (default: #24273a)
+   --fg-color            foreground color (default: #b7bdf8)
+   --preview-text        preview text to display
+   --version             show version
+"
+}
+
+generate_preview() {
+  local font=$1
+  local output=$2
+  magick -size "$SIZE" xc:"$BG_COLOR" \
+    -gravity center \
+    -pointsize "$FONT_SIZE" \
+    -font "$font" \
+    -fill "$FG_COLOR" \
+    -annotate +150+50 "$PREVIEW_TEXT" \
+    -flatten "$output"
+}
+
+preview_font() {
+  local font=$1
+  local tmpfile="/tmp/fontpreview_$$.png"
+
+  generate_preview "$font" "$tmpfile"
+
+  if [[ "$TERM" == "xterm-kitty" ]]; then
+    chafa --format=kitty --size="${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}" "$tmpfile"
+  else
+    chafa --format=sixel --size="${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}" "$tmpfile"
+  fi
+
+  rm -f "$tmpfile"
+}
+
+export -f generate_preview preview_font
+export SIZE FONT_SIZE BG_COLOR FG_COLOR PREVIEW_TEXT
+
+main() {
+  dependencies=(magick fzf chafa)
+  for dependency in "${dependencies[@]}"; do
+    type -p "$dependency" &>/dev/null || {
+      echo "error: Could not find '${dependency}', is it installed?" >&2
+      exit 1
+    }
+  done
+
+  [[ $FONTPREVIEW_FONT_SIZE != "" ]] && FONT_SIZE=$FONTPREVIEW_FONT_SIZE
+  [[ $FONTPREVIEW_BG_COLOR != "" ]] && BG_COLOR=$FONTPREVIEW_BG_COLOR
+  [[ $FONTPREVIEW_FG_COLOR != "" ]] && FG_COLOR=$FONTPREVIEW_FG_COLOR
+  [[ $FONTPREVIEW_PREVIEW_TEXT != "" ]] && PREVIEW_TEXT=$FONTPREVIEW_PREVIEW_TEXT
+
+  magick -list font |
+    awk -F: '/^[ ]*Font: /{print substr($NF,2)}' |
+    fzf --prompt="$SEARCH_PROMPT" \
+      --preview='bash -c "preview_font {}"' \
+      --preview-window=right:60%
+}
+
+options=$(getopt -o h --long font-size:,bg-color:,fg-color:,preview-text:,version,help -- "$@")
+eval set -- "$options"
+
+while true; do
+  case "$1" in
+  -h | --help)
+    show_help
+    exit
+    ;;
+  --version)
+    echo $VERSION
+    exit
+    ;;
+  --font-size)
+    FONTPREVIEW_FONT_SIZE=$2
+    shift
+    ;;
+  --bg-color)
+    FONTPREVIEW_BG_COLOR=$2
+    shift
+    ;;
+  --fg-color)
+    FONTPREVIEW_FG_COLOR=$2
+    shift
+    ;;
+  --preview-text)
+    FONTPREVIEW_PREVIEW_TEXT=$2
+    shift
+    ;;
+  --)
+    shift
+    break
+    ;;
+  esac
+  shift
+done
+
+main

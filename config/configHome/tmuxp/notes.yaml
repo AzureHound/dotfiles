@@ -1,0 +1,11 @@
+session_name: Productivity
+windows:
+  - window_name: Obsidian
+    start_directory: ~/Obsidian
+    panes:
+      - shell_command:
+          - nvim; tmux kill-window
+  - window_name: To-Do
+    panes:
+      - shell_command:
+          - nvim ~/Obsidian/To-do.md; tmux kill-window

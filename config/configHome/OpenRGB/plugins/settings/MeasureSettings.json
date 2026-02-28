@@ -1,0 +1,100 @@
+[
+    {
+        "auto_start": true,
+        "brightness": 100,
+        "devices": [
+            {
+                "brightness": 100,
+                "description": "NZXT Hue 2 Device",
+                "is_percentage_fill": false,
+                "is_segment": false,
+                "location": "HID: /dev/hidraw7",
+                "name": "NZXT Kraken X3 Series",
+                "reverse": false,
+                "segment_idx": -1,
+                "serial": "00000000001A",
+                "vendor": "NZXT",
+                "version": "2.1.0",
+                "zone_idx": 1
+            },
+            {
+                "brightness": 100,
+                "description": "NZXT Hue 2 Device",
+                "is_percentage_fill": false,
+                "is_segment": true,
+                "location": "HID: /dev/hidraw7",
+                "name": "NZXT Kraken X3 Series",
+                "reverse": false,
+                "segment_idx": 0,
+                "serial": "00000000001A",
+                "vendor": "NZXT",
+                "version": "2.1.0",
+                "zone_idx": 1
+            }
+        ],
+        "fps": 30,
+        "hardware": 6,
+        "hardware_feature": 0,
+        "measure_color": {
+            "color_stops": [
+                [
+                    40.0,
+                    65280
+                ],
+                [
+                    70.0,
+                    65535
+                ],
+                [
+                    80.0,
+                    255
+                ]
+            ]
+        },
+        "name": "CPU",
+        "refresh_interval": 100,
+        "running": true
+    },
+    {
+        "auto_start": true,
+        "brightness": 100,
+        "devices": [
+            {
+                "brightness": 100,
+                "description": "NZXT Hue 2 Device",
+                "is_percentage_fill": false,
+                "is_segment": true,
+                "location": "HID: /dev/hidraw7",
+                "name": "NZXT Kraken X3 Series",
+                "reverse": false,
+                "segment_idx": 0,
+                "serial": "00000000001A",
+                "vendor": "NZXT",
+                "version": "2.1.0",
+                "zone_idx": 2
+            }
+        ],
+        "fps": 30,
+        "hardware": 7,
+        "hardware_feature": 0,
+        "measure_color": {
+            "color_stops": [
+                [
+                    50.0,
+                    16777215
+                ],
+                [
+                    70.0,
+                    65535
+                ],
+                [
+                    80.0,
+                    255
+                ]
+            ]
+        },
+        "name": "GPU",
+        "refresh_interval": 100,
+        "running": true
+    }
+]

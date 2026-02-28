@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+DEVICE="/dev/video4"
+RESOLUTION="1920x1080"
+FPS="30"
+
+ffplay -fs \
+  -fflags nobuffer \
+  -flags low_delay \
+  -framedrop \
+  -sync video \
+  -f v4l2 \
+  -input_format mjpeg \
+  -video_size $RESOLUTION \
+  -framerate $FPS \
+  -i $DEVICE \
+  -vf unsharp=5:5:0.8:5:5:0.0

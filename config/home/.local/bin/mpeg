@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+show_help() {
+  cat <<EOF
+Usage: mpeg [OPTIONS] path...
+
+OPTIONS:
+  --rm-exif    Remove EXIF metadata using exiftool
+  --jpg        Convert PNG/ARW to JPG [Quality 95]
+  --png        Convert Sony ARW to PNG [Defaults to 8-bit]
+  --8bit       Set depth to 8-bit [Default]
+  --10bit      Set depth to 10-bit
+  --12bit      Set depth to 12-bit
+  --16bit      Set depth to 16-bit
+  -h, --help   Show this help
+
+e.g:
+  mpeg --png photo.arw
+  mpeg --png --16bit photo.arw
+EOF
+  exit 0
+}
+
+BIT_DEPTH=""
+RM_EXIF=false
+TO_JPG=false
+TO_PNG=false
+PATHS=()
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  -h | --help) show_help ;;
+  --rm-exif) RM_EXIF=true ;;
+  --jpg) TO_JPG=true ;;
+  --png) TO_PNG=true ;;
+  --8bit) BIT_DEPTH="8" ;;
+  --10bit) BIT_DEPTH="10" ;;
+  --12bit) BIT_DEPTH="12" ;;
+  --16bit) BIT_DEPTH="16" ;;
+  *) PATHS+=("$1") ;;
+  esac
+  shift
+done
+
+[[ ${#PATHS[@]} -eq 0 ]] && {
+  echo "Usage: mpeg [--rm-exif] [--jpg] [--png] [--16bit] path..."
+  echo "Try 'mpeg -h' for more information."
+  exit 1
+}
+
+process_file() {
+  local src="$1"
+  local out="$2"
+  local ext="${src##*.}"
+
+  if [[ "$TO_PNG" == true ]] && [[ "${ext,,}" == "arw" ]]; then
+    out="${out%.*}.png"
+    local depth="${BIT_DEPTH:-8}"
+    magick "$src" -auto-orient -depth "$depth" -colorspace sRGB -define png:compression-level=9 "$out"
+    echo "$src -> $out"
+  elif [[ "$TO_JPG" == true ]]; then
+    if [[ "${ext,,}" == "arw" ]]; then
+      out="${out%.*}.jpg"
+      magick "$src" -auto-orient -colorspace sRGB -quality 95 "$out"
+      echo "$src -> $out"
+    elif [[ "${ext,,}" == "png" ]]; then
+      out="${out%.*}.jpg"
+      ffmpeg -y -loglevel error -i "$src" -q:v 2 "$out"
+      echo "$src -> $out"
+    elif [[ "${ext,,}" =~ ^jpe?g$ ]]; then
+      echo -e "\033[33mSkipping JPG: $src\033[0m"
+      return
+    else
+      cp "$src" "$out"
+    fi
+  else
+    cp "$src" "$out"
+  fi
+
+  [[ "$RM_EXIF" == true ]] && exiftool -overwrite_original -all= "$out" 2>/dev/null || true
+}
+
+for path in "${PATHS[@]}"; do
+  path="${path%/}"
+  if [[ -f "$path" ]]; then
+    dir="$(dirname "$path")"
+    base="$(basename "$path")"
+    name="${base%.*}"
+    ext="${base##*.}"
+    out="$dir/$name-mpeg.$ext"
+    process_file "$path" "$out"
+  elif [[ -d "$path" ]]; then
+    out_dir="${path}-mpeg"
+    mkdir -p "$out_dir"
+    for f in "$path"/*; do
+      [[ -f "$f" ]] && {
+        base="$(basename "$f")"
+        name="${base%.*}"
+        ext="${base##*.}"
+        out="$out_dir/$name-mpeg.$ext"
+        process_file "$f" "$out"
+      }
+    done
+  fi
+done
+
+exit 0

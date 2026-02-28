@@ -1,0 +1,49 @@
+categories:
+    - name: Feed
+      desc: ""
+      subscriptions:
+        - name: Antfu
+          desc: ""
+          url: https://antfu.me/feed.xml
+        - name: Dreams of Code
+          desc: ""
+          url: https://blog.dreamsofcode.io/rss.xml
+        - name: Orhun
+          desc: ""
+          url: https://blog.orhun.dev/rss.xml
+        - name: Charm
+          desc: ""
+          url: https://charm.sh/blog/rss.xml
+        - name: CTT
+          desc: ""
+          url: https://christitus.com/index.xml
+        - name: Clan
+          desc: ""
+          url: https://clan.lol/feed.xml
+        - name: Dataswamp
+          desc: ""
+          url: https://dataswamp.org/~solene/rss-html.xml
+        - name: Faster than Li
+          desc: ""
+          url: https://fasterthanli.me/index.xml
+        - name: Moonlight
+          desc: ""
+          url: https://github.com/moonlight-mod/extensions/commits.atom
+        - name: Isabel Roses
+          desc: ""
+          url: https://isabelroses.com/feed.xml
+        - name: Maia
+          desc: ""
+          url: https://maia.crimew.gay/feed.xml
+        - name: Mitchell H
+          desc: ""
+          url: https://mitchellh.com/feed.xml
+        - name: Terminal Trove
+          desc: ""
+          url: https://terminaltrove.com/new.xml
+        - name: Uncenter
+          desc: ""
+          url: https://uncenter.dev/feed.xml
+        - name: マリウス
+          desc: ""
+          url: https://マリウス.com/index.xml

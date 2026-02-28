@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+LRCLIB_API="https://lrclib.net/api/get"
+
+RMPC_LYRICS_DIR="$XDG_DATA_HOME/Lyrics"
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 \"/path/to/directory_containing_songs\""
+  exit 1
+fi
+
+SOURCE_DIR="$1"
+if [ ! -d "$SOURCE_DIR" ]; then
+  echo "Error: '$SOURCE_DIR' is not a directory."
+  exit 1
+fi
+
+SOURCE_DIR_BASENAME="$(basename "$SOURCE_DIR")"
+
+TARGET_LYRICS_SUBDIR="${RMPC_LYRICS_DIR}/${SOURCE_DIR_BASENAME}"
+
+mkdir -p "$TARGET_LYRICS_SUBDIR" || {
+  echo "Error: Could not create '$TARGET_LYRICS_SUBDIR'"
+  exit 1
+}
+
+get_lyrics_for() {
+  local artist="$1"
+  local album="$2"
+  local title_try="$3"
+
+  local curl_args=(
+    -sG
+    --data-urlencode "artist_name=${artist}"
+    --data-urlencode "track_name=${title_try}"
+  )
+  if [ -n "$album" ]; then
+    curl_args+=(--data-urlencode "album_name=${album}")
+  fi
+  curl_args+=("$LRCLIB_API")
+
+  local curl_output
+  curl_output=$(curl "${curl_args[@]}" 2>/dev/null)
+
+  if echo "$curl_output" | jq . >/dev/null 2>&1; then
+    echo "$curl_output" | jq -r '.syncedLyrics'
+  else
+    echo "Warning: Received non-JSON response for \"$artist - $title_try\". Response: $curl_output" >&2
+    echo "null"
+  fi
+}
+
+fetch_and_store() {
+  local artist_p="$1"
+  local album_p="$2"
+  local title_p="$3"
+  local target_lrc_path="$4"
+
+  local lyrics
+  lyrics="$(get_lyrics_for "$artist_p" "$album_p" "$title_p")"
+
+  if [ -z "$lyrics" ] || [ "$lyrics" == "null" ]; then
+    local stripped_title
+    stripped_title="$(echo "$title_p" | sed -E 's/ *\([^)]*\)//g')"
+    if [ "$stripped_title" != "$title_p" ]; then
+      echo "    Retrying with stripped title: \"$stripped_title\""
+      title_p="$stripped_title"
+      lyrics="$(get_lyrics_for "$artist_p" "$album_p" "$title_p")"
+    fi
+  fi
+
+  if [ -z "$lyrics" ] || [ "$lyrics" == "null" ]; then
+    echo "$(tput setaf 1)✗$(tput sgr0) No lyrics for: \"$artist_p - $title_p\""
+    return 1
+  fi
+
+  echo "$lyrics" | sed -E '/^\[(ar|al|ti):/d' >"$target_lrc_path"
+  echo "$(tput setaf 2)✔$(tput sgr0) Saved lyrics to: $(basename "$target_lrc_path") (in $SOURCE_DIR_BASENAME dir)"
+  return 0
+}
+
+echo "$(tput setaf 4)▶$(tput sgr0) Fetching lyrics for all .mp3 in: $SOURCE_DIR"
+echo "  Target lyrics directory: $TARGET_LYRICS_SUBDIR"
+echo
+
+shopt -s nullglob
+for mp3_file in "$SOURCE_DIR"/*.mp3; do
+  RAW_FILENAME="$(basename "$mp3_file" .mp3)"
+
+  if [[ "$RAW_FILENAME" =~ ^(.*)[[:blank:]]+-[[:blank:]]+(.*)$ ]]; then
+    ARTIST_PARSED="${BASH_REMATCH[1]}"
+    TITLE_PARSED="${BASH_REMATCH[2]}"
+    ALBUM_PARSED=""
+  else
+    ARTIST_PARSED="Unknown Artist"
+    TITLE_PARSED="$RAW_FILENAME"
+    ALBUM_PARSED=""
+  fi
+
+  TARGET_LRC_FILE="${TARGET_LYRICS_SUBDIR}/${RAW_FILENAME}.lrc"
+
+  echo "Attempting to fetch for: \"$ARTIST_PARSED - $TITLE_PARSED\""
+
+  if [ -f "$TARGET_LRC_FILE" ]; then
+    echo "– Skipping \"$RAW_FILENAME\" (already have .lrc in $SOURCE_DIR_BASENAME dir)"
+    continue
+  fi
+
+  if ! fetch_and_store "$ARTIST_PARSED" "$ALBUM_PARSED" "$TITLE_PARSED" "$TARGET_LRC_FILE"; then
+    continue
+  fi
+done
+
+echo
+echo "Done."

@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+
+CACHE="/run/user/$UID/swaybar.cache"
+MECH_PID="/run/user/$UID/mechsim.pid"
+REFRESH_RATE=20
+
+# Sounds
+pango_escape() {
+  local s="${1//&/&amp;}"
+  s="${s//</&lt;}"
+  s="${s//>/&gt;}"
+  s="${s//\"/&quot;}"
+  s="${s//\'/&apos;}"
+  printf '%s' "$s"
+}
+
+## Title
+truncate_title() {
+  local title="$1"
+  local max=40
+  if ((${#title} > max)); then
+    printf '%s…' "${title:0:max}"
+  else
+    printf '%s' "$title"
+  fi
+}
+
+
+## Mpris
+sounds=""
+if mpris_raw=$(playerctl metadata --format '{{status}} {{title}}' 2>/dev/null); then
+  read -r player_status raw_title <<<"$mpris_raw"
+
+  if [[ "$player_status" == "Playing" || "$player_status" == "Paused" ]]; then
+    song_info=$(truncate_title "$(pango_escape "$raw_title")")
+
+    if [[ "$player_status" == "Playing" ]]; then
+      sounds="<span foreground='#8aadf4'></span><span foreground='#f4dbd6'> ${song_info}</span> :: "
+    else
+      sounds="<span foreground='#ed8796'></span><span foreground='#8087a2'> ${song_info}</span> :: "
+    fi
+  fi
+fi
+
+# Heavy Logic Checks
+current_time_seconds=$(date +%s)
+last_update=0
+[[ -f "$CACHE" ]] && last_update=$(stat -c %Y "$CACHE")
+
+if ((current_time_seconds - last_update > REFRESH_RATE)); then
+
+  # Mechsim
+  mechsim=""
+  if [[ ! -f "$MECH_PID" ]] || ! ps -p "$(<"$MECH_PID")" >/dev/null; then
+    mechsim="<span foreground='#8bd5ca'> </span> "
+  fi
+
+  # BAT %
+  if [[ -f /sys/class/power_supply/BAT0/capacity ]]; then
+    read -r battery_percentage </sys/class/power_supply/BAT0/capacity
+    read -r raw_status </sys/class/power_supply/BAT0/status
+    battery_status="${raw_status// /}"
+  else
+    battery_percentage=0
+    battery_status="Unknown"
+  fi
+
+  battery_icons=("󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰁹")
+  battery_color="#eed49f"
+  icon_index=$((battery_percentage / 10))
+  ((icon_index > 9)) && icon_index=9
+  battery_icon=${battery_icons[icon_index]}
+
+  if ((battery_percentage >= 20 && battery_percentage <= 30)); then
+    battery_color="#f0c6c6"
+  fi
+
+  if [[ "$battery_status" == "Charging" || "$battery_status" == "Notcharging" ]]; then
+    battery_icon=""
+    battery_color="#a6da95"
+    if ((battery_percentage >= 56 && battery_percentage <= 60)); then
+      battery_icon="󰨔󱑻    $battery_icon"
+      battery_color="#ed8796"
+    fi
+  fi
+
+  # Network
+  network=""
+  if [[ -f /sys/class/net/eth0/carrier ]] && [[ $(</sys/class/net/eth0/carrier) == "1" ]]; then
+    network="<span foreground='#a6da95'>󰈀 </span> "
+  elif [[ -f /sys/class/net/wlan0/operstate ]]; then
+    read -r wifi_state </sys/class/net/wlan0/operstate
+    if [[ "$wifi_state" == "up" ]]; then
+      network="<span foreground='#c6a0f6'>󰤨 </span> "
+    else
+      network="<span foreground='#ed8796'>󰤭 </span> "
+    fi
+  fi
+
+  # Bluetooth
+  # bluetooth=""
+  # if [[ -d /sys/class/bluetooth/hci0 ]]; then
+  #   if bluetoothctl devices Connected | grep -q "Device"; then
+  #     bluetooth="<span foreground='#8aadf4'>󰂯 </span>"
+  #   fi
+  # fi
+
+  # Cache
+  echo "mechsim=\"$mechsim\"" >"$CACHE"
+  echo "battery_percentage=\"$battery_percentage\"" >>"$CACHE"
+  echo "battery_icon=\"$battery_icon\"" >>"$CACHE"
+  echo "battery_color=\"$battery_color\"" >>"$CACHE"
+  echo "network=\"$network\"" >>"$CACHE"
+  echo "bluetooth=\"$bluetooth\"" >>"$CACHE"
+else
+  source "$CACHE"
+fi
+
+# Time
+printf -v current_time "%(%H:%M)T" -1
+time=":: <span foreground='#8aadf4'>󰥔</span> <span foreground='#b7bdf8'>$current_time</span>"
+
+# OUTPUT
+battery_out="<span foreground='$battery_color'>$battery_icon $battery_percentage%</span>"
+
+echo "$sounds$mechsim$network$time | $battery_out"

@@ -1,0 +1,15 @@
+session_name: dotfiles
+windows:
+  - layout: main-vertical
+    start_directory: ~/Developer/dotfiles
+    panes:
+      - shell_command:
+          - nvim
+  - layout: main-vertical
+    start_directory: ~/Developer/dotfiles
+    panes:
+      - shell_command:
+          - exec lazygit
+  - layout: main-vertical
+    panes:
+      -

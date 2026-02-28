@@ -1,0 +1,3 @@
+.config/msmtp
+.config/mutt
+!.config/mutt/styles.muttrc

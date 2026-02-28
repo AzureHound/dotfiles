@@ -1,0 +1,139 @@
+# vim: filetype=muttrc
+
+color progress black cyan
+
+color sidebar_new       brightgreen default     # Mailboxes with new mail are Green
+color sidebar_flagged   red         default     # Mailboxes with flagged mails are Red
+color sidebar_divider   black       default     # dividers
+color sidebar_highlight default     brightblack # highlighted mailbox
+color sidebar_indicator color183    black       # selected mailbox
+color sidebar_ordinary  color146    default     # normal mailboxes
+color sidebar_unread    color254    default     # unread mail
+
+color index         yellow   default '.*'
+color index_number  blue     default
+color index_author  color183 default '.*'
+color index_subject cyan     default '.*'
+
+color index green     black   ~N  # New Messages are Green
+color index red       default ~F  # Flagged messages are Red
+color index brightred default ~T  # Tagged Messages are Red
+color index red       default ~D  # Messages to delete are Red
+
+# New Mail
+color index         green black "~N"
+color index_number  green black "~N"
+color index_author  green black "~N"
+color index_subject green black "~N"
+
+color normal     default     default      # Text is "Text"
+color attachment magenta     default      # Attachments are Pink
+color signature  brightblack default      # Signatures are Surface 2
+color search     blue        default      # Highlighted results are Blue
+color indicator  default     brightblack  # currently highlighted message Surface 2=Background Text=Foreground
+
+color error  red         default
+color status brightwhite default
+color tree   yellow      default
+color tilde  brightwhite default
+
+color hdrdefault brightmagenta default
+color header     blue          default ".*"
+color header     color183      default "^To:"
+color header     color183      default "^From:"
+color header     color183      default "^Sent:"
+color header     brightcyan    default "^Subject:"
+color header     brightwhite   default "^(CC|BCC)"
+
+color quoted  brightwhite default
+color quoted1 white       default
+color quoted2 brightblack default
+color quoted3 black       default
+color quoted4 black       default
+color quoted5 black       default
+
+mono bold      bold
+mono underline underline
+mono indicator reverse
+mono error     bold
+
+color message   brightcyan default
+color markers   red        white
+color bold      black      default
+color underline black      default
+
+color body color183     default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+"                               # Email addresses
+color body yellow       default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+"                        # URL
+color body green        default "\`[^\`]*\`"                                                        # Green text between ` and `
+color body brightblue   default "^# \.*"                                                            # Headings as bold blue
+color body brightcyan   default "^## \.*"                                                           # Subheadings as bold cyan
+color body brightgreen  default "^### \.*"                                                          # Subsubheadings as bold green
+color body yellow       default "^(\t| )*(-|\\*) \.*"                                               # List items as yellow
+color body brightcyan   default "[;:][-o][)/(|]"                                                    # emoticons
+color body brightcyan   default "[;:][)(|]"                                                         # emoticons
+color body brightcyan   default "[ ][*][^*]*[*][ ]?"                                                # more emoticon?
+color body brightcyan   default "[ ]?[*][^*]*[*][ ]"                                                # more emoticon?
+color body blue         default (^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$)                   # *bold* text Blue
+color body blue         default (^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)                       # _underlined_ text Blue
+color body blue         default (^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)                       # /italic/ text Blue
+color body blue         default '^(Date\/Time|Location|Organiser|Invitees|Teams Meeting)(:| \~\~)'  # calendar info
+color body red          default "(BAD signature)"
+color body cyan         default "(Good signature)"
+color body brightblack  default "^gpg: Good signature .*"
+color body brightyellow default "^gpg: "
+color body brightyellow red "^gpg: BAD signature from.*"
+mono  body bold "^gpg: Good signature"
+mono  body bold "^gpg: BAD signature from.*"
+color body yellow       default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+
+color status white    default                               # status bar
+color status blue     default ' '                          # unread count
+color status red      default ' '                          # read count
+color status yellow   default ' '                          # flagged
+color status green    default ' '                          # flagged
+color status red      default ' '                          # deleted
+color status color183 default '^ ([^ ]+)' 1                 # from
+color status cyan     default '\| (.+?)\s+󰃭 ' 1             # subject
+color status green    default '󰃭 '                          # date/time
+color status blue     default '[0-9]{2}:[0-9]{2}'           # time
+color status yellow   default ' '                          # attachment
+color status blue     default '󰦨 '                          # ls
+color status black    blue    '\s*󰏪 [1-9]+\s*'              # editing marker
+color status yellow   black   '\s* \s*[1-9]+\s*' 1         # yellow divider
+color status black    yellow  '\s* \s*[1-9]+\s*'           # yellow block
+color status yellow   default ' ([1-9]+%|all|end) 󰦨 \s*' 1  # blue/yellow arrow
+
+# color normal      default default       # Text is "Text"
+# color index       color2 default  ~N    # New Messages are Green
+# color index       color1 default  ~F    # Flagged messages are Red
+# color index       color13 default ~T    # Tagged Messages are Red
+# color index       color1 default  ~D    # Messages to delete are Red
+# color attachment  color5 default        # Attachments are Pink
+# color signature   color8 default        # Signatures are Surface 2
+# color search      color4 default        # Highlighted results are Blue
+
+# color indicator   default color8        # currently highlighted message Surface 2=Background Text=Foreground
+# color error       color1 default        # error messages are Red
+# color status      color15 default       # status line "Subtext 0"
+# color tree        color15 default       # thread tree arrows Subtext 0
+# color tilde       color15 default       # blank line padding Subtext 0
+
+# color hdrdefault  color13 default       # default headers Pink
+# color header      color13 default "^From:"
+# color header      color13 default "^Subject:"
+
+# color quoted      color15 default       # Subtext 0
+# color quoted1     color7  default       # Subtext 1
+# color quoted2     color8  default       # Surface 2
+# color quoted3     color0  default       # Surface 1
+# color quoted4     color0  default
+# color quoted5     color0  default
+
+# color body    color2 default    [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+               # email addresses Green
+# color body    color2 default    (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+        # URLs Green
+# color body    color4 default    (^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$) # *bold* text Blue
+# color body    color4 default    (^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)     # _underlined_ text Blue
+# color body    color4 default    (^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)     # /italic/ text Blue
+
+# color sidebar_flagged   color1  default   # Mailboxes with flagged mails are Red
+# color sidebar_new       color10 default   # Mailboxes with new mail are Green

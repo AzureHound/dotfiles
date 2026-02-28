@@ -1,0 +1,31 @@
+{ lib, ... }:
+
+let
+  inherit (lib.modules) mkDefault;
+in
+
+{
+  home.shellAliases = {
+    cp = "cp -irv";
+    dev = "~/Developer";
+    df = "df -h";
+    grep = "grep --color=auto";
+    ip = "ip -c a";
+    jctl = "journalctl -p 3 -xb";
+    mkdir = "mkdir -pv";
+    mv = "mv -iv";
+    open = "xdg-open";
+    ping = "ping -c 10";
+    powertop = "sudo powertop";
+    proc = "sysz";
+    pubip = "curl -4 https://icanhazip.com";
+    rm = "trash";
+    todo = "nvim ~/Obsidian/To-do.md";
+
+    domain = "tldx";
+    histwipe = "rm ~/.cache/cliphist/db";
+    market = "ticker --config ~/.config/ticker/ticker.yml";
+    nixbuild = mkDefault "nh os switch -a";
+    # nixbuild = mkDefault "nh os switch --update -a";
+  };
+}

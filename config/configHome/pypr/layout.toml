@@ -1,0 +1,17 @@
+# █   ▄▀█ █▄█ █▀█ █ █ ▀█▀
+# █▄▄ █▀█  █  █▄█ █▄█  █
+
+[pyprland]
+plugins = ["layout_center"]
+
+[layout_center]
+# style = ["opacity 0.92", "bordercolor rgba($textAlphaee)"]
+margin = 70
+offset = [0, 0]
+
+captive_focus = true
+
+next = "movefocus r"
+prev = "movefocus l"
+next2 = "movefocus d"
+prev2 = "movefocus u"

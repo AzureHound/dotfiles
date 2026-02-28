@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+hyprctl dispatch "hl.dsp.exec_cmd('kitty -o close_on_child_death=yes -e $HOME/.local/bin/glyph', {float=true, size='(monitor_w*0.6) (monitor_h*0.7)', center='1'})"

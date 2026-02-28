@@ -1,0 +1,68 @@
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+
+let
+  inherit (lib.lists) optionals;
+  inherit (lib.modules) mkIf mkForce;
+
+  enable = config.pixel.profiles.hetzner.enable || config.pixel.profiles.oracle.enable;
+in
+
+{
+  config = mkIf enable {
+    services = {
+      # Unavailable - device lacks SMART capability.
+      smartd.enable = mkForce false;
+
+      # Needed by the Hetzner Cloud password reset feature
+      qemuGuest.enable = true;
+    };
+
+    systemd.services.qemu-guest-agent.path = with pkgs; [ shadow ];
+
+    boot = {
+      growPartition = !config.boot.initrd.systemd.enable;
+      kernelParams = [ "net.ifnames=0" ];
+      kernel.sysctl = {
+        "net.ipv4.ip_forward" = true;
+        "net.ipv6.conf.all.forwarding" = true;
+      };
+
+      initrd = {
+        availableKernelModules = [
+          "ata_piix"
+          "uhci_hcd"
+          "xen_blkfront"
+
+          "virtio_net"
+          "virtio_pci"
+          "virtio_mmio"
+          "virtio_blk"
+          "virtio_scsi"
+          "9p"
+          "9pnet_virtio"
+        ]
+        ++ optionals (!config.pixel.profiles.oracle.enable) [
+          "vmw_pvscsi"
+        ];
+
+        kernelModules = [
+          "nvme"
+          "virtio_balloon"
+          "virtio_console"
+          "virtio_rng"
+          "virtio_gpu"
+        ];
+      };
+
+      loader.grub = {
+        useOSProber = mkForce false;
+        efiSupport = mkForce false;
+      };
+    };
+  };
+}

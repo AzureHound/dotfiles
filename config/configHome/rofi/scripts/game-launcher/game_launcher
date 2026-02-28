@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+THEME_FILE="$HOME/.config/rofi/scripts/game-launcher/style.rasi"
+
+rofi -show games -theme "$THEME_FILE"
+
+exit $?

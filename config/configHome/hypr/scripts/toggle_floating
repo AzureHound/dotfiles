@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+floating=$(hyprctl activewindow -j | jq -r '.floating')
+window=$(hyprctl activewindow -j | jq -r '.initialClass')
+
+mon_w=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true) | .width')
+mon_h=$(hyprctl monitors -j | jq -r '.[] | select(.focused==true) | .height')
+
+function toggle() {
+  w_pct=${1%\%}
+  h_pct=${2%\%}
+
+  w_px=$((mon_w * w_pct / 100))
+  h_px=$((mon_h * h_pct / 100))
+
+  hyprctl --batch "dispatch hl.dsp.window.float({action='set'}) ; dispatch hl.dsp.window.resize({x=${w_px}, y=${h_px}}) ; dispatch hl.dsp.window.center()"
+}
+
+function untoggle() {
+  hyprctl dispatch "hl.dsp.window.float({action='unset'})"
+}
+
+function handle() {
+  if [ "$floating" == "false" ]; then
+    toggle "$1" "$2"
+  else
+    untoggle
+  fi
+}
+
+case $window in
+kitty) handle "50%" "55%" ;;
+*) handle "70%" "70%" ;;
+esac

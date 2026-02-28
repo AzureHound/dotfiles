@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# Check if upower is installed
+if ! command -v upower &>/dev/null; then
+  echo "Error: upower not found. Install it first."
+  exit 1
+fi
+
+# Get battery device
+BATTERY=$(upower -e | grep 'BAT')
+
+# Check if a battery is detected
+if [ -z "$BATTERY" ]; then
+  echo "No battery detected."
+  exit 1
+fi
+
+# Display battery status
+STATUS=$(upower -i "$BATTERY" | grep --color=never -E "state|to full|percentage")
+
+# Check if the battery is discharging and add the remaining time to the status
+if upower -i "$BATTERY" | grep -q "state.*discharging"; then
+  TIME_REMAINING=$(upower -i "$BATTERY" | grep "time to empty" | awk '{print $4, $5}')
+  STATUS="$STATUS\n    time remaining:      $TIME_REMAINING"
+fi
+
+# Battery health calculation
+BAT_PATH="/sys/class/power_supply/BAT0"
+
+# Use energy_* if available, otherwise fallback to charge_*
+if [[ -f "$BAT_PATH/energy_full" && -f "$BAT_PATH/energy_full_design" ]]; then
+  full=$(cat "$BAT_PATH/energy_full")
+  design=$(cat "$BAT_PATH/energy_full_design")
+elif [[ -f "$BAT_PATH/charge_full" && -f "$BAT_PATH/charge_full_design" ]]; then
+  full=$(cat "$BAT_PATH/charge_full")
+  design=$(cat "$BAT_PATH/charge_full_design")
+else
+  echo "Battery info not found or unsupported system."
+  exit 1
+fi
+
+health=$((100 * full / design))
+STATUS="$STATUS\n    battery health:      $health%"
+
+echo -e "$STATUS"

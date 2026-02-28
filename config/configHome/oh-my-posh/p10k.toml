@@ -1,0 +1,290 @@
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 3
+final_space = true
+
+[palette]
+base = '#24273a'
+blue = '#8aadf4'
+crust = '#181926'
+flamingo = '#f0c6c6'
+green = '#a6da95'
+lavender = '#b7bdf8'
+mantle = '#1e2030'
+maroon = '#ee99a0'
+mauve = '#c6a0f6'
+overlay0 = '#6e738d'
+overlay1 = '#8087a2'
+overlay2 = '#939ab7'
+peach = '#f5a97f'
+pink = '#f5bde6'
+red = '#ed8796'
+rosewater = '#f4dbd6'
+sapphire = '#7dc4e4'
+sky = '#91d7e3'
+subtext0 = '#a5adcb'
+subtext1 = '#b8c0e0'
+surface0 = '#363a4f'
+surface1 = '#494d64'
+surface2 = '#5b6078'
+teal = '#8bd5ca'
+text = '#cad3f5'
+yellow = '#eed49f'
+
+[secondary_prompt]
+template = '❯ '
+foreground = 'p:green'
+background = 'transparent'
+
+[transient_prompt]
+template = ' '
+background = 'transparent'
+foreground_templates = [
+  '{{if gt .Code 0}}p:red{{end}}',
+  '{{if eq .Code 0}}p:green{{end}}',
+]
+
+[upgrade]
+source = 'cdn'
+interval = '168h'
+auto = false
+notice = false
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+template = '󱄅 '
+foreground = 'p:blue'
+background = 'transparent'
+type = 'text'
+style = 'plain'
+
+[[blocks.segments]]
+template = '{{ .Path }}'
+foreground = 'p:subtext0'
+background = 'transparent'
+type = 'path'
+style = 'plain'
+
+[blocks.segments.properties]
+style = 'full'
+
+[blocks.segments.properties.mapped_locations]
+'/tmp' = '/tmp  '
+'~/Archive' = '~/Archive  '
+'~/Desktop' = '~/Desktop  '
+'~/Developer' = '~/Developer  '
+'~/Documents' = '~/Documents  '
+'~/Downloads' = '~/Downloads '
+'~/Music' = '~/Music 󰎋'
+'~/Pictures' = '~/Pictures  '
+
+[[blocks.segments]]
+template = '<p:red>  '
+type = 'command'
+style = 'plain'
+
+[blocks.segments.properties]
+command = "if [ ! -w . ]; then echo '  '; fi"
+
+[[blocks.segments]]
+template = '{{ .UpstreamIcon }}{{ .HEAD }} {{if (and (eq .Ahead 0) (eq .Behind 0) (not .Working.Changed) (not .Staging.Changed))}}<p:green> </>{{end}}'
+foreground = 'p:green'
+background = 'transparent'
+type = 'git'
+style = 'plain'
+
+[blocks.segments.properties]
+bitbucket_icon = ' <p:blue> </> '
+branch_icon = ' '
+fetch_status = true
+fetch_upstream_icon = true
+git_icon = ' <p:green> </> '
+github_icon = ' <p:subtext0> </> '
+gitlab_icon = ' <p:peach> </> '
+remotes = ['origin', 'aur']
+
+[blocks.segments.properties.upstream_icons]
+'aur.archlinux.org' = ' <p:blue> </> '
+
+[[blocks.segments]]
+template = '{{if .Ahead}}↑{{.Ahead}}{{end}}{{if .Behind}}↓{{.Behind}}{{end}}{{- if gt (add .Staging.Added .Staging.Modified) 0 }}{{ add .Staging.Added .Staging.Modified }}{{ end -}}{{- if gt .Working.Modified 0 }}!{{ .Working.Modified }}{{ end -}}{{- if gt .Working.Untracked 0 }}?{{ .Working.Untracked }}{{ end -}}'
+foreground = 'p:red'
+background = 'transparent'
+type = 'git'
+style = 'plain'
+
+[blocks.segments.properties]
+commit_icon = '@'
+fetch_status = true
+
+[[blocks.segments]]
+template = ' {{ .Output }}'
+foreground = 'p:green'
+type = 'command'
+style = 'plain'
+
+[blocks.segments.properties]
+command = "if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then git diff --numstat | awk '{a+=$1; d+=$2} END {if (a>0 || d>0) printf \"Σ%s <p:red>✘%s</>\", a, d}'; fi"
+
+[[blocks.segments]]
+template = '{{ if .IsRoot }} {{ end }}'
+type = 'root'
+style = 'plain'
+
+[blocks.segments.properties]
+root_icon = ' '
+
+[[blocks]]
+type = 'prompt'
+alignment = 'right'
+
+[[blocks.segments]]
+template = ' <p:yellow> {{.Profile}}{{if .Region}}@{{.Region}}{{end}}'
+foreground = 'p:overlay0'
+type = 'aws'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_version = true
+
+[[blocks.segments]]
+template = ' <p:blue>  v{{ .Output }}'
+type = 'command'
+style = 'plain'
+
+[blocks.segments.properties]
+command = "if [ -f compose.yml ] || [ -f docker-compose.yml ] || [ -f docker-compose.yaml ] || [ -f Dockerfile ]; then docker -v | awk '{print $3}' | sed 's/,//'; fi"
+
+[[blocks.segments]]
+template = ' <p:blue> v{{ .Full }}'
+type = 'dart'
+style = 'plain'
+
+[[blocks.segments]]
+template = ' <p:sky> {{ if .Error }}{{ .Error }}{{ else }}v{{ .Full }}{{ end }}'
+foreground = 'p:overlay0'
+type = 'go'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_version = true
+
+[[blocks.segments]]
+template = ' <p:blue>  v{{ .Output }}'
+type = 'command'
+style = 'plain'
+
+[blocks.segments.properties]
+command = "if [[ \"$PWD\" == \"$HOME/.config/hypr\"* ]]; then hyprland --version | head -1 | awk '{print $2}'; fi"
+
+[[blocks.segments]]
+template = ' <p:maroon>󰬷 {{ if .Error }}{{ .Error }}{{ else }}v{{ .Full }}{{ end }}'
+foreground = 'p:overlay0'
+type = 'java'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_version = true
+
+[[blocks.segments]]
+template = ' <p:mauve> v{{ .Full }}'
+type = 'kotlin'
+style = 'plain'
+
+[[blocks.segments]]
+template = ' <p:blue> v{{ .Full }}'
+type = 'lua'
+style = 'plain'
+
+[[blocks.segments]]
+template = ' <p:green> {{ .Output }}</>'
+type = 'command'
+style = 'plain'
+
+[blocks.segments.properties]
+command = "if [[ \"$PWD\" == \"$HOME/.config/nvim\"* || $(basename \"$PWD\") == \"neovim\" ]]; then version=$(bob ls | rg Used | awk '{print $2}'); if [[ \"$version\" == *nightly* ]]; then echo \"nightly\"; else echo \"$version\"; fi; fi"
+
+[[blocks.segments]]
+template = '{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }} <p:green></> <p:overlay0>v{{ .Full }}</>'
+foreground = 'p:overlay0'
+type = 'node'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_package_manager = true
+fetch_version = true
+npm_icon = ' <p:green> npm</>'
+pnpm_icon = ' <p:peach> pnpm</>'
+yarn_icon = ' <p:blue> yarn</>'
+
+[[blocks.segments]]
+template = ' <p:teal> {{ if .Error }}{{ .Error }}{{ else }}v{{ .Full }}{{ end }}'
+foreground = 'p:overlay0'
+type = 'python'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'context'
+fetch_virtual_env = false
+
+[[blocks.segments]]
+template = ' <p:red> {{ if .Error }}{{ .Error }}{{ else }}v{{ .Full }}{{ end }}'
+foreground = 'p:overlay0'
+type = 'ruby'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_version = true
+
+[[blocks.segments]]
+template = ' <p:peach> {{ if .Error }}{{ .Error }}{{ else }}v{{ .Full }}{{ end }}'
+foreground = 'p:overlay0'
+type = 'rust'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_version = true
+
+[[blocks.segments]]
+template = ' <p:peach> v{{ .Full }}'
+type = 'swift'
+style = 'plain'
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+template = ''
+background = 'transparent'
+type = 'text'
+style = 'plain'
+foreground_templates = [
+  '{{if gt .Code 0}}p:red{{end}}',
+  '{{if eq .Code 0}}p:green{{end}}',
+]
+
+[[blocks]]
+type = 'rprompt'
+overflow = 'hidden'
+
+[[blocks.segments]]
+template = ' {{ .FormattedMs }}'
+foreground = 'p:yellow'
+background = 'transparent'
+type = 'executiontime'
+style = 'plain'
+
+[blocks.segments.properties]
+style = 'round'
+threshold = 100.0

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+mkdir -p "$HOME/Obsidian/Quick Notes" &&
+  nvim "$HOME/Obsidian/Quick Notes"/$(date '+%Y-%m-%d_%H-%M-%S').md

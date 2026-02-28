@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+MODE="$1"
+gpu_index=0
+default_pl=170
+
+print_usage() {
+  echo "Usage: $0 {mode}"
+  echo
+  echo "Modes:"
+  echo "  - devmode"
+  echo "  - gamemode"
+}
+
+if [ -z "$MODE" ]; then
+  MODE=$(
+    printf "devmode\ngamemode\n" | fzf --pointer="❯" --prompt="" --no-preview \
+      --color=fg:#cad3f5,fg+:#cad3f5,bg:-1,bg+:-1,gutter:#24273a \
+      --color=hl:#eed49f,hl+:#a6da95,query:#a6da95 \
+      --color=pointer:#a6da95,selected-bg:#494d64 \
+      --color=info:#f4dbd6,spinner:#f4dbd6
+  )
+fi
+
+case "$MODE" in
+devmode)
+  sudo -v || exit 1
+  echo "DEVELOPMENT mode..."
+  sudo nvidia-smi -pm 1
+  sudo nvidia-smi -i "$gpu_index" -pl 140
+  # if ! pgrep -f "kanata" >/dev/null; then
+  #   kanata -c ~/.config/kanata/config.kbd &
+  # fi
+  sudo auto-cpufreq --force powersave
+  sudo nohup liquidctl --match "NZXT Kraken X" set pump speed 20 >/dev/null 2>&1 &
+
+  pkill -f mechsim
+  nohup mechsim -V 40 -s cherrymx-black-pbt >/dev/null 2>&1 &
+
+  # if ! pgrep -f "hyprsunset" >/dev/null; then
+  #   hyprsunset &
+  # fi
+
+  pkill -f wlsunset
+  nohup wlsunset -l 23.83 -L 91.28 -t 4000 -T 6500 >/dev/null 2>&1 &
+  ;;
+
+gamemode)
+  sudo -v || exit 1
+  echo "GAME mode..."
+  sudo nvidia-smi -pm 1
+  sudo nvidia-smi -i "$gpu_index" -pl "$default_pl"
+  # echo "gpu power limit: ${default_pl}W"
+  # pkill -f kanata
+  sudo auto-cpufreq --force performance
+  sudo nohup liquidctl --match "NZXT Kraken X" set pump speed 80 >/dev/null 2>&1 &
+
+  pkill -f mechsim
+  # pkill -f hyprsunset
+  pkill -f wlsunset
+  ;;
+
+--help | -h)
+  print_usage
+  ;;
+
+*)
+  exit 1
+  ;;
+esac

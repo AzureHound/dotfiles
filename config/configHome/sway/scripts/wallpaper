@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+WALLPAPER_DIR="$HOME/Developer/Wallpapers"
+SYMLINK_DIR="$HOME/.config/swaylock"
+SYMLINK_TARGET="$SYMLINK_DIR/wallpaper"
+
+WALLPAPER_PATH=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" \) | shuf -n 1)
+
+if [ -z "$WALLPAPER_PATH" ]; then
+  echo "Error: No wallpaper found in $WALLPAPER_DIR"
+  exit 1
+fi
+
+pkill swaybg
+
+swaybg -o eDP-1 -i "$WALLPAPER_PATH" -m fill \
+  -o DP-1 -i "$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" \) | shuf -n 1)" -m fill &
+
+#mkdir -p "$SYMLINK_DIR"
+ln -sf "$WALLPAPER_PATH" "$SYMLINK_TARGET"

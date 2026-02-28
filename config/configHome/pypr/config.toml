@@ -1,0 +1,12 @@
+# █▀█ █▄█ █▀█ █▀█ █   ▄▀█ █▄ █ █▀▄
+# █▀▀  █  █▀▀ █▀▄ █▄▄ █▀█ █ ▀█ █▄▀
+
+[pyprland]
+include = [
+  "~/.config/pypr/expose.toml",
+  "~/.config/pypr/layout.toml",
+  "~/.config/pypr/scratchpads.toml",
+  # "~/.config/pypr/wallpaper.toml",
+]
+
+plugins = ["magnify", "toggle_special"]

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+git branch -a | fzf --header="Checkout Branch" --preview="git diff --color=always {1} | delta" --pointer=" " | xargs git checkout

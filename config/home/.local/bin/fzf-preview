@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+file="$1"
+[[ -f "$file" ]] || exit
+
+case "$(file -Lb --mime-type "$file")" in
+image/*)
+  if [[ "$TERM" == "xterm-kitty" || -n "$KITTY_WINDOW_ID" ]]; then
+    kitten icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place="${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}@0x0" "$file"
+  else
+    chafa --format=symbols --colors=full --symbols=all --size="${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}" "$file"
+  fi
+  ;;
+*)
+  bat -p --color=always "$file" 2>/dev/null
+  ;;
+esac

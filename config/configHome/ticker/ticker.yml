@@ -1,0 +1,31 @@
+show-summary: true
+show-tags: true
+show-fundamentals: true
+show-separator: true
+show-holdings: false
+show-positions: true
+interval: 5
+currency: INR
+currency-summary-only: false
+watchlist:
+  - NET
+  - TATAMOTORS.NS
+  - SHIB-USD
+  - VGX-USD
+groups:
+  - name: Crypto
+    watchlist:
+      - SHIB-USD
+      - VGX-USD
+  - name: Stocks
+    watchlist:
+      - AAPL
+      - NET
+      - TATAMOTORS.NS
+colors:
+  text: "#cad3f5"
+  text-light: "#8aadf4"
+  text-label: "#8bd5ca"
+  text-line: "#363a4f"
+  text-tag: "#eed49f"
+  background-tag: "#363a4f"

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+color=$(hyprpicker -a)
+
+if [[ -n "$color" ]]; then
+  echo "$color"
+
+  safe_name="${color//\#/}"
+  image="/tmp/color-${safe_name}.png"
+
+  convert -size 48x48 xc:"$color" "$image" 2>/dev/null
+
+  if [[ -f "$image" ]]; then
+    notify-send -i "$image" "Color Picker" "<b>$color</b> copied to clipboard"
+  else
+    notify-send -i "color-select" "Color Picker" "<b>$color</b> copied to clipboard"
+  fi
+fi

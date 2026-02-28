@@ -1,0 +1,24 @@
+# █▀ █ █ █ ▄▀█ █▄█
+# ▄█ ▀▄▀▄▀ █▀█  █
+
+# Configs
+set $config_dir  ~/.config/sway/configs
+# set $scripts_dir ~/.config/sway/scripts
+
+# Source
+include $config_dir/apps.conf
+include $config_dir/input.conf
+include $config_dir/swayidle.conf
+include $config_dir/binds.conf
+include $config_dir/monitors.conf
+# include $config_dir/swaybar.conf
+include $config_dir/workspaces.conf
+
+# Theme
+include ~/.config/sway/theme/theme.conf
+
+# Autostart
+exec_always ~/.config/sway/scripts/autostart/apps
+exec_always ~/.config/sway/scripts/autostart/services
+
+include /etc/sway/config.d/*

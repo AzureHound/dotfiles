@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if pgrep -f "steam.*-gamepadui" >/dev/null; then
+  pkill -f "steam.*-gamepadui"
+else
+  steam -gamepadui -fullscreen &
+  disown
+fi

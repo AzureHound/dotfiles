@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+SESSION_NAME="Code"
+
+if tmux ls 2>/dev/null; then
+  tmux attach-session -t "$(tmux ls | head -n 1 | cut -d: -f1)"
+else
+  tmux new-session -s $SESSION_NAME -d
+  tmux attach-session -t $SESSION_NAME
+fi

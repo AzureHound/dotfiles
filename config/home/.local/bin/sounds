@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if command -v wpctl &>/dev/null; then
+  SYSTEM_VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null | grep -o '[0-9]\.[0-9]\+' | awk '{print int($1*100)}' || true)
+  [[ -n "$SYSTEM_VOL" ]] && mpc volume "$SYSTEM_VOL" >/dev/null 2>&1
+fi
+
+exec rmpc

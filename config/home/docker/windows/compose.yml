@@ -1,0 +1,43 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    privileged: true
+    environment:
+      VERSION: "11"
+      CPU_CORES: "4"
+      RAM_SIZE: "8G"
+      DISK_SIZE: "60G"
+      # USERNAME: "eden"
+      # PASSWORD: "Longhorn"
+      # LANGUAGE: "English"
+      # KEYBOARD: "en-US"
+      # REGION: "en-IN"
+      ARGUMENTS: "-cpu host,arch_capabilities=off"
+      # ARGUMENTS: "-cpu host,arch_capabilities=off -device usb-host,vendorid=0x03f0,productid=0x0f58"
+      # MANUAL: "Y"
+      DEBUG: "Y"
+    volumes:
+      - ./os:/storage
+      - /home/eden/Sync/Win11.iso:/boot.iso
+      - ./autounattend.xml:/custom.xml
+      # - ./oem:/oem
+      - ./LAN:/shared
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    networks:
+      - lan
+    stop_grace_period: 2m
+    restart: unless-stopped
+
+networks:
+  lan:
+    external: true
+    name: lan

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if pgrep -x "swayidle" >/dev/null; then
+  pkill -x swayidle
+  notify-send "DeCaffeine"
+else
+  swayidle &
+  notify-send "Caffeinated"
+fi

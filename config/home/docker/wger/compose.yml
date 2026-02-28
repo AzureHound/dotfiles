@@ -1,0 +1,158 @@
+services:
+  web:
+    container_name: wger
+    image: docker.io/wger/server:latest
+    env_file:
+      - ./config/prod.env
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    volumes:
+      - static:/home/wger/static
+      - media:/home/wger/media
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8000
+      interval: 10s
+      timeout: 5s
+      start_period: 300s
+      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: 5
+    restart: unless-stopped
+    expose:
+      - 8000
+    networks:
+      - lan
+
+  nginx:
+    container_name: wger-nginx
+    image: docker.io/nginx:stable
+    depends_on:
+      - web
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static:/wger/static:ro
+      - media:/wger/media:ro
+    healthcheck:
+      test: service nginx status
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+    ports:
+      - "8062:80"
+    networks:
+      - lan
+
+  db:
+    container_name: wger-postgress
+    image: docker.io/postgres:15-alpine
+    environment:
+      - POSTGRES_USER=wger
+      - POSTGRES_PASSWORD=wger
+      - POSTGRES_DB=wger
+      - TZ=Asia/Kolkata
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    healthcheck:
+      test: pg_isready -U wger
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: 5
+    restart: unless-stopped
+    expose:
+      - 5432
+    networks:
+      - lan
+
+  cache:
+    container_name: wger-redis
+    image: docker.io/redis
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf
+      - redis-data:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: 5
+    restart: unless-stopped
+    expose:
+      - 6379
+    networks:
+      - lan
+
+  celery_worker:
+    container_name: wger_celery_worker
+    image: docker.io/wger/server:latest
+    command: /start-worker
+    depends_on:
+      web:
+        condition: service_healthy
+    env_file:
+      - ./config/prod.env
+    volumes:
+      - media:/home/wger/media
+    healthcheck:
+      test: celery -A wger inspect ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: 5
+    networks:
+      - lan
+
+  celery_beat:
+    container_name: wger_celery_beat
+    image: docker.io/wger/server:latest
+    command: /start-beat
+    depends_on:
+      celery_worker:
+        condition: service_healthy
+    env_file:
+      - ./config/prod.env
+    volumes:
+      - celery-beat:/home/wger/beat/
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: 5
+    networks:
+      - lan
+
+volumes:
+  postgres-data:
+  celery-beat:
+  redis-data:
+  media:
+  static:
+
+networks:
+  lan:
+    name: lan
+    external: true

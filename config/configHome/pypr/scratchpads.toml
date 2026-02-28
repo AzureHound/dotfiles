@@ -1,0 +1,244 @@
+# █▀ █▀▀ █▀█ ▄▀█ ▀█▀ █▀▀ █ █ █▀█ ▄▀█ █▀▄ █▀
+# ▄█ █▄▄ █▀▄ █▀█  █  █▄▄ █▀█ █▀▀ █▀█ █▄▀ ▄█
+
+[pyprland]
+plugins = ["scratchpads"]
+
+[pyprland.variables]
+shell = "zsh -c"
+term = "kitty --class"
+
+[scratchpads.term]
+animation = ""
+command = "[term] Term"
+class = "Term"
+size = "80% 80%"
+unfocus = "hide"
+hysteresis = 0.6
+lazy = true
+
+[scratchpads.asciiquarium]
+animation = ""
+command = "[term] Aquarium asciiquarium -t"
+class = "Aquarium"
+size = "99% 99%"
+unfocus = "hide"
+hysteresis = 0.4
+lazy = true
+
+[scratchpads.bluetui]
+animation = ""
+command = "[term] Bluetooth bluetui"
+class = "Bluetooth"
+size = "70% 77%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.bonsai]
+animation = ""
+command = "[term] Bonsai cbonsai --seed 119 --live"
+class = "Bonsai"
+size = "66% 74%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.btop]
+animation = ""
+command = "[term] Activity btop"
+class = "Activity"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.cava]
+animation = ""
+command = "[term] Visualizer cava"
+class = "Visualizer"
+size = "60% 60%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.impala]
+animation = ""
+command = "[term] WiFi impala"
+class = "WiFi"
+size = "70% 77%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.jelly]
+animation = ""
+command = "[term] Binge [shell] jelly"
+class = "Binge"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.4
+lazy = true
+
+[scratchpads.lazydocker]
+animation = ""
+command = "[term] Docker lazydocker"
+class = "Docker"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.lofi]
+animation = ""
+command = "[term] LoFi lowfi -bm"
+class = "LoFi"
+size = "18% 15%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.neomutt]
+animation = ""
+command = "[term] Mail neomutt"
+class = "Mail"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.neovim]
+animation = ""
+command = "[term] Ide nvim"
+class = "Ide"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.obsidian]
+animation = ""
+command = "[term] Obsidian nvim +'Obsidian quick_switch'"
+class = "Obsidian"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.nvitop]
+animation = ""
+command = "[term] Gpu nvitop"
+class = "Gpu"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.pomodoro]
+animation = ""
+command = "[term] Pomodoro [shell] 'timr-tui -m pomodoro'"
+class = "Pomodoro"
+size = "45% 50%"
+unfocus = "hide"
+hysteresis = 0.4
+lazy = true
+
+[scratchpads.pipes]
+animation = ""
+command = "[term] Pipes pipes.sh"
+class = "Pipes"
+size = "99% 99%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.quick-note]
+animation = ""
+command = "[term] Notes quick-note"
+class = "Notes"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.4
+lazy = true
+
+[scratchpads.sounds]
+animation = ""
+command = "[term] Music sounds"
+class = "Music"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.4
+lazy = true
+
+[scratchpads.todo]
+animation = ""
+command = "[term] To-Do nvim ~/Obsidian/To-do.md"
+class = "To-Do"
+size = "36% 96%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.tt]
+animation = ""
+command = "[term] Type tt"
+class = "Type"
+size = "60% 60%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.tty-clock]
+animation = "fromBottom"
+command = "[term] Time tty-clock -SscC1b -f '%a, %d %b'"
+class = "Time"
+size = "40% 40%"
+margin = 110
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.unimatrix]
+animation = ""
+command = "[term] Matrix unimatrix -n -c red -s 90 -l 'o'"
+class = "Matrix"
+size = "99% 99%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.vim]
+animation = ""
+command = "[term] Editor vim"
+class = "Editor"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.weather]
+animation = ""
+command = "[term] Weather --hold ~/.local/share/mise/installs/go-github-com-josephburgess-gust-cmd-gust/0.2.0/bin/gust -f"
+class = "Weather"
+size = "40% 98%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.wiremix]
+animation = ""
+command = "[term] Volume wiremix"
+class = "Volume"
+size = "80% 80%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
+[scratchpads.yazi]
+animation = ""
+command = "[term] Explorer yazi"
+class = "Explorer"
+size = "90% 90%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true

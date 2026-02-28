@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+DISPLAY="DP-1"
+WALLPAPER_DIR="$HOME/Videos/Wallpapers"
+GST_OPTIONS="no-audio loop"
+
+INTERVAL_MINUTES=""
+
+while getopts "i:h" opt; do
+  case $opt in
+  i)
+    INTERVAL_MINUTES="$OPTARG"
+    ;;
+  h)
+    echo "Options:"
+    echo "  -i <minutes>        interval in minutes"
+    exit 0
+    ;;
+  \?)
+    exit 1
+    ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+change_wallpaper() {
+  if [ ! -d "$WALLPAPER_DIR" ]; then
+    return 1
+  fi
+
+  VIDEO_FILES=()
+  while IFS= read -r file; do
+    VIDEO_FILES+=("$file")
+  done < <(find "$WALLPAPER_DIR" -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.webm" -o -name "*.avi" -o -name "*.mov" \))
+
+  if [ ${#VIDEO_FILES[@]} -eq 0 ]; then
+    return 1
+  fi
+
+  RANDOM_VIDEO="${VIDEO_FILES[RANDOM % ${#VIDEO_FILES[@]}]}"
+
+  ln -sf "$RANDOM_VIDEO" "$HOME/Videos/Wallpapers/lock"
+
+  OLD_PIDS=$(pgrep gslapper)
+
+  gslapper -f -o "$GST_OPTIONS" "$DISPLAY" "$RANDOM_VIDEO"
+
+  sleep 1
+
+  if [ -n "$OLD_PIDS" ]; then
+    echo "$OLD_PIDS" | xargs -r kill 2>/dev/null
+  fi
+}
+
+change_wallpaper
+
+if [ -n "$INTERVAL_MINUTES" ]; then
+  if ! [[ "$INTERVAL_MINUTES" =~ ^[0-9]+$ ]] || [ "$INTERVAL_MINUTES" -le 0 ]; then
+    exit 1
+  fi
+  while true; do
+    sleep $((INTERVAL_MINUTES * 60))
+    change_wallpaper
+  done
+fi

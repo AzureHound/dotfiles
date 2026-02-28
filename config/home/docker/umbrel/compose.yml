@@ -1,0 +1,19 @@
+services:
+  umbrel:
+    image: dockurr/umbrel
+    container_name: umbrel
+    pid: host
+    ports:
+      - 8000:80
+    volumes:
+      - ./umbrel:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    stop_grace_period: 1m
+    networks:
+      - lan
+
+networks:
+  lan:
+    external: true
+    name: lan

@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+WINDOWS_USER="eden"
+WINDOWS_PASS="Longhorn"
+CACHE="$HOME/docker/Windows/LAN/apps.json"
+
+# Desktop
+if [[ "$1" == "--desktop" ]]; then
+  nohup xfreerdp /u:"$WINDOWS_USER" /p:"$WINDOWS_PASS" /v:127.0.0.1 \
+    /cert:ignore +clipboard /f /sound:sys:pulse /microphone:sys:pulse \
+    /scale:100 /compression >/dev/null 2>&1 &
+  sleep 2
+  exit 0
+fi
+
+# Cache
+if [[ ! -f "$CACHE" ]]; then
+  echo "Error: $CACHE not found"
+  exit 1
+fi
+
+# Apps
+selected=$(jq -r '.[].Name' "$CACHE" | fzf \
+  --color=fg:#cad3f5,fg+:#cad3f5,bg:-1,bg+:-1,gutter:#24273a \
+  --color=header:#ed8796,hl:#eed49f,hl+:#a6da95,query:#a6da95 \
+  --color=border:#494d64,label:#8aadf4,separator:#b7bdf8,scrollbar:#f0c6c6 \
+  --color=marker:#f4dbd6,pointer:#a6da95,selected-bg:#494d64 \
+  --color=prompt:#8aadf4,info:#f4dbd6,spinner:#f4dbd6 \
+  --height=100% --margin=0 --padding=0 --no-preview --no-reverse --no-multi \
+  --border rounded --border-label=' Windows 11 PRO ' --pointer='❯' --prompt ' Windows: ')
+
+[[ -z "$selected" ]] && exit 0
+
+# App [PATH, Args, & Source]
+read -r app_path app_args app_source < <(jq -r ".[] | select(.Name==\"$selected\") | \"\(.Path) \(.Args) \(.Source)\"" "$CACHE")
+
+# RemoteApp
+if [[ "$app_source" == "uwp" ]]; then
+  nohup xfreerdp /u:"$WINDOWS_USER" /p:"$WINDOWS_PASS" /v:127.0.0.1 \
+    /cert:ignore +clipboard /sound:sys:pulse /microphone:sys:pulse \
+    /scale:140 /compression /app:"$app_path" /app-cmd:"$app_args" >/dev/null 2>&1 &
+else
+  if [[ -n "$app_args" ]]; then
+    nohup xfreerdp /u:"$WINDOWS_USER" /p:"$WINDOWS_PASS" /v:127.0.0.1 \
+      /cert:ignore +clipboard /sound:sys:pulse /microphone:sys:pulse \
+      /scale:140 /compression /app:"$app_path" /app-cmd:"$app_args" >/dev/null 2>&1 &
+  else
+    nohup xfreerdp /u:"$WINDOWS_USER" /p:"$WINDOWS_PASS" /v:127.0.0.1 \
+      /cert:ignore +clipboard /sound:sys:pulse /microphone:sys:pulse \
+      /scale:140 /compression /app:"$app_path" >/dev/null 2>&1 &
+  fi
+fi
+
+sleep 2
+exit

@@ -1,0 +1,7 @@
+@theme "~/.config/rofi/style.rasi"
+
+// Window
+window {
+  height:                      810px;
+  width:                       1600px;
+}

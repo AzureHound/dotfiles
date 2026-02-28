@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+wallpapers_dir="$HOME/Developer/Wallpapers"
+
+build_theme() {
+  rows=$3
+  cols=$3
+  icon_size=$3
+
+  echo "element{orientation:vertical;}element-text{horizontal-align:0.5;}element-icon{size:$icon_size.0000em;}listview{lines:$rows;columns:$cols;}"
+}
+
+theme="$HOME/.config/rofi/scripts/wallpaper/style.rasi"
+
+rofi_cmd="rofi -dmenu -i -show-icons -theme-str $(build_theme 5 5 9) -theme ${theme}"
+
+choice=$(
+  fd --base-directory "$wallpapers_dir" --type f --max-depth 1 . | grep -v "README.md" | sort -V |
+    while read -r A; do echo -en "$A\x00icon\x1f$wallpapers_dir/$A\n"; done |
+    $rofi_cmd
+)
+
+[ -z "$choice" ] && exit 0
+
+wallpaper="$wallpapers_dir/$choice"
+
+if pgrep -x "hyprpaper" >/dev/null; then
+  hyprctl hyprpaper wallpaper ",$wallpaper"
+  ln -sf "$wallpaper" "$HOME/.config/hypr/lock"
+elif command -v swaybg &>/dev/null; then
+  pkill swaybg
+  swaybg -i "$wallpaper" -m fill &
+  ln -sf "$wallpaper" "$HOME/.config/swaylock/lock"
+fi
+
+exit 0

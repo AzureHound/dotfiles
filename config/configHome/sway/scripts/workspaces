@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+term="footclient"
+browser="firefox"
+tmux="$HOME/.local/bin/tmux-session-init"
+
+swaymsg "
+  workspace 2; exec $browser;
+  workspace 1; exec $term -e -F $tmux
+"

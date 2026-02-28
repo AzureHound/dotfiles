@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# ▄▀█ █▀█ █▀█ █▀
+# █▀█ █▀▀ █▀▀ ▄█
+
+# Apps
+# obsidian -disable-gpu &
+# thunderbird &
+
+# Term Apps
+# footclient -e btop &

@@ -1,0 +1,33 @@
+services:
+  app:
+    container_name: yamtrack
+    image: ghcr.io/fuzzygrim/yamtrack
+    depends_on:
+      - db
+    environment:
+      - TZ=Asia/Kolkata
+      - SECRET=longstring
+      - REDIS_URL=redis://db:6379
+    volumes:
+      - ./data:/yamtrack/db
+    healthcheck:
+      disable: true
+    restart: unless-stopped
+    ports:
+      - 9000:8000
+    networks:
+      - lan
+
+  db:
+    container_name: yamtrack-redis
+    image: redis:8-alpine
+    volumes:
+      - ./redis:/data
+    restart: unless-stopped
+    networks:
+      - lan
+
+networks:
+  lan:
+    name: lan
+    external: true

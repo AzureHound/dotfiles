@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+LOG_FILE="$HOME/battery.log"
+BATTERY=$(upower -e | grep BAT | head -1)
+
+echo "$(date '+%Y-%m-%d %H:%M:%S'),$(upower -i $BATTERY | grep percentage | awk '{print $2}'),$(upower -i $BATTERY | grep state | awk '{print $2}')" >>"$LOG_FILE"

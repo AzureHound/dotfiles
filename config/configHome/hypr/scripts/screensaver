@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+pgrep -f "kitty --class screensaver" && exit 0
+
+hyprctl eval "hl.dispatch(hl.dsp.window.close({ window = 'title:^(Picture-in-Picture)$' }))"
+
+focused_monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')
+
+screensaver() {
+  hyprctl eval "hl.dispatch(hl.dsp.exec_cmd(\"kitty --class screensaver -T screensaver -o window_margin_width=0 -o window_padding_width=0 -o single_window_margin_width=0 -o single_window_padding_width=0 $1\"))"
+}
+
+cmds=("asciiquarium -t" "cbonsai -l -i -c 'x'" "pipes.sh" "terminal-rain" "unimatrix -n -c red -s 90 -l 'o'")
+
+for monitor in $(hyprctl monitors -j | jq -r '.[] | .name'); do
+  hyprctl eval "hl.dispatch(hl.dsp.focus({ monitor = '$monitor' }))"
+  screensaver "${cmds[$RANDOM % ${#cmds[@]}]}"
+done
+
+hyprctl eval "hl.dispatch(hl.dsp.focus({ monitor = '$focused_monitor' }))"

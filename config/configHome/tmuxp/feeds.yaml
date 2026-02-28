@@ -1,0 +1,10 @@
+session_name: Media
+windows:
+  - window_name: News
+    panes:
+      - shell_command:
+          - clx; tmux kill-window
+  - window_name: RSS
+    panes:
+      - shell_command:
+          - goread; tmux kill-window

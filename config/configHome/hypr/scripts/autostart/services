@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# █▀▀ ▀▄▀ █▀▀ █▀▀  █▀ █▀▀ █▀█ █ █ █ █▀▀ █▀▀ █▀
+# ██▄ █ █ ██▄ █▄▄  ▄█ ██▄ █▀▄ ▀▄▀ █ █▄▄ ██▄ ▄█
+
+# Pyprland Daemon
+pypr --debug /tmp/pypr.log &
+
+# Wallpaper Engine
+# swww-daemon --format xrgb &
+
+# Live Wallpaper
+# "$HOME/.config/hypr/scripts/mpvpaper -i 30" &
+
+# Notify connecting & disconnecting devices
+# devify &
+
+# Cliphist
+rm "$HOME/.cache/cliphist/db" &
+
+# RGB
+openrgb --server -p "Profile 1" &

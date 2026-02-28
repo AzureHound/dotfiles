@@ -1,0 +1,30 @@
+hide_entries_without_box_art = false
+box_art_dir = "/home/eden/.local/share/icons/games"
+fallback_to_icons = true
+show_entry_source_text = false
+use_bold_entry_title = false
+
+[sort]
+order = "alphabetical"
+reverse = false
+
+[launchers.steam]
+hide = false
+extra_args = ["-silent"]
+path_fallback_box_art = "~/images/steam.png"
+
+# [[entries]]
+# title = "Breath of the Wild"
+# launch_command = "/usr/sbin/eden \"/mnt/games/Eden/BOTW/The Legend of Zelda Breath of the Wild [01007EF00011E000][v0].nsp\""
+# path_box_art = "botw.png"
+# path_game_dir = "/mnt/games/Eden/BOTW/The Legend of Zelda Breath of the Wild [01007EF00011E000][v0].nsp"
+
+# [[entries]]
+# title = "Tears of the Kingdom"
+# launch_command = "/usr/sbin/eden \"/mnt/games/Eden/TOTK/The Legend of Zelda Tears of the Kingdom [0100F2C0115B6000][v0][US].nsp\""
+# path_box_art = "totk.png"
+# path_game_dir = "/mnt/games/Eden/TOTK/The Legend of Zelda Tears of the Kingdom [0100F2C0115B6000][v0][US].nsp"
+
+[[entries]]
+title = "Lossless Scaling"
+hide = true

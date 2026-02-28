@@ -1,0 +1,11 @@
+session_name: Mail
+windows:
+  - window_name: neomutt
+    panes:
+      - shell_command:
+          - neomutt; tmux kill-window
+  - window_name: Attachments
+    start_directory: ~/Downloads/Mail
+    panes:
+      - shell_command:
+          - y; tmux kill-window

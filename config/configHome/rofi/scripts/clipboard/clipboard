@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+
+selection="$(cliphist list | rofi -dmenu -i -theme "$HOME/.config/rofi/scripts/clipboard/style.rasi")"
+cliphist decode <<<"$selection" | wl-copy

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+STATE="/run/user/$UID/mechsim.pid"
+
+sudo -v || exit 1
+
+if pgrep -f "mechsim" >/dev/null; then
+  echo "MechSim is already running"
+  exit 0
+fi
+
+nohup mechsim -V 100 -s mxblack-travel >/dev/null 2>&1 &
+
+echo $! >"$STATE"
+
+# mxblack-travel
+# cherrymx-black-pbt

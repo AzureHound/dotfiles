@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+active_class=$(hyprctl -j activewindow | jq -r '.class')
+
+grep 'workspace =' "$HOME/Developer/dotfiles/config/configHome/hypr/theme/rules.lua" | while IFS= read -r line; do
+  workspace_value=$(echo "$line" | sed -n 's/.*workspace = "\([^"]*\)".*/\1/p')
+  class_value=$(echo "$line" | sed -n 's/.*class = "\([^"]*\)".*/\1/p')
+  regex=$(echo "$class_value" | sed 's/\\\\/\\/g')
+
+  if [ -n "$workspace_value" ] && [ -n "$class_value" ]; then
+    if echo "$active_class" | grep -Eq "$regex"; then
+      ws_num=$(echo "$workspace_value" | awk '{print $1}')
+
+      if [[ "$workspace_value" == *"silent"* ]]; then
+        hyprctl dispatch "hl.dsp.window.move({workspace='$ws_num', follow=false})"
+      else
+        hyprctl dispatch "hl.dsp.window.move({workspace='$ws_num'})"
+      fi
+      exit 0
+    fi
+  fi
+done
+exit 1

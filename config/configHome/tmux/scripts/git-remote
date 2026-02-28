@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+REPO="$1"
+
+if [[ -d "$REPO" ]]; then
+  GIT_REMOTE=$(git -C "$REPO" remote -v 2>/dev/null)
+
+  if [[ -n "$GIT_REMOTE" ]]; then
+    if [[ "$GIT_REMOTE" =~ "github" ]]; then
+      GIT_REMOTE_SYMBOL=" "
+      GIT_REMOTE_COLOR="#a5adcb"
+    elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
+      GIT_REMOTE_SYMBOL=" "
+      GIT_REMOTE_COLOR="#f5a97f"
+    elif [[ "$GIT_REMOTE" =~ "forgejo" ]]; then
+      GIT_REMOTE_SYMBOL=""
+      GIT_REMOTE_COLOR="#ee99a0"
+    elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
+      GIT_REMOTE_SYMBOL=" "
+      GIT_REMOTE_COLOR="#8aadf4"
+    elif [[ "$GIT_REMOTE" =~ "aur" ]]; then
+      GIT_REMOTE_SYMBOL="󰣇"
+      GIT_REMOTE_COLOR="#8aadf4"
+    elif [[ "$GIT_REMOTE" =~ "git" ]]; then
+      GIT_REMOTE_SYMBOL=""
+      GIT_REMOTE_COLOR="#a6da95"
+    else
+      GIT_REMOTE_SYMBOL=""
+      GIT_REMOTE_COLOR="#6e738d"
+    fi
+    echo "#[fg=${GIT_REMOTE_COLOR}]${GIT_REMOTE_SYMBOL} "
+  fi
+fi

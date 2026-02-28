@@ -1,0 +1,6 @@
+; git submodule update --init --recursive
+
+[submodule "config/home/.password-store"]
+	path = config/home/.password-store
+	url = git@github.com:AzureHound/password-store.git
+	branch = main

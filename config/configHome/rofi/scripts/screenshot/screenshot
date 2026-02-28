@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if [ "$1" = "--freeze" ]; then
+  extra_args="--freeze"
+fi
+
+if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+  screenshot="$HOME/Developer/dotfiles/config/configHome/hypr/scripts/hyprshot"
+else
+  screenshot="$HOME/.config/sway/scripts/swayshot"
+fi
+
+theme="$HOME/.config/rofi/scripts/screenshot/style.rasi"
+filename="captura-$(date +%Y-%m-%d-%s).png"
+save_dir="$HOME/Pictures/screenshots"
+command="$screenshot -o $save_dir -f $filename $extra_args"
+
+region="󰆞"
+output=""
+window=""
+folder=""
+
+selected="$(echo -e "$region\n$output\n$window\n$folder" | rofi -dmenu -theme "${theme}")"
+case $selected in
+$region)
+  $command -m region
+  ;;
+$output)
+  $command -m output
+  ;;
+$window)
+  $command -m window
+  ;;
+$folder)
+  $HOME/.config/rofi/scripts/screenshot/screenshot_selection
+  ;;
+esac

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+SESSION="TERM"
+CURRENT_SESSION=$(tmux display -p '#{session_name}')
+
+if [ "$CURRENT_SESSION" = "$SESSION" ]; then
+  tmux detach-client
+  exit 0
+fi
+
+current_path=$(tmux display -p '#{pane_current_path}')
+
+if ! tmux has-session -t "$SESSION" 2>/dev/null; then
+  tmux new-session -d -s "$SESSION" -c "$current_path"
+  tmux set-option -t "$SESSION" status off
+  tmux set-option -t "$SESSION" detach-on-destroy on
+else
+  popup_path=$(tmux display -t "$SESSION" -p '#{pane_current_path}')
+  if [ "$popup_path" != "$current_path" ]; then
+    tmux send-keys -t "$SESSION" " cd '$current_path'" C-m
+  fi
+fi
+
+tmux popup \
+  -S fg=#494d64 \
+  -s fg=white \
+  -T "[TERM]" \
+  -w 80% \
+  -h 80% \
+  -b rounded \
+  -E \
+  "tmux attach -t $SESSION"

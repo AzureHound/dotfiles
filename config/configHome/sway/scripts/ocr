@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+region=$(slurp)
+
+if [[ -z "$region" ]]; then
+  notify-send -i "video-display" -h string:ocr:failed -t 2000 "ScreenOCR" "No region selected."
+  exit 1
+fi
+
+ocr_text=$(grim -g "$region" - | tesseract stdin -)
+
+if [[ $? -eq 0 && -n "$ocr_text" ]]; then
+  echo "$ocr_text" | wl-copy
+  notify-send -i "text-x-generic" -h string:ocr:success -t 1000 "ScreenOCR" "Text Copied"
+else
+  notify-send -i "text-x-preview" -h string:ocr:failed -t 2000 "ScreenOCR" "OCR Failed."
+  exit 1
+fi

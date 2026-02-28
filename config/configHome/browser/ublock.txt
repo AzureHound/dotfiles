@@ -1,0 +1,51 @@
+{
+  "timeStamp": 1765115886813,
+  "version": "1.68.0",
+  "userSettings": {
+    "uiAccentCustom": true,
+    "uiAccentCustom0": "#b7bdf8",
+    "importedLists": [],
+    "popupPanelSections": 3,
+    "tooltipsDisabled": true
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-quick-fixes",
+    "ublock-unbreak",
+    "easylist",
+    "adguard-generic",
+    "easyprivacy",
+    "adguard-spyware-url",
+    "urlhaus-1",
+    "curben-phishing",
+    "plowe-0",
+    "fanboy-cookiemonster",
+    "ublock-cookies-easylist",
+    "adguard-cookies",
+    "ublock-cookies-adguard",
+    "fanboy-social",
+    "adguard-social",
+    "fanboy-thirdparty_social",
+    "easylist-chat",
+    "easylist-newsletters",
+    "easylist-notifications",
+    "easylist-annoyances",
+    "adguard-mobile-app-banners",
+    "adguard-other-annoyances",
+    "adguard-popup-overlays",
+    "adguard-widgets",
+    "ublock-annoyances"
+  ],
+  "hiddenSettings": {},
+  "whitelist": [
+    "chrome-extension-scheme",
+    "moz-extension-scheme"
+  ],
+  "dynamicFilteringString": "behind-the-scene * * noop\nbehind-the-scene * inline-script noop\nbehind-the-scene * 1p-script noop\nbehind-the-scene * 3p-script noop\nbehind-the-scene * 3p-frame noop\nbehind-the-scene * image noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-large-media: behind-the-scene false\nno-csp-reports: * true",
+  "userFilters": "! https://www.youtube.com\n\n! Homepage: https://github.com/gijsdev/ublock-hide-yt-shorts\nyoutube.com##ytd-grid-video-renderer:has(#video-title:has-text(#shorts))\nyoutube.com##ytd-grid-video-renderer:has(#video-title:has-text(#Shorts))\nyoutube.com##ytd-grid-video-renderer:has(#video-title:has-text(#short))\nyoutube.com##ytd-grid-video-renderer:has(#video-title:has-text(#Short))\n\nyoutube.com##ytd-grid-video-renderer:has([overlay-style=\"SHORTS\"])\nyoutube.com##ytd-rich-item-renderer:has([overlay-style=\"SHORTS\"])\nyoutube.com##ytd-video-renderer:has([overlay-style=\"SHORTS\"])\nyoutube.com##ytd-item-section-renderer.ytd-section-list-renderer[page-subtype=\"subscriptions\"]:has(ytd-video-renderer:has([overlay-style=\"SHORTS\"]))\n\nyoutube.com##ytd-rich-section-renderer:has(#rich-shelf-header:has-text(Shorts))\nyoutube.com##ytd-reel-shelf-renderer:has(.ytd-reel-shelf-renderer:has-text(Shorts))\n\nyoutube.com##ytd-guide-entry-renderer:has-text(Shorts)\nyoutube.com##ytd-mini-guide-entry-renderer:has-text(Shorts)\n\nyoutube.com##tp-yt-paper-tab:has(.tp-yt-paper-tab:has-text(Shorts))\n\nyoutube.com##yt-tab-shape:has-text(/^Shorts$/)\n\nyoutube.com##ytd-reel-shelf-renderer.ytd-structured-description-content-renderer:has-text(\"Shorts remixing this video\")\n\nyoutube.com##ytd-rich-grid-row,#contents.ytd-rich-grid-row:style(display: contents !important)\n\n! Home: https://github.com/Onsotumenh/YouTube-Cosmetic-Filters-for-uBlock-Origin\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/For you/i))\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/People also watched/i))\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/Previously watched/i))\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/Related to your search/i))\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/Related Movies/i))\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/New for you/i))\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/Channels new to you/i))\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/Related chapters/i))\nwww.youtube.com##ytd-shelf-renderer.style-scope:has(span:has-text(/Explore more/i))\nwww.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has(span:has-text(/Latest from/i))\nwww.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has(span:has-text(/Results for similar searches/i))\nwww.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has-text(/From related searches/i)\nwww.youtube.com##ytd-horizontal-card-list-renderer.ytd-item-section-renderer.style-scope:has-text(/People also search for/i)\nwww.youtube.com##ytd-horizontal-card-list-renderer.ytd-item-section-renderer.style-scope:has-text(/Searches related to/i)\nwww.youtube.com##ytd-movie-renderer.ytd-item-section-renderer.style-scope\nwww.youtube.com##ytd-reel-shelf-renderer.ytd-item-section-renderer.style-scope\nwww.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has-text(/Latest Posts From/i)\nwww.youtube.com###about-these-results\nwww.youtube.com##ytd-emergency-onebox-renderer.ytd-item-section-renderer.style-scope > .ytd-emergency-onebox-renderer.style-scope\nwww.youtube.com##.ytd-item-section-renderer.style-scope > .ytd-ad-slot-renderer.style-scope\n\n! Home: https://github.com/Onsotumenh/YouTube-Cosmetic-Filters-for-uBlock-Origin\nwww.youtube.com##contents.ytd-shelf-renderer.style-scope:has-text(/People also watched/i)\nwww.youtube.com##ytd-shelf-renderer.ytd-item-section-renderer.style-scope:has(span:has-text(/Watch again/i))\nwww.youtube.com##ytd-horizontal-card-list-renderer.ytd-item-section-renderer.style-scope:has-text(/People also watched/i)\nwww.youtube.com###content > .ytd-rich-section-renderer.style-scope\nwww.youtube.com##ytd-rich-item-renderer.ytd-rich-grid-row.style-scope > #star-survey\nwww.youtube.com###merch-shelf > .ytd-watch-flexy.style-scope\nwww.youtube.com##ytd-rich-item-renderer.ytd-rich-grid-row.style-scope > .ytd-feed-nudge-renderer.style-scope\nwww.youtube.com##ytd-rich-item-renderer.style-scope > .ytd-feed-nudge-renderer.style-scope\nwww.youtube.com##.ytd-rich-item-renderer.style-scope > .ytd-feed-nudge-renderer.style-scope\nwww.youtube.com##ytd-mini-guide-entry-renderer.ytd-mini-guide-renderer.style-scope\n\nyoutube.com##ytd-rich-grid-row,#contents.ytd-rich-grid-row:style(display: contents !important)\n\nwww.youtube.com###scroll-container > .ytd-feed-filter-chip-bar-renderer.style-scope\nwww.youtube.com###header > .ytd-rich-grid-renderer.style-scope\nwww.youtube.com###voice-search-button\n\n\nwww.youtube.com##ytd-rich-section-renderer.ytd-rich-grid-renderer.style-scope:nth-of-type(3)\nwww.youtube.com##.ytdChipsShelfWithVideoShelfRendererHost > div\nwww.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(4)\nwww.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:nth-of-type(5)\nwww.youtube.com###guide-links-primary\nwww.youtube.com###guide-links-secondary\nwww.youtube.com###copyright\nwww.youtube.com##.yt-spec-button-shape-next--enable-backdrop-filter-experiment.yt-spec-button-shape-next--icon-leading.yt-spec-button-shape-next--size-m.yt-spec-button-shape-next--overlay.yt-spec-button-shape-next--tonal.yt-spec-button-shape-next\n\n! https://pi.hole\npi.hole##.main-footer\npi.hole##li.text-uppercase.header:nth-of-type(15)\npi.hole##.menu-donate > [href=\"https://pi-hole.net/donate/\"]\n\n! http://10.10.0.4:4000\n10.10.0.4##footer\n\n! https://10.10.0.5\n10.10.0.5##.ng-star-inserted.sidenav-copyright-icon.mat-mdc-tooltip-trigger > .mat-icon-no-color.notranslate.mat-icon.ix-icon > svg\n10.10.0.5###send-feedback > .mat-icon-no-color.notranslate.mat-icon.ix-icon > svg\n10.10.0.5###tc-status > .mat-icon-no-color.notranslate.mat-icon.ix-icon > svg\n10.10.0.5##.ng-star-inserted.sidenav-copyright-txt\n10.10.0.5##.copyright\n\n! https://www.perplexity.ai\nwww.perplexity.ai##.md\\:hover\\:\\!bg-subtle.dark\\:bg-offset.bg-raised.duration-normal.transition.divide-subtlest.ring-subtlest.border-subtlest.md\\:p-\\[12px\\].items-center.flex.p-sm.shadow-\\[0_1px_2px_0_rgba\\(0\\,0\\,0\\,0\\.03\\)\\].rounded-xl.border.relative\nwww.perplexity.ai##a.justify-center.items-center.flex-col.w-full.flex.group.gap-two.p-sm:nth-of-type(2)\nwww.perplexity.ai##a.justify-center.items-center.flex-col.w-full.flex.group.gap-two.p-sm:nth-of-type(3)\nwww.perplexity.ai##.\\[\\@media\\(max-height\\:680px\\)\\]\\:hidden.items-center.flex-col.flex.gap-xs\nwww.perplexity.ai##.\\[\\@media\\(max-height\\:680px\\)\\]\\:hidden.items-center.flex-col.appearance-none.inline-flex.group.gap-xs\nwww.perplexity.ai##.lg\\:block.hidden.fixed.m-sm.right-md.bottom-md > .items-center.flex.gap-sm\nwww.perplexity.ai##.gap-\\[10px\\].flex-col.flex\nwww.perplexity.ai##.gap-\\[10px\\].flex-col.flex > a.block.relative.group > .block.relative.group > .bg-subtle.divide-subtlest.ring-subtlest.border-subtlest.group-hover\\:opacity-100.opacity-0.rounded-md.absolute.duration-quick.-inset-x-sm.-inset-y-xs\nwww.perplexity.ai##.gap-\\[10px\\].flex-col.flex > a.block.relative.group > .block.relative.group > .dark\\:selection\\:text-super.dark\\:selection\\:bg-super\\/10.selection\\:text-foreground.selection\\:bg-super\\/50.text-foreground.text-sm.font-sans.gap-2.items-center.flex.relative\nwww.perplexity.ai##.min-h-\\[var\\(--page-content-height\\)\\].erp-mobile-sidecar\\:min-h-\\[var\\(--mobile-sidecar-content-height\\)\\].erp-sidecar\\:min-h-\\[var\\(--sidecar-content-height\\)\\] > .bg-transparent.divide-subtlest.ring-subtlest.border-subtlest.px-\\[var\\(--thread-visual-spacing\\)\\].md\\:pb-lg.pb-\\[var\\(--thread-visual-spacing\\)\\].md\\:pt-lg.pt-\\[var\\(--thread-visual-spacing\\)\\] > .max-w-threadContentWidth.mx-auto.isolate > .max-w-threadContentWidth.mx-auto > .relative > .flex-col.flex.mt-md.gap-y-md > .first\\:mt-0.flex-col.flex.gap-y-lg > .bg-transparent.divide-subtlest.ring-subtlest.border-subtlest > .flex-col.flex.gap-y-md > .justify-between.items-center.flex > .items-center.flex-shrink-0.flex.gap-x-xs > .bg-transparent.divide-subtlest.ring-subtlest.border-subtlest.items-center.flex.gap-xs"
+}
