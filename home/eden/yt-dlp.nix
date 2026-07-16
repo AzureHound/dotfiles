@@ -5,7 +5,7 @@
     inherit (config.pixel.profiles.media.watching) enable;
 
     settings = {
-      output = "~/Videos/yt-dlp/%(playlist|)s/%(playlist_index&{} - |)s%(title)s [%(id)s].%(ext)s";
+      output = ''"~/Videos/yt-dlp/%(playlist|)s/%(playlist_index&{} - |)s%(title)s [%(id)s].%(ext)s"'';
 
       # extract-audio = true;
       no-playlist = true;
