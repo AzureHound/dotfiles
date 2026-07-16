@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   inputs,
@@ -7,6 +8,7 @@
 }:
 
 let
+  inherit (lib.modules) mkIf;
   inherit (pkgs.stdenv.hostPlatform) isLinux;
 
   spicePkgs = inputs'.spicetify.legacyPackages;
@@ -24,8 +26,8 @@ in
     theme = spicePkgs.themes.catppuccin;
     colorScheme = "macchiato";
 
-    wayland = isLinux;
-    windowManagerPatch = isLinux;
+    wayland = mkIf isLinux true;
+    windowManagerPatch = mkIf isLinux true;
 
     enabledExtensions = with spicePkgs.extensions; [
       adblock
