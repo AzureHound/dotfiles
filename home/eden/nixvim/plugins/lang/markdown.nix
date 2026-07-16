@@ -10,7 +10,10 @@
       "markdownlint-cli2"
     ];
     lint.lintersByFt.markdown = [ "markdownlint-cli2" ];
-    blink-cmp.settings.sources.per_filetype.markdown = [ "thesaurus" ];
+    blink-cmp.settings.sources.per_filetype.markdown = [
+      "lsp"
+      "thesaurus"
+    ];
     treesitter.grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
       markdown
       markdown_inline
