@@ -37,15 +37,22 @@ in
       tmuxp.enable = true;
 
       extraConfig = ''
+        set-option -sa terminal-overrides ",xterm-256color:RGB"
+        set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+        set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+
         set-option -g renumber-windows 1
         set-option -g lock-after-time 3600
+        set-window-option -g xterm-keys on
 
         set -g set-titles on
+        set -g bell-action any
         set -g focus-events on
         set -g extended-keys on
         set -g set-clipboard on
         set -g status-interval 1
         set -g lock-command vlock
+        set -g visual-activity off
         set -g allow-passthrough on
         set -g detach-on-destroy off
         set -g extended-keys-format csi-u
