@@ -8,7 +8,18 @@
       # █ █ █▄█ █▀█ █▀█ █   █▀█ █▀▀ █▄▀
       # █▀█  █  █▀▀ █▀▄ █▄▄ █▄█ █▄▄ █ █
 
-      source = [ "${self}/config/configHome/hypr/theme/colors.lua" ];
+      # NOTE: Hyprlock hasn't yet moved to lua
+      # source = [ "${self}/config/configHome/hypr/theme/colors.lua" ];
+      "$lavender" = "rgb(b7bdf8)";
+      "$text" = "rgb(cad3f5)";
+      "$subtext0" = "rgb(a5adcb)";
+      "$peach" = "rgb(f5a97f)";
+      "$teal" = "rgb(8bd5ca)";
+      "$yellow" = "rgb(eed49f)";
+      "$red" = "rgb(ed8796)";
+      "$surface0" = "rgb(363a4f)";
+      "$green" = "rgb(a6da95)";
+      "$mauve" = "rgb(c6a0f6)";
 
       "$font0" = "JetBrainsMono Nerd Font";
       "$font1" = "Maple Mono";
