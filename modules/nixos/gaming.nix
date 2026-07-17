@@ -151,6 +151,7 @@ in
       systemPackages = with pkgs; [
         # (bottles.override { removeWarningPopup = true; })
         freetype
+        steamcmd
         # winetricks
       ];
     };

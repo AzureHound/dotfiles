@@ -50,7 +50,6 @@
     pipes
     pyprland
     qemu
-    steamcmd
     terminal-rain-lightning
     tty-clock
     # upscaler
