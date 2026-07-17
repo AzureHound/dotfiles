@@ -61,7 +61,7 @@ in
         -- local screenLocker = "${defaults.screenLocker}"
         local monitors = ${toLua { } monitorList}
 
-        ${builtins.readFile (self + "/config/configHome/hypr/config.lua")}
+        ${builtins.readFile (self + "/config/configHome/hypr/hyprland.lua")}
       '';
     };
 
