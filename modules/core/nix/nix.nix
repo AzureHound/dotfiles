@@ -7,6 +7,8 @@
 
 let
   inherit (lib.lists) optionals;
+
+  sudoers = if (_class == "nixos") then "@wheel" else "@admin";
 in
 
 {
@@ -44,7 +46,7 @@ in
         "uid-range"
       ];
 
-      allowed-users = [ (if (_class == "nixos") then "@wheel" else "@admin") ];
+      allowed-users = [ sudoers ];
 
       # https://x.com/puckipedia/status/1693927716326703441
       accept-flake-config = false;
