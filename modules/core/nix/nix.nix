@@ -47,6 +47,7 @@ in
       ];
 
       allowed-users = [ sudoers ];
+      trusted-users = [ sudoers ];
 
       # https://x.com/puckipedia/status/1693927716326703441
       accept-flake-config = false;
