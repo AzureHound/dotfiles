@@ -12,14 +12,14 @@
       # ShowStatusBar = true;
 
       _FXSortFoldersFirst = true;
-      _FXEnableColumnAutoSizing = true;
+      # _FXEnableColumnAutoSizing = true;
       FXPreferredViewStyle = "Nlsv";
 
       FXDefaultSearchScope = "SCcf";
       FXEnableExtensionChangeWarning = false;
       FXRemoveOldTrashItems = true;
 
-      CreateDesktop = false;
+      # CreateDesktop = false;
       ShowHardDrivesOnDesktop = true;
       ShowExternalHardDrivesOnDesktop = true;
       ShowMountedServersOnDesktop = true;
