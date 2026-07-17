@@ -54,12 +54,15 @@ in
             # "Newton" = {
             #   id = "DEVICE-ID-GOES-HERE";
             # };
+
             "Notebook" = {
               id = "QWDKFNR-4EYOSYD-YNOJIB5-R4TTEL3-HEBDWBP-5FBH5JW-UBX5O2M-3MSZ2AT";
             };
+
             "Orion" = {
               id = "EOM5CBO-6DY537D-PAX5345-LGDRK6J-DKENSVW-4QHDBWG-ZGI2OAT-FZEJVA6";
             };
+
             "Server" = {
               id = "VM5JQBF-WVJHXAD-7EGVDNR-OPTUXI5-ZOJFHJX-ZCJIPON-WVPONFO-I3D37AE";
             };
@@ -79,6 +82,7 @@ in
               ignorePatterns = [ "(?d).DS_Store" ];
               maxConflicts = 0;
             };
+
             "Obsidian" = {
               id = "obsidian";
               path = "${home}/Obsidian";
@@ -92,6 +96,7 @@ in
               ignorePatterns = [ "(?d).DS_Store" ];
               maxConflicts = 0;
             };
+
             "Sync" = {
               id = "sync";
               path = "${home}/Sync";
@@ -105,6 +110,7 @@ in
               ignorePatterns = [ "(?d).DS_Store" ];
               maxConflicts = 0;
             };
+
             "Wallpapers" = {
               id = "wallpapers";
               path = "${home}/Videos/Wallpapers";
