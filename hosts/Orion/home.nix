@@ -32,8 +32,6 @@
     '';
   };
 
-  services.swaync.enable = true;
-
   home.packages = with pkgs; [
     asciiquarium-transparent
     # distrobox

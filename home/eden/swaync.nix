@@ -14,6 +14,7 @@ in
   config = mkIf config.pixel.profiles.graphical.enable {
     services = {
       swaync = {
+        enable = config.programs.hyprland.enable;
         package = mkpkg.swaync;
 
         settings = {
