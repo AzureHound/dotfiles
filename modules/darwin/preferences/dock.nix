@@ -9,7 +9,6 @@ in
 {
   system.defaults = {
     dock = {
-      orientation = "bottom";
       tilesize = 48;
       magnification = true;
       largesize = 70;
@@ -25,7 +24,6 @@ in
       mineffect = "scale";
       minimize-to-application = true;
 
-      expose-animation-duration = 0.1;
       expose-group-apps = true;
       appswitcher-all-displays = true;
       mru-spaces = false; # Recent spaces

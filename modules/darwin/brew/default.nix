@@ -56,7 +56,6 @@
         upgrade = true;
         # 'zap': uninstalls all formulae [ & related files ] not listed here.
         cleanup = "zap";
-        extraFlags = [ "--force-cleanup" ];
       };
 
       # https://github.com/mas-cli/mas
