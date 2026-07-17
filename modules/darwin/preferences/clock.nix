@@ -1,7 +1,5 @@
 {
   system.defaults = {
-    NSGlobalDomain.AppleICUForce24HourTime = true;
-
     menuExtraClock = {
       Show24Hour = true;
       ShowAMPM = false;
@@ -14,5 +12,7 @@
       ShowDayOfWeek = true;
       ShowDayOfMonth = true;
     };
+
+    NSGlobalDomain.AppleICUForce24HourTime = true;
   };
 }

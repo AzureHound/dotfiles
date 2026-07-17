@@ -15,7 +15,7 @@
       _FXEnableColumnAutoSizing = true;
       FXPreferredViewStyle = "Nlsv";
 
-      FXDefaultSearchScope = "SCcf"; # CWD by default
+      FXDefaultSearchScope = "SCcf";
       FXEnableExtensionChangeWarning = false;
       FXRemoveOldTrashItems = true;
 
@@ -28,8 +28,8 @@
     };
 
     NSGlobalDomain = {
-      NSDocumentSaveNewDocumentsToCloud = false;
       NSTableViewDefaultSizeMode = 2;
+      NSDocumentSaveNewDocumentsToCloud = false;
     };
 
     CustomUserPreferences."com.apple.finder" = {
@@ -38,11 +38,13 @@
           arrangeBy = "name";
         };
       };
+
       StandardViewSettings = {
         IconViewSettings = {
           arrangeBy = "name";
         };
       };
+
       FK_StandardViewSettings = {
         IconViewSettings = {
           arrangeBy = "name";

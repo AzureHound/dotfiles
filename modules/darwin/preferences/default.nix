@@ -11,9 +11,9 @@
     ./controlcenter.nix
     ./dock.nix
     ./finder.nix
-    ./images.nix
-    ./info.nix
+    ./img.nix
     ./login.nix
+    ./logs.nix
     ./measurements.nix
     ./misc.nix
     ./power.nix
