@@ -72,8 +72,10 @@ evalHost {
       key = "dotfiles#darwin-hostnames";
       _file = "${__curPos.file}";
 
-      networking.computerName = hostname;
-      networking.localHostName = hostname;
+      networking = {
+        computerName = hostname;
+        localHostName = hostname;
+      };
       system.defaults.smb.NetBIOSName = hostname;
     }
   ];
