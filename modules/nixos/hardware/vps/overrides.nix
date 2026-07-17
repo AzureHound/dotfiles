@@ -20,7 +20,13 @@ in
 
       # Needed by the Hetzner Cloud password reset feature
       qemuGuest.enable = true;
+
+      # There is no physical hardware to flash firmware onto
+      fwupd.enable = mkForce false;
     };
+
+    # VM has no devices that needs firmware blobs loaded into them
+    hardware.enableRedistributableFirmware = mkForce false;
 
     systemd.services.qemu-guest-agent.path = with pkgs; [ shadow ];
 
