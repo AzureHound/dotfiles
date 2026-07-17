@@ -5,6 +5,10 @@
       TrackpadRightClick = true;
     };
 
-    NSGlobalDomain."com.apple.swipescrolldirection" = false;
+    NSGlobalDomain = {
+      "com.apple.mouse.tapBehavior" = true;
+      "com.apple.trackpad.forceClick" = true;
+      "com.apple.swipescrolldirection" = false;
+    };
   };
 }

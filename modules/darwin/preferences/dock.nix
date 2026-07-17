@@ -21,6 +21,7 @@ in
       showhidden = true;
       static-only = false;
 
+      # launchanim = false;
       mineffect = "scale";
       minimize-to-application = true;
 

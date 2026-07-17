@@ -18,6 +18,7 @@
       AppleScrollerPagingBehavior = true;
       AppleShowScrollBars = "WhenScrolling";
 
+      # NSAutomaticWindowAnimationsEnabled = false;
       NSDisableAutomaticTermination = true;
       NSWindowShouldDragOnGesture = true;
       # NSCloseAlwaysConfirmsChanges = false;
@@ -35,6 +36,8 @@
       NSAutomaticPeriodSubstitutionEnabled = false;
       NSAutomaticQuoteSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = true;
+
+      iCal."first day of week" = "Monday";
     };
 
     CustomUserPreferences = {
