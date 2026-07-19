@@ -19,4 +19,9 @@
     zen-browser.enable = true;
     zsh.enable = true;
   };
+
+  services = {
+    ollama.enable = true;
+    syncthing.enable = true;
+  };
 }

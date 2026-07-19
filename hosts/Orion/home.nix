@@ -32,6 +32,11 @@
     '';
   };
 
+  services = {
+    ollama.enable = true;
+    syncthing.enable = true;
+  };
+
   home.packages = with pkgs; [
     asciiquarium-transparent
     # distrobox

@@ -41,11 +41,6 @@
       # webcam = true;
     };
 
-    services = {
-      ollama.enable = true;
-      syncthing.enable = true;
-    };
-
     system = {
       boot = {
         loader = "systemd-boot";

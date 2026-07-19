@@ -43,6 +43,7 @@
     ./nixvim
     ./npm.nix
     ./obs-studio.nix
+    ./ollama.nix
     ./oh-my-posh.nix
     ./opencode.nix
     ./pass.nix
@@ -64,6 +65,7 @@
     ./superfile.nix
     ./swayimg.nix
     ./swaync.nix
+    ./syncthing.nix
     ./theme.nix
     ./thunderbird.nix
     ./tmux.nix
