@@ -87,7 +87,6 @@ in
     ffmpegthumbnailer
     # fragments
     freerdp
-    # gallery-dl
     gnome-calculator
     # gnome-connections
     gnome-disk-utility

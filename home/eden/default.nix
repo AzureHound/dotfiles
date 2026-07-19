@@ -16,6 +16,7 @@
     ./fonts.nix
     ./foot.nix
     ./fzf.nix
+    ./gallery-dl.nix
     ./gcc.nix
     ./gh.nix
     ./ghostty.nix
