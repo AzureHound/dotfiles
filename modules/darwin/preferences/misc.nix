@@ -14,6 +14,8 @@
       # reduceTransparency = true;
     };
 
+    iCal."first day of week" = "Monday";
+
     NSGlobalDomain = {
       AppleScrollerPagingBehavior = true;
       AppleShowScrollBars = "WhenScrolling";
@@ -36,8 +38,6 @@
       NSAutomaticPeriodSubstitutionEnabled = false;
       NSAutomaticQuoteSubstitutionEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = true;
-
-      iCal."first day of week" = "Monday";
     };
 
     CustomUserPreferences = {
