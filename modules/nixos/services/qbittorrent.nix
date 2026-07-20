@@ -53,8 +53,6 @@ in
 
           Core.AutoDeleteAddedTorrentFile = "IfAdded";
 
-          Network.PortForwardingEnabled = false;
-
           Preferences.WebUI = {
             LocalHostAuth = false;
 
