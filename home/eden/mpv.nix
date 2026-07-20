@@ -41,7 +41,7 @@ in
         # OSD
         osd-bar = "yes";
         # osd-scale= "0.5";
-        osd-font = "JetBrainsMono Nerd Font";
+        osd-font = "Maple Mono";
         osd-font-size = 35;
         term-osd-bar = "yes";
 
