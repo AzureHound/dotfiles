@@ -57,7 +57,7 @@ in
           };
           ffmpeg = {
             accel = "disabled";
-            accelDecode = false;
+            accelDecode = true;
             acceptedAudioCodecs = [
               "aac"
               "mp3"
