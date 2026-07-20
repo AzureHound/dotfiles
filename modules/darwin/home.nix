@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   name,
   inputs,
   ...
@@ -17,8 +16,6 @@
     };
 
     home = {
-      packages = with pkgs; [ aerospace ];
-
       file.".hushlogin".text = "";
 
       shellAliases = {
