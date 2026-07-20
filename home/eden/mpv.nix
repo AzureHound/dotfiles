@@ -146,13 +146,20 @@ in
       };
     };
 
-    xdg.configFile = mkCfgLink (
-      map (f: "mpv/${f}") [
-        "input.conf"
-        "script-opts"
-        "shaders"
-      ]
-    );
+    xdg.configFile =
+      mkCfgLink (
+        map (f: "mpv/${f}") [
+          "input.conf"
+          "script-opts"
+          "shaders"
+        ]
+      )
+      // {
+        "mpv/fonts/modernz-icons.ttf".source = pkgs.fetchurl {
+          url = "https://github.com/Samillion/ModernZ/raw/main/modernz-icons.ttf";
+          hash = "sha256-UDO4TVaVAlOJaMbyOwhZvaeQ7thcEOQZsHWVN+xgoBY=";
+        };
+      };
 
     # Theme
     catppuccin.mpv.enable = false;
