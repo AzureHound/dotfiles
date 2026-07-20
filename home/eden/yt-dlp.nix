@@ -7,6 +7,8 @@
     settings = {
       output = ''"~/Videos/yt-dlp/%(playlist|)s/%(playlist_index&{} - |)s%(title)s [%(id)s].%(ext)s"'';
 
+      format = "bestvideo[vcodec!*=av01]+bestaudio/best";
+
       # extract-audio = true;
       no-playlist = true;
 
@@ -20,7 +22,7 @@
       embed-chapter = true;
 
       sponsorblock-mark = "all";
-      sponsorblock-chapter-title = "SponsorBlock: %(category_names)l";
+      sponsorblock-chapter-title = ''"SponsorBlock: %(category_names)l"'';
     };
   };
 }
