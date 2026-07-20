@@ -9,9 +9,7 @@
 let
   inherit (lib.modules) mkIf;
 
-  inherit (osConfig.pixel) device;
-
-  isLinux = pkgs.stdenv.hostPlatform.isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
 
   host = "127.0.0.1";
   port = 11434;
@@ -69,7 +67,7 @@ in
   config = mkIf config.services.ollama.enable {
     services.ollama = {
       inherit host port;
-      acceleration = if device.gpu == "nvidia" then "cuda" else null;
+      acceleration = if (osConfig.pixel.device.gpu or null) == "nvidia" then "cuda" else null;
     };
 
     systemd.user.services.ollama-model-loader = mkIf isLinux {
