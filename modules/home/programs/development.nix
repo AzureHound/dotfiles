@@ -22,6 +22,7 @@ in
       # bun
       # cargo
       # claude-code
+      # clickgen
       # deno
       dig
       # gemini-cli
