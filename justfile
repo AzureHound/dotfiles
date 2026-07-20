@@ -120,7 +120,7 @@ update *input:
     nix flake update {{ input }} \
       --refresh \
       --commit-lock-file \
-      --commit-lockfile-summary "flake.lock: update {{ if input == "" { "all inputs" } else { input } }}" \
+      --commit-lockfile-summary "chore(flake): update {{ if input == "" { "all inputs" } else { input } }}" \
       --flake {{ flake }}
 
 # push to the mirrors
