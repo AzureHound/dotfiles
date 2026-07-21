@@ -12,7 +12,7 @@
     profiles."${name}".settings = {
       FontAntialias = true;
       ShowActiveProcessInTitle = true;
-      ShowCommandKeyInTitle = true;
+      # ShowCommandKeyInTitle = true;
       inherit name;
       rowCount = 34;
       columnCount = 126;
