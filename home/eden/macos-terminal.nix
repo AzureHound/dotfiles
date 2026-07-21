@@ -14,8 +14,8 @@
       ShowActiveProcessInTitle = true;
       ShowCommandKeyInTitle = true;
       inherit name;
-      rowCount = 24;
-      columnCount = 80;
+      rowCount = 34;
+      columnCount = 126;
     };
   };
 }
