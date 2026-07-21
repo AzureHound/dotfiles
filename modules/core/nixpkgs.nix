@@ -6,9 +6,7 @@
       allowUnfree = true;
       allowUnfreePredicate = _: true;
 
-      permittedInsecurePackages = [
-        "pnpm-9.15.9"
-      ];
+      permittedInsecurePackages = [];
 
       allowAliases = false;
       allowBroken = false;
