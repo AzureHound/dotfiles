@@ -15,7 +15,7 @@
       keymap_mode = "vim-insert";
       sync.records = true;
       logs.dir = "~/.local/state/atuin";
-      ai.enable = false;
+      ai.enabled = false;
     };
   };
 }
