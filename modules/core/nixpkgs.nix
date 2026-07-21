@@ -11,7 +11,7 @@
       allowAliases = false;
       allowBroken = false;
       allowUnsupportedSystem = false;
-      allowVariants = false;
+      allowVariants = true;
 
       # showDerivationWarnings = [ "maintainerless" ];
     };
