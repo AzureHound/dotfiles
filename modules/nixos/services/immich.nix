@@ -1,6 +1,7 @@
 {
   lib,
   self,
+  pkgs,
   config,
   ...
 }:
@@ -45,7 +46,11 @@ in
         inherit (cfg) port host;
         openFirewall = true;
 
+        package = pkgs.pkgsCuda.immich;
+
         accelerationDevices = null;
+
+        machine-learning.environment.DEVICE = "cuda";
 
         settings = {
           backup = {
