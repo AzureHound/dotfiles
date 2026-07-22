@@ -24,6 +24,7 @@
 
       title = "‎";
       maximize = true;
+      auto-update = "off";
       term = "xterm-256color";
       focus-follows-mouse = true;
       confirm-close-surface = false;
