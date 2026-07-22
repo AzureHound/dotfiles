@@ -81,7 +81,7 @@ in
         demuxer-max-back-bytes = "1200M";
 
         # AUDIO & SUBTITLES
-        af = "dynaudnorm=g=5:f=250:r=0.9:p=0.5";
+        af = if isLinux then "dynaudnorm=g=5:f=250:r=0.9:p=0.5" else "";
         volume = 70;
         volume-max = 200;
         alang = "en,jpn,jp";
@@ -105,14 +105,18 @@ in
 
         # MOTION INTERPOLATION
         # override-display-fps = 60;
-        video-sync = "display-resample";
+        video-sync = if isLinux then "display-resample" else "audio";
         # interpolation = "yes";
         # tscale = "oversample"; # smoothmotion
 
         # UPSCALING & PROCESSING
         # NOTE: Any FSRCNNX above FSRCNNX_x2_8-0-4-1 is not worth the additional computational overhead
         # ssimdownscaler is tuned for mitchell & downscaling=no
-        glsl-shaders = "~~/shaders/FSRCNNX_x2_8-0-4-1.glsl:~~/shaders/SSimDownscaler.glsl:~~/shaders/KrigBilateral.glsl";
+        glsl-shaders =
+          if isLinux then
+            "~~/shaders/FSRCNNX_x2_8-0-4-1.glsl:~~/shaders/SSimDownscaler.glsl:~~/shaders/KrigBilateral.glsl"
+          else
+            "";
         scale = "ewa_lanczos";
         dscale = "mitchell";
         cscale = "mitchell";
