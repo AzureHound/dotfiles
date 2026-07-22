@@ -26,10 +26,6 @@
     thunderbird.enable = true;
     zen-browser.enable = true;
     zsh.enable = true;
-
-    tmux.extraConfig = ''
-      set -g status on
-    '';
   };
 
   services = {

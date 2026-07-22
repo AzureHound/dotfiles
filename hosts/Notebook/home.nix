@@ -1,4 +1,13 @@
-{ pkgs, mkCfgLink, ... }:
+{
+  lib,
+  pkgs,
+  mkCfgLink,
+  ...
+}:
+
+let
+  inherit (lib.modules) mkAfter;
+in
 
 {
   pixel = {
@@ -22,6 +31,10 @@
     qutebrowser.enable = true;
     thunderbird.enable = true;
     zsh.enable = true;
+
+    tmux.extraConfig = mkAfter ''
+      set -g status off
+    '';
   };
 
   services.mako.enable = true;

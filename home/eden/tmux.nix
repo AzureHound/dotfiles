@@ -45,6 +45,7 @@ in
         set-option -g lock-after-time 3600
         set-window-option -g xterm-keys on
 
+        set -g status on
         set -g set-titles on
         set -g bell-action any
         set -g focus-events on
