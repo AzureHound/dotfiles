@@ -31,6 +31,8 @@ in
     });
 
     extraSpecialArgs = {
+      hostname = config.networking.hostName;
+
       inherit
         inputs
         inputs'
