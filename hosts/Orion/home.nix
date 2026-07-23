@@ -1,4 +1,9 @@
-{ pkgs, mkCfgLink, ... }:
+{
+  pkgs,
+  mkpkg,
+  mkCfgLink,
+  ...
+}:
 
 {
   pixel = {
@@ -63,6 +68,7 @@
     # vitetris
     # nethack
     # chess-tui
+    mkpkg.greenlight
     # stockfish # Chess Engine
   ];
 
