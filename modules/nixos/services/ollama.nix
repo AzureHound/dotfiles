@@ -30,6 +30,7 @@ in
         # "qwen2.5-coder:7b"
         "qwen2.5-coder:14b"
         "qwen3:14b-q4_K_M"
+        "qwen3.5:9b"
       ];
     };
   };
