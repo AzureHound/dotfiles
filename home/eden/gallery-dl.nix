@@ -5,7 +5,7 @@ let
 in
 
 {
-  config = mkIf config.pixel.profiles.graphical.enable {
+  config = mkIf config.pixel.profiles.workstation.enable {
     programs.gallery-dl = {
       enable = true;
       settings = {
