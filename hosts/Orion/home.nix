@@ -65,11 +65,11 @@
 
     ## games
     # _2048-in-terminal
-    # vitetris
-    # nethack
     # chess-tui
     mkpkg.greenlight
+    # nethack
     # stockfish # Chess Engine
+    # vitetris
   ];
 
   # configHome
