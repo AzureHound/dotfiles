@@ -121,9 +121,11 @@
       zstyle ':completion:*' matcher-list "" 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
       # zstyle ':completion:*' verbose true
 
-      zstyle ':completion:*:paths' accept-exact '*(N)'
+      # zstyle ':completion:*:paths' accept-exact '*(N)'
       zstyle ':completion:*:functions' ignored-patterns '_*'
       zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+
+      zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/zcompcache"
       zstyle ':completion:*' use-cache on
 
       zstyle ':fzf-tab:*' fzf-flags \
