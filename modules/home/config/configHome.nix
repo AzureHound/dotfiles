@@ -38,7 +38,7 @@ in
     })
 
     (mkIf config.pixel.profiles.development.enable {
-      xdg.configFile = mkCfgLink [ "glab-cli" ];
+      xdg.configFile = mkCfgLink [ ];
     })
   ];
 }

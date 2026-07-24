@@ -346,7 +346,6 @@ in
 
       shellAliases = {
         # branch = ''git branch --sort=-committerdate | fzf --header "Checkout Recent Branch" --preview "git diff --color=always {1} | delta" --pointer=" " | xargs git checkout'';
-        gl = "glab";
         glogs = "git log --oneline --graph --all";
         gr = ''cd "$(git rev-parse --show-toplevel)"'';
       };

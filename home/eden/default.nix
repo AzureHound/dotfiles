@@ -21,6 +21,7 @@
     ./gh.nix
     ./ghostty.nix
     ./git.nix
+    ./glab.nix
     ./glow.nix
     ./gtk.nix
     ./hypr

@@ -27,7 +27,6 @@ in
       dig
       # gemini-cli
       # gh-copilot
-      glab
       go
       # hugo
       # lazysql
