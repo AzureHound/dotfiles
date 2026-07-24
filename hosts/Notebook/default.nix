@@ -38,8 +38,6 @@ in
       };
     };
 
-    services.syncthing.enable = true;
-
     system = {
       boot = {
         loader = "systemd-boot";

@@ -37,7 +37,10 @@ in
     '';
   };
 
-  services.mako.enable = true;
+  services = {
+    mako.enable = true;
+    syncthing.enable = true;
+  };
 
   home.packages = with pkgs; [
     brightnessctl
