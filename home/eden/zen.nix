@@ -213,7 +213,7 @@ in
         "browser.download.autohideButton" = true;
         "browser.framerate.idle" = true;
         "browser.search.suggest.enabled" = true;
-        "browser.tabs.inTitlebar" = 1;
+        "browser.tabs.inTitlebar" = if pkgs.stdenv.hostPlatform.isLinux then 0 else 1;
         "browser.tabs.unloadOnLowMemory" = true;
         "browser.tabs.warnOnClose" = true;
         "browser.uiCustomization.state" = builtins.toJSON {
