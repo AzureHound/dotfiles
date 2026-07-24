@@ -78,6 +78,7 @@
         "ghostty"
         # "intellij-idea"
         # "jordanbaird-ice@beta"
+        "notion"
         "whatsapp"
       ];
     };
