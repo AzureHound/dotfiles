@@ -1,32 +1,10 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
+{ lib, pkgs, ... }:
 
 let
   inherit (lib.strings) optionalString;
 in
 
 {
-  sops = {
-    secrets.env = { };
-
-    templates.fish-env = {
-      content = ''
-        function setup_secrets_vars;
-          if [ -n "$__SECRETS_SOURCED" ]
-            return
-          end
-          set -gx __SECRETS_SOURCED '1'
-          ${config.sops.placeholder.env}
-        end
-        setup_secrets_vars
-      '';
-    };
-  };
-
   programs.fish = {
 
     plugins = with pkgs.fishPlugins; [
@@ -152,8 +130,6 @@ in
         set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
       end
       gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
-
-      source ${config.sops.templates.fish-env.path}
     '';
   };
 }
