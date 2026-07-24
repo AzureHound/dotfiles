@@ -2,6 +2,7 @@ keys:
   - &eden age1cqn2lzacjwhtpecsnhjc2nf659va465sa2evdw37jahkg03jaavs2slpq0
 
   - &Newton age1pgka3kxkts352c2fky80ee34hzzdtj87pu3ykufprwhtxmsne5ks4sjv6k
+  - &Notebook age1hlcz002grl23atw676g9ruwld9jjkkr0jcgwvl7dfyt9y4nzp5sqxdg84z
   - &Orion age107mvx47vn5sfp7clw75e6v2m4p4s9wrj22zhvmml50y9l0lmsyuq9q3szp
 
 creation_rules:
@@ -16,4 +17,5 @@ creation_rules:
           - *eden
 
           - *Newton
+          - *Notebook
           - *Orion
