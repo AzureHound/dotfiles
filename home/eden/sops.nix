@@ -6,6 +6,10 @@ in
 
 {
   sops.secrets = {
+    forge = {
+      path = configHome + "/forge/config";
+    };
+
     gust = {
       path = configHome + "/gust/auth.json";
     };
