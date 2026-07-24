@@ -16,18 +16,6 @@
           pv = "pr view";
         };
       };
-
-      hosts = {
-        "github.com" = {
-          git_protocol = "ssh";
-          user = "AzureHound";
-          users = {
-            AzureHound = {
-              git_protocol = "ssh";
-            };
-          };
-        };
-      };
     };
 
     gh-dash = {
@@ -36,6 +24,20 @@
       settings = {
         pager.diff = "delta --dark --paging=never";
       };
+    };
+  };
+
+  sops = {
+    secrets.gh = { };
+
+    templates."hosts.yml" = {
+      path = "${config.home.homeDirectory}/.config/gh/hosts.yml";
+      content = ''
+        github.com:
+          user: AzureHound
+          oauth_token: ${config.sops.placeholder.gh}
+          git_protocol: ssh
+      '';
     };
   };
 }
