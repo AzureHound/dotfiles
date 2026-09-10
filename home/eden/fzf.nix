@@ -8,6 +8,8 @@
 let
   inherit (lib.meta) getExe;
   inherit (lib.modules) mkIf;
+
+  previewCmd = "eza --long --header --icons --all --color=always --group-directories-first --hyperlink=auto";
 in
 
 {
@@ -63,9 +65,9 @@ in
     };
 
     home.sessionVariables = {
-      fzf_preview_dir_cmd = "eza --long --header --icons --all --color=always --group-directories-first --hyperlink=auto";
+      fzf_preview_dir_cmd = previewCmd;
       fzf_fd_opts = "--hidden --color=always";
-      _ZO_FZF_OPTS = "$FZF_DEFAULT_OPTS '--preview \"{$fzf_preview_dir_cmd} {2}\"'";
+      _ZO_FZF_OPTS = "$FZF_DEFAULT_OPTS --preview '${previewCmd} {2}'";
     };
 
     # Theme
