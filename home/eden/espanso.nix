@@ -1,6 +1,14 @@
-{ config, mkCfgLink, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  mkCfgLink,
+  ...
+}:
 
 {
+  launchd.agents.espanso.enable = lib.mkIf pkgs.stdenv.hostPlatform.isDarwin (lib.mkForce false);
+
   services.espanso = {
     inherit (config.pixel.profiles.graphical) enable;
 
