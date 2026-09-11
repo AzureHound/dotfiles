@@ -35,6 +35,7 @@
     ./gtk.nix
     ./hypr
     ./hx.nix
+    ./jankyborders.nix
     ./jelly.nix
     ./jj.nix
     ./jrnl.nix
