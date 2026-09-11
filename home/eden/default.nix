@@ -2,6 +2,7 @@
   imports = [
     ./pkgs.nix
 
+    ./aerospace.nix
     ./aria2.nix
     ./atuin.nix
     ./bat.nix
