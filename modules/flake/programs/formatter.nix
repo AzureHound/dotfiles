@@ -3,7 +3,7 @@
   writeShellScriptBin,
   treefmt,
 
-  actionlint,
+  # actionlint,
   deadnix,
   locker,
   nixfmt,
@@ -19,7 +19,7 @@
 
 treefmt.withConfig {
   runtimeInputs = [
-    actionlint
+    # actionlint
     deadnix
     locker
     nixfmt
@@ -58,13 +58,13 @@ treefmt.withConfig {
     ];
 
     formatter = {
-      actionlint = {
-        command = "actionlint";
-        includes = [
-          ".github/workflows/*.yml"
-          ".github/workflows/*.yaml"
-        ];
-      };
+      # actionlint = {
+      #   command = "actionlint";
+      #   includes = [
+      #     ".github/workflows/*.yml"
+      #     ".github/workflows/*.yaml"
+      #   ];
+      # };
 
       deadnix = {
         command = "deadnix";
