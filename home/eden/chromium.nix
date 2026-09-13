@@ -41,8 +41,8 @@ in
       # Stylus
       {
         id = "clngdbkpkpeebahjckkjfobafhncgmne";
-        version = "2.4.10";
-        hash = "sha256-+A+9w8Fc7VJD3Azofjyhchmpd2QQhDPoKsfkD6C9cpM=";
+        version = "2.4.11";
+        hash = "sha256-7JnTWC0q3DykvmwJaDvEaLKUDK65iPC7T7EXwS/AHfY=";
       }
 
       # SponsorBlock
