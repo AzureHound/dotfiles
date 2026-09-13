@@ -22,7 +22,7 @@
   };
 
   programs = {
-    chromium.enable = true;
+    # chromium.enable = true;
     # discord.enable = true;
     firefox.enable = true;
     # fish.enable = true;
