@@ -25,7 +25,7 @@ in
   };
 
   programs = {
-    # chromium.enable = true;
+    chromium.enable = true;
     firefox.enable = true;
     foot.enable = true;
     # kitty.enable = true;
