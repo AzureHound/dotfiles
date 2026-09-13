@@ -38,13 +38,6 @@ in
         hash = "sha256-0aWULZwjTQM4LamSeZMgVQZMquejLMmxV5QMhjFl1Z8=";
       }
 
-      # uBlock Origin
-      {
-        id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
-        version = "1.73.0";
-        hash = "sha256-am9BiDyrsTDQCNXazBGIKEkMJwE3ZbNRiSR+i+oXg5E=";
-      }
-
       # Stylus
       {
         id = "clngdbkpkpeebahjckkjfobafhncgmne";
