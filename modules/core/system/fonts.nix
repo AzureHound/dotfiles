@@ -36,6 +36,16 @@ in
         twemoji-color-font
 
         maple-mono.truetype
+
+        (stdenvNoCC.mkDerivation {
+          name = "josefin-sans";
+          src = "${self}/config/home/.local/share/fonts/JosefinSans";
+          dontUnpack = true;
+          installPhase = ''
+            mkdir -p $out/share/fonts/truetype
+            cp -r $src/* $out/share/fonts/truetype/
+          '';
+        })
       ]
 
       ++ (with pkgs.nerd-fonts; [
