@@ -3,6 +3,9 @@
 # █▀▀ ▀▄▀ █▀▀ █▀▀  █▀ █▀▀ █▀█ █ █ █ █▀▀ █▀▀ █▀
 # ██▄ █ █ ██▄ █▄▄  ▄█ ██▄ █▀▄ ▀▄▀ █ █▄▄ ██▄ ▄█
 
+# xwayland
+xwayland-satellite &
+
 # Display
 brightnessctl s 1067 &
 

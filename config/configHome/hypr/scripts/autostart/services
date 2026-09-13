@@ -3,6 +3,9 @@
 # █▀▀ ▀▄▀ █▀▀ █▀▀  █▀ █▀▀ █▀█ █ █ █ █▀▀ █▀▀ █▀
 # ██▄ █ █ ██▄ █▄▄  ▄█ ██▄ █▀▄ ▀▄▀ █ █▄▄ ██▄ ▄█
 
+# xwayland
+xwayland-satellite &
+
 # Pyprland Daemon
 pypr --debug /tmp/pypr.log &
 
