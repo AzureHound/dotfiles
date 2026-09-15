@@ -14,6 +14,7 @@
   };
 
   programs = {
+    # aerospace.enable = true;
     # chromium.enable = true;
     ghostty.enable = true;
     zen-browser.enable = true;
