@@ -29,7 +29,7 @@
       templates.folder = "Templates";
 
       ui.enable = false;
-      picker.name = "snacks.pick";
+      picker.name = "snacks.picker";
       legacy_commands = false;
 
       # Logic Functions
