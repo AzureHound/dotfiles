@@ -47,8 +47,8 @@ in
       #  14: Quick Note
       wvous-tl-corner = 1;
       wvous-tr-corner = 1;
-      wvous-bl-corner = 1;
-      wvous-br-corner = 14;
+      wvous-bl-corner = 5;
+      wvous-br-corner = 4;
 
       persistent-apps =
         [ ]
