@@ -10,7 +10,7 @@
     };
 
     universalaccess = {
-      reduceMotion = true;
+      # reduceMotion = true;
       # reduceTransparency = true;
     };
 
