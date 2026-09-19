@@ -9,7 +9,7 @@ in
 {
   system.defaults = {
     dock = {
-      tilesize = 48;
+      tilesize = 54;
       magnification = true;
       largesize = 70;
 
