@@ -76,6 +76,7 @@
       # `brew install --cask`
       casks = [
         "ghostty"
+        # "home-assistant"
         # "intellij-idea"
         # "notion"
         "whatsapp"
