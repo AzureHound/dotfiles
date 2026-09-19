@@ -77,7 +77,7 @@
       casks = [
         "ghostty"
         # "intellij-idea"
-        "notion"
+        # "notion"
         "whatsapp"
       ];
     };
