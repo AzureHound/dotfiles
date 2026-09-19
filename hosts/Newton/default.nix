@@ -10,5 +10,5 @@
     };
   };
 
-  # networking.wakeOnLan.enable = true;
+  networking.wakeOnLan.enable = false;
 }
