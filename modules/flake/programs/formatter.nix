@@ -58,14 +58,6 @@ treefmt.withConfig {
     ];
 
     formatter = {
-      # actionlint = {
-      #   command = "actionlint";
-      #   includes = [
-      #     ".github/workflows/*.yml"
-      #     ".github/workflows/*.yaml"
-      #   ];
-      # };
-
       deadnix = {
         command = "deadnix";
         options = [ "--edit" ];
