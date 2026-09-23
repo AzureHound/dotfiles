@@ -20,11 +20,12 @@ in
       package = pkgs.rofi;
       plugins = optional gaming pkgs.rofi-games;
 
-      font = "JetBrainsMono Nerd Font 10";
-      terminal = "rofi-sensible-terminal";
       theme = "~/.config/rofi/style.rasi";
 
-      extraConfig = {
+      settings = {
+        font = "JetBrainsMono Nerd Font 10";
+        terminal = "rofi-sensible-terminal";
+
         modes = "drun,run,filebrowser";
         case-sensitive = false;
         cycle = false;
