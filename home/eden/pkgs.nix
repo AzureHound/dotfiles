@@ -128,7 +128,7 @@ in
       widevine-cdm
       wl-clipboard
       wl-gammactl
-      xwayland-satellite
+      # xwayland-satellite
 
       ## iOS
       # ideviceinstaller
