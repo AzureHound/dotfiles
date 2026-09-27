@@ -53,6 +53,7 @@ in
       # dipc
       duf
       exiftool
+      ffmpeg
       # figlet
       ghostscript
       goread
@@ -115,6 +116,7 @@ in
       # plocate
       # pwvucontrol
       raider
+      rclone
       # revanced-cli
       # rpi-imager
       slurp
@@ -150,7 +152,6 @@ in
     ]
 
     ++ optionals (cfg.media.watching.enable && isLinux) [
-      ffmpeg
       # syncplay
     ]
 
