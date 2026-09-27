@@ -14,4 +14,8 @@
       # "--octal-permissions"
     ];
   };
+
+  home.shellAliases = {
+    tree = "lt";
+  };
 }
