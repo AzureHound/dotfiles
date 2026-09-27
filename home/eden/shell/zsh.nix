@@ -4,7 +4,7 @@
   programs.zsh = {
     dotDir = "${config.xdg.configHome}/zsh";
 
-    autosuggestion.enable = true;
+    # autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
     autocd = true;
@@ -55,10 +55,22 @@
       export GPG_TTY=$(tty)
       gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
 
+      # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+
+      export DEJA_ACCEPT_KEY='^E'
+      export DEJA_TOGGLE_KEY='^X'
+      export DEJA_CYCLE_KEY="^N"
+
+      export DEJA_CYCLE_FUZZY_KEY=""
+      export DEJA_CYCLE_FUZZY_BACK_KEY=""
+      export DEJA_TOGGLE_EMPTY_KEY=""
+
+      export DEJA_HIGHLIGHT_STYLE='fg=8'
+      eval "$(${pkgs.deja}/bin/deja init zsh)"
+
       ZVM_INIT_MODE=sourcing
       ABBR_GET_AVAILABLE_ABBREVIATION=1
       ABBR_LOG_AVAILABLE_ABBREVIATION=1
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
       ZVM_VI_EDITOR=vim
       ZVM_SYSTEM_CLIPBOARD_ENABLED=true
@@ -202,4 +214,6 @@
       }
     ];
   };
+
+  home.packages = with pkgs; [ deja ];
 }
