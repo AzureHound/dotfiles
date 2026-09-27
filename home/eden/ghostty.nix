@@ -3,8 +3,8 @@
     package = null;
 
     settings = {
-      background-opacity = 0.90;
-      background-blur = 20;
+      # background-opacity = 0.90;
+      # background-blur = 20;
 
       adjust-cell-height = "20%";
       font-size = 19;
