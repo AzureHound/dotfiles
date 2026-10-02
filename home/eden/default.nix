@@ -34,7 +34,7 @@
     ./glow.nix
     ./gtk.nix
     ./hypr
-    ./hx.nix
+    # ./hx.nix
     ./jankyborders.nix
     ./jelly.nix
     ./jj.nix
