@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+DL=0
+URL=""
+
+for arg in "$@"; do
+  if [[ "$arg" == "-dl" || "$arg" == "--dl" ]]; then
+    DL=1
+  else
+    URL="$arg"
+  fi
+done
+
+process_track() {
+  local artist="$1" track="$2" cover="$3" dir="$4"
+  local out="$track"
+  [[ -n "$dir" ]] && out="$dir/$track"
+
+  [ -z "$track" ] || [ -f "$out.mp3" ] && return
+
+  yt-dlp -f "bestaudio/best" -x --audio-format mp3 --audio-quality 320K --embed-metadata ${dir:+-P "$dir"} -o "$track.%(ext)s" "ytsearch1:$artist $track"
+
+  if [ -f "$out.mp3" ] && [ -n "$cover" ] && [ "$cover" != "null" ]; then
+    curl -sL "$cover" -o "$out.jpg"
+    ffmpeg -y -i "$out.mp3" -i "$out.jpg" -map 0:0 -map 1:0 -c copy -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (front)" "$out.tmp.mp3" -hide_banner -loglevel error
+    mv "$out.tmp.mp3" "$out.mp3"
+    rm -f "$out.jpg"
+  fi
+}
+
+if [[ -n "$URL" ]]; then
+  name=$(curl -sL "$URL" | awk -F'<title>' '{print $2}' | awk -F' - ' '{print $1}')
+  name="${name:-Playlist}"
+
+  mkdir -p "$name"
+  spotdl save "$URL" --save-file "$name/$name.spotdl"
+  jq -r '.[] | "\(.artist)\t\(.name)\t\(.cover_url)"' "$name/$name.spotdl" >"$name/$name.md"
+  rm "$name/$name.spotdl"
+
+  if [[ $DL -eq 1 ]]; then
+    while IFS=$'\t' read -r artist track cover || [ -n "$track" ]; do
+      process_track "$artist" "$track" "$cover" "$name"
+    done <"$name/$name.md"
+    (cd "$name" && ls -1 *.mp3 >"$name.m3u" 2>/dev/null && rm -f *.webp *.vtt 2>/dev/null)
+  fi
+
+elif [[ $DL -eq 1 ]]; then
+  md_file=$(ls *.md 2>/dev/null | head -n 1)
+
+  if [[ -z "$md_file" ]]; then
+    echo "No .md file found in cwd."
+    exit 1
+  fi
+
+  while IFS=$'\t' read -r artist track cover || [ -n "$track" ]; do
+    process_track "$artist" "$track" "$cover" ""
+  done <"$md_file"
+
+  name="${md_file%.md}"
+  ls -1 *.mp3 >"$name.m3u" 2>/dev/null
+  rm -f *.webp *.vtt 2>/dev/null
+fi

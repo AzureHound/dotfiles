@@ -17,6 +17,7 @@ in
     {
       home.scripts = mkScptLink (
         [
+          "spot"
           # "sysgrade"
         ]
 
