@@ -65,9 +65,9 @@
 
   services = {
     displayManager.defaultSession = "hyprland";
+    hardware.openrgb.enable = true;
     logind.settings.Login.HandlePowerKey = "poweroff";
     ollama.package = pkgs.ollama-cuda;
-    udev.packages = with pkgs; [ openrgb ];
   };
 
   systemd = {
@@ -88,4 +88,8 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    openrgb-with-all-plugins
+  ];
 }

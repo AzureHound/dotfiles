@@ -49,10 +49,6 @@
     liquidctl
     # lsfg-vk
     # lsfg-vk-ui
-    (openrgb.withPlugins [
-      # openrgb-plugin-effects
-      openrgb-plugin-hardwaresync
-    ])
     pipes
     pyprland
     qemu
