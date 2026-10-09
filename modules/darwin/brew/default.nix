@@ -19,8 +19,8 @@
       package = pkgs.fetchFromGitHub {
         owner = "homebrew";
         repo = "brew";
-        tag = "7.0.0";
-        hash = "sha256-1uLAp0lNdt2blJOJ26jIwJbEwg8/ttc7XMpyxzXx3vI=";
+        tag = "7.0.8";
+        hash = "sha256-ktO8OiPLPqaDMyJXi71XM19YX2oByqwopg5AA4AFn7g=";
       };
 
       mutableTaps = false;
@@ -31,15 +31,15 @@
         "homebrew/homebrew-core" = pkgs.fetchFromGitHub {
           owner = "homebrew";
           repo = "homebrew-core";
-          rev = "b148af37ec51d1fad173909e1a07c0d2cf288ab8";
-          hash = "sha256-bo+Lbr9xNyQIcDtOxwLKEENzdQ5ivS8jxPxpv4BRqvA=";
+          rev = "c9f01628150078c996001ff0a99aeedd5f715f52";
+          hash = "sha256-1/5JIUR/FoifPUieCyzFKHKFuZY1/W39QlFl89Wlz5s=";
         };
 
         "homebrew/homebrew-cask" = pkgs.fetchFromGitHub {
           owner = "homebrew";
           repo = "homebrew-cask";
-          rev = "c15c00e922d79de132cccbee770b9d4f5bac8a6d";
-          hash = "sha256-2Cy9Qq+oKCp45hce5ZeI4MeTSxFcASMnmMK9sxfYaeU=";
+          rev = "b7463efd8581af66eb577059ca5344267770012d";
+          hash = "sha256-hpFYF1Kb61rxEjDgymdvfsywTRPdlXzJLVAgioEsoEY=";
         };
       };
     };
