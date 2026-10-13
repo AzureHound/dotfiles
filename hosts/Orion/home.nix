@@ -42,6 +42,7 @@
 
   home.packages = with pkgs; [
     asciiquarium-transparent
+    # davinci-resolve
     # distrobox
     # easyeffects
     hyprpicker
