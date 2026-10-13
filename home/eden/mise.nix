@@ -19,6 +19,7 @@ in
         tools = {
           "go:github.com/josephburgess/gust/cmd/gust" = "latest";
 
+          # "npm:@excalidraw/cli" = "latest";
           "npm:czg" = "latest";
           "npm:five-server" = "latest";
           "npm:torlnk" = "latest";
