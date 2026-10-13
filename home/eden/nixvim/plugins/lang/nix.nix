@@ -6,18 +6,18 @@
       enable = true;
       settings = {
         formatting.command = [ "nixfmt" ];
-        nixpkgs.expr = "import (builtins.getFlake (toString ./.)).inputs.nixpkgs { }";
-        options = {
-          nixos = {
-            expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.Orion.options";
-          };
-          nix-darwin = {
-            expr = "(builtins.getFlake (toString ./.)).darwinConfigurations.Newton.options";
-          };
-          home-manager = {
-            expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.Orion.options.home-manager.users.type.getSubOptions []";
-          };
-        };
+        # nixpkgs.expr = "import (builtins.getFlake (toString ./.)).inputs.nixpkgs { }";
+        # options = {
+        #   nixos = {
+        #     expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.Orion.options";
+        #   };
+        #   nix-darwin = {
+        #     expr = "(builtins.getFlake (toString ./.)).darwinConfigurations.Newton.options";
+        #   };
+        #   home-manager = {
+        #     expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.Orion.options.home-manager.users.type.getSubOptions []";
+        #   };
+        # };
       };
     };
 
