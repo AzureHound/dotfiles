@@ -12,7 +12,7 @@
             "configuration": null,
             "description": "ENE SMBus Device",
             "display_name": "",
-            "flags": 2,
+            "flags": 1,
             "leds": [
                 {
                     "name": "Unknown LED 1"
@@ -206,7 +206,7 @@
             "configuration": null,
             "description": "ENE SMBus Device",
             "display_name": "",
-            "flags": 2,
+            "flags": 1,
             "leds": [
                 {
                     "name": "DRAM LED 1"
@@ -400,7 +400,7 @@
             "configuration": null,
             "description": "ENE SMBus Device",
             "display_name": "",
-            "flags": 2,
+            "flags": 1,
             "leds": [
                 {
                     "name": "Unknown LED 1"
@@ -594,7 +594,7 @@
             "configuration": null,
             "description": "ENE SMBus Device",
             "display_name": "",
-            "flags": 2,
+            "flags": 1,
             "leds": [
                 {
                     "name": "Unknown LED 1"
@@ -783,7 +783,7 @@
             ],
             "description": "RGB Fusion GPU Device",
             "display_name": "",
-            "flags": 2,
+            "flags": 1,
             "leds": [
                 {
                     "name": "GPU LED"
@@ -919,7 +919,7 @@
             "configuration": null,
             "description": "ASUS Aura USB Mainboard Device",
             "display_name": "",
-            "flags": 2,
+            "flags": 1,
             "leds": [
                 {
                     "name": "Aura Mainboard, LED 1"
@@ -1161,7 +1161,7 @@
             "configuration": null,
             "description": "NZXT Hue 2 Device",
             "display_name": "",
-            "flags": 2,
+            "flags": 1,
             "leds": [
                 {
                     "name": "Ring LED 1"
@@ -1191,7 +1191,7 @@
                     "name": "Logo LED"
                 }
             ],
-            "location": "HID: /dev/hidraw7",
+            "location": "HID: /dev/hidraw5",
             "modes": [
                 {
                     "brightness": 0,
@@ -2133,13 +2133,13 @@
             ],
             "description": "Logitech HID++ 2.0 Device",
             "display_name": "",
-            "flags": 2,
+            "flags": 1,
             "leds": [
                 {
                     "name": "Primary"
                 }
             ],
-            "location": "HID: /dev/hidraw6",
+            "location": "HID: /dev/hidraw7",
             "modes": [
                 {
                     "brightness": 0,
