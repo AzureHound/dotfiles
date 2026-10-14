@@ -41,6 +41,13 @@
           rev = "d4d25dbd93eef9ed20f4ae73f3c269a728a412eb";
           hash = "sha256-FkuEIGWiCMhpV7OYfwJUkI7yrHI3AY70KrZ2KnF9hXI=";
         };
+
+        # "abue-ammar/homebrew-tinycast" = pkgs.fetchFromGitHub {
+        #   owner = "abue-ammar";
+        #   repo = "homebrew-tinycast";
+        #   rev = "3a9a0fa4de664a0aa2b34880e71626dd55309a38";
+        #   hash = "sha256-GSG018gaRrzd0iycO3cM2rNPpamTXwt1Z5AlQG/kcZo=";
+        # };
       };
     };
 
@@ -75,6 +82,8 @@
 
       # `brew install --cask`
       casks = [
+        # "abue-ammar/tinycast/tinycast"
+
         "ghostty"
         # "home-assistant"
         # "intellij-idea"
