@@ -14,6 +14,7 @@ in
       "ephjcajbkgplkjmelpglennepbpmdpjg" # ff2mpv
       "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
       "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
+      "ddkjiahejlhfcafbddmgiahcphecmpfh" # uBlock Origin lite
     ];
 
     nativeMessagingHosts = [ pkgs.ff2mpv-rust ];
