@@ -50,7 +50,11 @@ in
 
         accelerationDevices = null;
 
-        machine-learning.environment.DEVICE = "cuda";
+        machine-learning.environment = {
+          DEVICE = "cuda";
+          # opt in to the optimised models, ignored before immich 3.3
+          MACHINE_LEARNING_MODEL_REVISION = "v2";
+        };
 
         settings = {
           backup = {
@@ -173,7 +177,7 @@ in
               maxResolution = 736;
               minDetectionScore = 0.5;
               minRecognitionScore = 0.8;
-              modelName = "PP-OCRv5_mobile";
+              modelName = "PP-OCRv6_medium";
             };
 
             urls = [ "http://127.0.0.1:3003" ];
