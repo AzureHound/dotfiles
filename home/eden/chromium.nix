@@ -1,68 +1,24 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
+{ lib, pkgs, ... }:
 
 let
-  inherit (lib.lists) concatLists head;
-  inherit (lib.strings) concatMapStrings enableFeature getVersion;
-  inherit (lib.versions) splitVersion;
+  inherit (lib.lists) concatLists;
+  inherit (lib.strings) concatMapStrings enableFeature;
 
   features = en: features: "--${en}-features=" + (concatMapStrings (x: x + ",") features);
-
-  extension =
-    {
-      id,
-      version,
-      hash,
-    }:
-    {
-      inherit id version;
-      crxPath = pkgs.fetchurl {
-        name = "${id}.crx";
-        url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${head (splitVersion (getVersion config.programs.chromium.package))}&x=id%3D${id}%26installsource%3Dondemand%26uc";
-        inherit hash;
-      };
-    };
 in
 
 {
   programs.chromium = {
-    extensions = map extension [
-      # Bitwarden
-      {
-        id = "nngceckbapebfimnlniiiahkandclblb";
-        version = "2026.8.0";
-        hash = "sha256-0aWULZwjTQM4LamSeZMgVQZMquejLMmxV5QMhjFl1Z8=";
-      }
-
-      # Stylus
-      {
-        id = "clngdbkpkpeebahjckkjfobafhncgmne";
-        version = "2.4.11";
-        hash = "sha256-7JnTWC0q3DykvmwJaDvEaLKUDK65iPC7T7EXwS/AHfY=";
-      }
-
-      # SponsorBlock
-      {
-        id = "mnjggcdmjocbbbhaepdhchncahnbgone";
-        version = "6.1.6";
-        hash = "sha256-VYf+K2qZRhAcoN3nxu/nanVcXuW21uY9/EjH9zbNtP8=";
-      }
-
-      # ff2mpv
-      {
-        id = "ephjcajbkgplkjmelpglennepbpmdpjg";
-        version = "6.0.0";
-        hash = "sha256-4VEwf3rqtobbOElIsYi1mIcIvFS3KXlpHYfs3d+AzGg=";
-      }
+    extensions = [
+      "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+      "ephjcajbkgplkjmelpglennepbpmdpjg" # ff2mpv
+      "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
+      "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
     ];
 
     nativeMessagingHosts = [ pkgs.ff2mpv-rust ];
 
-    package = pkgs.ungoogled-chromium.override {
+    package = pkgs.chromium.override {
       enableWideVine = true;
 
       # https://github.com/secureblue/hardened-chromium
