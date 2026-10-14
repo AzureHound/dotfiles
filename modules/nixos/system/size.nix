@@ -12,6 +12,7 @@ in
   };
 
   programs = {
+    command-not-found.enable = false;
     less.enable = mkForce false;
     nano.enable = false;
   };
