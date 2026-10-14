@@ -7,7 +7,7 @@
     # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
     settings = {
       gui = {
-        authorColors.Eden = "#8bd5ca";
+        theme.authorColors.Eden = "#8bd5ca";
         branchColors = {
           "release" = "#eed49f";
           "hotfix" = "#ed8796";
