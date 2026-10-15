@@ -26,7 +26,7 @@ in
 {
   options.pixel.system.networking.tailscale = {
     enable = mkEnableOption "Tailscale VPN" // {
-      default = true;
+      # default = true;
     };
 
     exitNode = mkOption {
