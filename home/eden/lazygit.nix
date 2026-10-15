@@ -7,13 +7,6 @@
     # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#default
     settings = {
       gui = {
-        theme.authorColors.Eden = "#8bd5ca";
-        branchColors = {
-          "release" = "#eed49f";
-          "hotfix" = "#ed8796";
-          "feature" = "#a6da95";
-        };
-
         scrollHeight = 10;
         scrollPastBottom = false;
         skipRewordInEditorWarning = true;
@@ -37,6 +30,13 @@
           unstagedChangesColor = [ "#ed8796" ];
           defaultFgColor = [ "#cad3f5" ];
           searchingActiveBorderColor = [ "#eed49f" ];
+
+          authorColors.Eden = "#8bd5ca";
+          branchColorPatterns = {
+            "release" = "#eed49f";
+            "hotfix" = "#ed8796";
+            "feature" = "#a6da95";
+          };
         };
 
         showNumstatInFilesView = true;
