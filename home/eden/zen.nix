@@ -323,7 +323,7 @@ in
           modifiers.control = true;
         }
       ];
-      keyboardShortcutsVersion = 20;
+      keyboardShortcutsVersion = 21;
     };
   };
 }
