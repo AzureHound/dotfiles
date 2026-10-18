@@ -301,6 +301,7 @@ in
         "zen.workspaces.force-container-workspace" = true;
       };
 
+      keyboardShortcutsVersion = 21;
       keyboardShortcuts = [
         {
           id = "zen-workspace-switch-1";
@@ -323,7 +324,6 @@ in
           modifiers.control = true;
         }
       ];
-      keyboardShortcutsVersion = 21;
     };
   };
 }
