@@ -690,11 +690,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791821858,
-        "narHash": "sha256-mfD1zlt/iOYDQPV0+No35kYiqlh5CQu4z04OrnBOeOM=",
+        "lastModified": 1792835767,
+        "narHash": "sha256-J0cK0tQSAgnW0QNs3Vnyq2+N+PcnwkUHtOq78PpAH9A=",
         "owner": "AzureHound",
         "repo": "jelly",
-        "rev": "ca613fa619bb090bc0f44ab48310b772455d8e4d",
+        "rev": "7ccd1c617de71b142aa474914a7e555c593de560",
         "type": "github"
       },
       "original": {
