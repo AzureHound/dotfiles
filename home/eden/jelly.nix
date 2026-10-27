@@ -1,5 +1,6 @@
 {
   lib,
+  name,
   config,
   inputs,
   ...
@@ -20,6 +21,7 @@ in
 
       server = "http://10.10.0.5:8096";
       apiKeySopsSecret = "jelly";
+      user = name;
     };
   };
 }
