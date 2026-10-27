@@ -32,6 +32,7 @@ in
     ./hyprpaper.nix
     ./hyprshot.nix
     # ./hyprsunset.nix
+    ./hyprtoolkit.nix
 
     ./plugins.nix
   ];
