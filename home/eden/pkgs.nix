@@ -100,7 +100,6 @@ in
       # helvum
       hunspell
       # identity
-      impala
       # impression
       # insomnia
       libnotify
