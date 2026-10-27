@@ -55,6 +55,7 @@
     ./mpv.nix
     ./mpvpaper.nix
     ./neomutt.nix
+    ./neru.nix
     ./nix-your-shell.nix
     ./nixvim
     ./npm.nix

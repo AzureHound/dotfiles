@@ -769,6 +769,26 @@
         "type": "github"
       }
     },
+    "neru": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793024970,
+        "narHash": "sha256-esx1CGjRqKeRtekIif2zywB8apErR3vWxOg6d77wD3A=",
+        "owner": "y3owk1n",
+        "repo": "neru",
+        "rev": "2096c8642ccd48a5132a1707a32af796d4c3f4a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "y3owk1n",
+        "repo": "neru",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1791048980,
@@ -953,6 +973,7 @@
         "hyprland-plugins": "hyprland-plugins",
         "jelly": "jelly",
         "millennium": "millennium",
+        "neru": "neru",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "nur": "nur",

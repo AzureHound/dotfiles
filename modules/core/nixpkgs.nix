@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   nixpkgs = {
@@ -15,6 +15,15 @@
 
       # showDerivationWarnings = [ "maintainerless" ];
     };
+
+    overlays = [
+      inputs.neru.overlays.default
+      (final: prev: {
+        neru = prev.neru.overrideAttrs (old: {
+          doInstallCheck = false;
+        });
+      })
+    ];
   };
 
   # assertions = [

@@ -13,7 +13,6 @@ hl.on("hyprland.start", function()
   -- exec_once("devify")
   exec_once("openrgb --server -p 'Profile 1'")
   exec_once("pypr --debug /tmp/pypr.log")
-  -- exec_once("neru launch")
   exec_once("rm -f ~/.cache/cliphist/db")
 
   -- ▄▀█ █▀█ █▀█ █▀

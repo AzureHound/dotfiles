@@ -84,6 +84,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    neru = {
+      type = "github";
+      owner = "y3owk1n";
+      repo = "neru";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       type = "github";
       owner = "nix-community";
