@@ -157,8 +157,8 @@ let
     };
   };
 
-  associations' = lib.attrsets.concatMapAttrs (
-    _: val: lib.attrsets.listToAttrs (lib.lists.map (mt: lib.attrsets.nameValuePair mt "${val.app}.desktop") val.mimeTypes)
+  associations' = lib.concatMapAttrs (
+    _: val: lib.listToAttrs (map (mt: lib.nameValuePair mt "${val.app}.desktop") val.mimeTypes)
   ) appsToAssoc;
 
   specifics = {
@@ -261,16 +261,13 @@ in
         from pathlib import Path
 
         if readline.get_current_history_length() == 0:
-          state_home = os.environ.get("state")
-          if state_home is None:
-            state_home = Path.home() / ".local" / "state"
-          else:
-            state_home = Path(state_home)
+          history_env = os.environ.get("PYTHON_HISTORY", "${cfg.dataHome}/python/python_history")
+          history_path = Path(history_env)
 
-          history_path = state_home / "python_history"
           if history_path.is_dir():
             raise OSError(f"'{history_path}' cannot be a directory")
 
+          history_path.parent.mkdir(parents=True, exist_ok=True)
           history = str(history_path)
 
           try:
