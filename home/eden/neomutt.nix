@@ -194,7 +194,6 @@ in
     home = {
       sessionVariables = {
         MBSYNCRC = "${config.xdg.configHome}/isync/mbsyncrc";
-        NOTMUCH_CONFIG = "${config.xdg.configHome}/notmuch/default/config";
       };
 
       shellAliases = {
