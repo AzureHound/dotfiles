@@ -29,6 +29,7 @@ in
     firefox.enable = true;
     foot.enable = true;
     # kitty.enable = true;
+    # libreoffice.enable = true;
     qutebrowser.enable = true;
     sway.enable = true;
     thunderbird.enable = true;

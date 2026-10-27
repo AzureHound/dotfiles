@@ -28,6 +28,7 @@
     # fish.enable = true;
     hyprland.enable = true;
     kitty.enable = true;
+    # libreoffice.enable = true;
     # nushell.enable = true;
     qutebrowser.enable = true;
     thunderbird.enable = true;

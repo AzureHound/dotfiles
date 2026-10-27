@@ -45,6 +45,7 @@
     ./lazydocker.nix
     ./lazygit.nix
     ./lazysql.nix
+    ./libreoffice.nix
     ./mako.nix
     ./man.nix
     ./mangohud.nix
