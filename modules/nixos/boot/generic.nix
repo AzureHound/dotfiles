@@ -43,8 +43,6 @@ in
 
     initrd = mkMerge [
       (mkIf cfg.initrd.tweaks.enable {
-        verbose = false;
-
         kernelModules = [
           "nvme"
           "xhci_pci"
