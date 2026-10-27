@@ -26,11 +26,31 @@
       new_notes_location = "notes_subdir";
       daily_notes.folder = "Notes/Dailies";
       attachments.folder = "Assets/imgs";
-      templates.folder = "Templates";
+
+      templates = {
+        folder = "Templates";
+        date_format = "%Y-%m-%d";
+        time_format = "%H:%M";
+      };
 
       ui.enable = false;
-      picker.name = "snacks.picker";
       legacy_commands = false;
+
+      statusline = {
+        enabled = false;
+      };
+
+      picker = {
+        name = "snacks.picker";
+        note_mappings = {
+          new = "<C-x>";
+          insert_link = "<C-l>";
+        };
+        tag_mappings = {
+          tag_note = "<C-x>";
+          insert_tag = "<C-l>";
+        };
+      };
 
       # Logic Functions
       note_id_func.__raw = ''
@@ -52,16 +72,7 @@
 
       frontmatter.func.__raw = ''
         function(note)
-          if note.title then
-            note:add_alias(note.title)
-          end
-          local out = { aliases = note.aliases }
-          if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-            for k, v in pairs(note.metadata) do
-              out[k] = v
-            end
-          end
-          return out
+          return {}
         end
       '';
 
@@ -87,6 +98,41 @@
               return overridden(uri, opt)
             end
           end)(vim.ui.open)
+        end
+      '';
+
+      resolvers.attachment.__raw = ''
+        function(ctx, done)
+          local tmp = vim.fn.tempname()
+          local buf = vim.api.nvim_create_buf(false, true)
+          local width = math.floor(vim.o.columns * 0.8)
+          local height = math.floor(vim.o.lines * 0.8)
+          local win = vim.api.nvim_open_win(buf, true, {
+            relative = "editor",
+            row = math.floor((vim.o.lines - height) / 2),
+            col = math.floor((vim.o.columns - width) / 2),
+            width = width,
+            height = height,
+            style = "minimal",
+            border = "rounded",
+          })
+
+          vim.fn.jobstart({ "yazi", "--chooser-file=" .. tmp }, {
+            term = true,
+            on_exit = function()
+              vim.api.nvim_win_close(win, true)
+              vim.api.nvim_buf_delete(buf, { force = true })
+              if vim.uv.fs_stat(tmp) then
+                local lines = vim.fn.readfile(tmp)
+                if lines[1] then
+                  done({ path = lines[1] })
+                  return
+                end
+              end
+              done(nil)
+            end,
+          })
+          vim.cmd("startinsert")
         end
       '';
 
@@ -193,6 +239,12 @@
       action = "<cmd>Obsidian dailies<CR>";
       options.desc = "Daily Notes";
     }
+    {
+      mode = "n";
+      key = "<leader>op";
+      action = "<cmd>Obsidian properties<CR>";
+      options.desc = "Properties";
+    }
 
     # Visual mode
     {
@@ -221,7 +273,7 @@
       action.__raw = ''
         function()
           Snacks.picker.grep({
-            search = "^\\\\s*- \\\\[ \\\\]",
+            search = "^\\s*- \\[ \\]",
             regex = true,
             dirs = { vim.fn.getcwd() },
             finder = "grep",
@@ -240,7 +292,7 @@
       action.__raw = ''
         function()
           Snacks.picker.grep({
-            search = "^\\\\s*- \\\\[x\\\\]:",
+            search = "^\\s*- \\[x\\]:",
             regex = true,
             dirs = { vim.fn.getcwd() },
             finder = "grep",
