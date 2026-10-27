@@ -1,6 +1,8 @@
 -- █▀▀ █▀▀ █▄ █ █▀▀ █▀█ ▄▀█ █
 -- █▄█ ██▄ █ ▀█ ██▄ █▀▄ █▀█ █▄▄
 
+local colors = require("theme.colors")
+
 hl.config({
   general = {
     gaps_in = 4,
@@ -51,6 +53,7 @@ hl.config({
       size = 9,
       passes = 2,
       noise = 0.0,
+      popups = true,
     },
 
     shadow = {

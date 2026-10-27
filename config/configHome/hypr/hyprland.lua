@@ -2,23 +2,21 @@
 -- █▀█  █  █▀▀ █▀▄ █▄▄ █▀█ █ ▀█ █▄▀
 
 local conf = os.getenv("HOME") .. "/Developer/dotfiles/config/configHome/hypr"
+package.path = package.path .. ";" .. conf .. "/?.lua"
 
 -- Configs
-dofile(conf .. "/configs/apps.lua")
-dofile(conf .. "/configs/func.lua")
-dofile(conf .. "/configs/binds.lua")
-dofile(conf .. "/configs/env.lua")
-dofile(conf .. "/configs/input.lua")
-dofile(conf .. "/configs/layouts.lua")
-dofile(conf .. "/configs/misc.lua")
-dofile(conf .. "/configs/monitors.lua")
-dofile(conf .. "/configs/plugins.lua")
-dofile(conf .. "/configs/workspaces.lua")
-dofile(conf .. "/theme/theme.lua")
+require("configs.autostart")
+require("configs.func")
+require("configs.binds")
+require("configs.env")
+require("configs.input")
+require("configs.layouts")
+require("configs.misc")
+require("configs.monitors")
+require("configs.plugins")
+require("configs.workspaces")
 
--- Autostart
-hl.on("hyprland.start", function()
-  local autostart = conf .. "/scripts/autostart/"
-  hl.exec_cmd(autostart .. "apps")
-  hl.exec_cmd(autostart .. "services")
-end)
+-- Theme
+require("theme.animations")
+require("theme.decorations")
+require("theme.rules")

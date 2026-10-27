@@ -1,7 +1,7 @@
 -- █▀▀ █▀█ █   █▀█ █▀█ █▀
 -- █▄▄ █▄█ █▄▄ █▄█ █▀▄ ▄█
 
-colors = {
+local colors = {
   rosewater = "rgb(f4dbd6)",
   rosewaterAlpha = "f4dbd6",
 
@@ -80,3 +80,5 @@ colors = {
   crust = "rgb(181926)",
   crustAlpha = "181926",
 }
+
+return colors

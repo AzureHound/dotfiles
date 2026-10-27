@@ -1,7 +1,6 @@
 -- https://github.com/sandwichfarm/hyprexpo
 
-local home = os.getenv("HOME")
-dofile(home .. "/Developer/dotfiles/config/configHome/hypr/theme/colors.lua")
+local colors = require("theme.colors")
 
 -- Conf
 hl.config({
