@@ -54,6 +54,13 @@ in
         ];
       };
 
+      xdph.settings = {
+        screencopy = {
+          max_fps = 60;
+          allow_token_by_default = false;
+        };
+      };
+
       configType = "lua";
       extraConfig = ''
         -- local kb = "${keyboard}"
@@ -67,12 +74,7 @@ in
       '';
     };
 
-    xdg.configFile = mkCfgLink (
-      map (x: "hypr/${x}") [
-        "scripts"
-        "xdph.conf"
-      ]
-    );
+    xdg.configFile = mkCfgLink (map (x: "hypr/${x}") [ "scripts" ]);
 
     # Theme
     catppuccin.hyprland.enable = false;
