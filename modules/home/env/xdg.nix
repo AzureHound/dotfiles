@@ -109,9 +109,51 @@ let
       mimeTypes = [ "inode/directory" ];
     };
 
+    mail = {
+      app = "org.mozilla.Thunderbird";
+      mimeTypes = [
+        "message/rfc822"
+        "x-scheme-handler/mailto"
+        "x-scheme-handler/mid"
+        "x-scheme-handler/webcal"
+        "x-scheme-handler/webcals"
+        "text/calendar"
+        "text/vcard"
+      ];
+    };
+
     pdf = {
       app = "org.pwmt.zathura-pdf-mupdf";
       mimeTypes = [ "application/pdf" ];
+    };
+
+    presentation = {
+      app = "libreoffice-impress";
+      mimeTypes = [
+        "application/vnd.ms-powerpoint"
+        "application/vnd.oasis.opendocument.presentation"
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+      ];
+    };
+
+    spreadsheet = {
+      app = "libreoffice-calc";
+      mimeTypes = [
+        "application/vnd.ms-excel"
+        "application/vnd.oasis.opendocument.spreadsheet"
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        "text/csv"
+      ];
+    };
+
+    word = {
+      app = "libreoffice-writer";
+      mimeTypes = [
+        "application/msword"
+        "application/rtf"
+        "application/vnd.oasis.opendocument.text"
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ];
     };
   };
 
