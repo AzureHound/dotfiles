@@ -64,8 +64,16 @@ in
           extensions = {
             betterCodeblocks = true;
             betterEmbedsYT = true;
+            cleanChatBar = {
+              enabled = true;
+              config.removedButtons = [
+                "gift"
+                "activity"
+              ];
+            };
             clearUrls = true;
             cloneExpressions = true;
+            copyAvatarUrl = true;
             copyWebp = true;
             disableSentry = true;
             domOptimizer = true;
@@ -101,18 +109,16 @@ in
             svgEmbed = true;
             textReplacer = {
               enabled = true;
-              config = {
-                patterns = {
-                  "://tiktok.com/" = "://tnktok.com/";
-                  "://vm.tiktok.com/" = "://vm.tnktok.com/";
-                  "://www.tiktok.com/" = "://www.tnktok.com/";
-                  "://twitter.com/" = "://vxtwitter.com/";
-                  "://instagram.com/" = "://oginstagram.com/";
-                  "://www.instagram.com/" = "://oginstagram.com/";
-                  "://reddit.com/" = "://vxreddit.com/";
-                  "://www.reddit.com/" = "://vxreddit.com/";
-                  "://x.com/" = "://vxtwitter.com/";
-                };
+              config.patterns = {
+                "://tiktok.com/" = "://tnktok.com/";
+                "://vm.tiktok.com/" = "://vm.tnktok.com/";
+                "://www.tiktok.com/" = "://www.tnktok.com/";
+                "://twitter.com/" = "://vxtwitter.com/";
+                "://instagram.com/" = "://oginstagram.com/";
+                "://www.instagram.com/" = "://oginstagram.com/";
+                "://reddit.com/" = "://vxreddit.com/";
+                "://www.reddit.com/" = "://vxreddit.com/";
+                "://x.com/" = "://vxtwitter.com/";
               };
             };
             volumeManipulator = true;
