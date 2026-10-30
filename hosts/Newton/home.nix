@@ -1,3 +1,5 @@
+{ mkCfgLink, ... }:
+
 {
   pixel = {
     profiles = {
@@ -25,4 +27,9 @@
     ollama.enable = true;
     syncthing.enable = true;
   };
+
+  # Symlinks
+  xdg.configFile = mkCfgLink [
+    "vicinae/settings.json"
+  ];
 }

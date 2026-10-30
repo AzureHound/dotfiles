@@ -91,6 +91,7 @@
     ./tmux.nix
     ./tt.nix
     ./udiskie.nix
+    ./vicinae
     ./vim.nix
     ./vivid.nix
     ./w3m.nix

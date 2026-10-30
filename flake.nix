@@ -98,6 +98,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    vicinae = {
+      type = "github";
+      owner = "vicinaehq";
+      repo = "vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser = {
       type = "github";
       owner = "0xc000022070";
