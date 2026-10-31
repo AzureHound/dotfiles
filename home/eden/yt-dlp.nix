@@ -1,8 +1,19 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 
 {
   programs.yt-dlp = {
     inherit (config.pixel.profiles.media.watching) enable;
+
+    package =
+      (pkgs.yt-dlp.override {
+        jsRuntime = pkgs.nodejs;
+      }).overrideAttrs
+        (prevAttrs: {
+          makeWrapperArgs = prevAttrs.makeWrapperArgs or [ ] ++ [
+            "--add-flag"
+            "--js-runtimes=node"
+          ];
+        });
 
     settings = {
       output = ''"~/Videos/yt-dlp/%(playlist|)s/%(playlist_index&{} - |)s%(title)s [%(id)s].%(ext)s"'';
