@@ -8,15 +8,10 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkEnableOption;
-
-  cfg = config.pixel.profiles.gaming;
 in
 
 {
-  options.pixel.profiles.gaming.enable = mkEnableOption "Gaming profile";
-
-  config = mkIf cfg.enable {
+  config = mkIf config.pixel.profiles.gaming.enable {
     nixpkgs.overlays = [ inputs.millennium.overlays.default ];
 
     hardware.xone.enable = true; # Xbox Controller
@@ -42,35 +37,6 @@ in
     };
 
     programs = {
-      gamemode = {
-        enable = true;
-        enableRenice = true;
-
-        settings = {
-          general = {
-            reaper_freq = 5;
-            desiredgov = "performance";
-            desiredprof = "performance";
-            softrealtime = "auto";
-            renice = 10;
-            ioprio = 0;
-            inhibit_screensaver = 1;
-            disable_splitlock = 1;
-          };
-
-          # gpu = {
-          #   apply_gpu_optimisations = "accept-responsibility";
-          #   gpu_device = 0;
-          #   amd_performance_level = "high";
-          # };
-
-          # custom = {
-          #   start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
-          #   end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
-          # };
-        };
-      };
-
       steam = {
         enable = true;
 
@@ -140,6 +106,40 @@ in
         remotePlay.openFirewall = true;
         # dedicatedServer.openFirewall = true;
         # localNetworkGameTransfers.openFirewall = true;
+      };
+
+      gamescope = {
+        enable = true;
+        capSysNice = true;
+      };
+
+      gamemode = {
+        enable = true;
+        enableRenice = true;
+
+        settings = {
+          general = {
+            reaper_freq = 5;
+            desiredgov = "performance";
+            desiredprof = "performance";
+            softrealtime = "auto";
+            renice = 15;
+            ioprio = 0;
+            inhibit_screensaver = 1;
+            disable_splitlock = 1;
+          };
+
+          # gpu = {
+          #   apply_gpu_optimisations = "accept-responsibility";
+          #   gpu_device = 0;
+          #   amd_performance_level = "high";
+          # };
+
+          # custom = {
+          #   start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+          #   end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+          # };
+        };
       };
     };
 
