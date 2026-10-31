@@ -97,6 +97,7 @@ in
           mtime = false;
           ytdl = {
             module = "yt_dlp";
+            path = lib.getExe config.programs.yt-dlp.package;
           };
         };
 
@@ -113,12 +114,12 @@ in
           shorten = "eaw";
           ansi = true;
           logfile = {
-            path = "~/.gallery-dl/log.txt";
+            path = "~/.local/state/gallery-dl/log.txt";
             mode = "w";
             level = "debug";
           };
           unsupportedfile = {
-            path = "~/.gallery-dl/unsupported.txt";
+            path = "~/.local/state/gallery-dl/unsupported.txt";
             mode = "a";
             format = "{asctime} {message}";
             "format-date" = "%Y-%m-%d-%H-%M-%S";
@@ -126,7 +127,7 @@ in
         };
 
         cache = {
-          file = "~/.gallery-dl/cache.sqlite3";
+          file = "~/.local/state/gallery-dl/cache.sqlite3";
         };
       };
     };
