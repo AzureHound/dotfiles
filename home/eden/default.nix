@@ -58,6 +58,7 @@
     ./neru.nix
     ./nix-your-shell.nix
     ./nixvim
+    ./noctalia.nix
     ./npm.nix
     ./nvibrant.nix
     ./obs.nix

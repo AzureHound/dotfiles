@@ -70,6 +70,13 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    noctalia = {
+      type = "github";
+      owner = "noctalia-dev";
+      repo = "noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     homebrew = {
       type = "github";
       owner = "zhaofengli";
