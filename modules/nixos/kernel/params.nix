@@ -45,7 +45,7 @@ in
     # "module.sig_enforce=1"
 
     # blocks access to all kernel memory, even preventing administrators from being able to inspect & probe the kernel
-    "lockdown=confidentiality"
+    # "lockdown=confidentiality"
     # "lockdown=integrity"
 
     # enable buddy allocator free poisoning
