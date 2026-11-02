@@ -68,6 +68,7 @@
     ./pi.nix
     ./posting.nix
     # ./qt.nix
+    ./quickshell.nix
     ./qutebrowser.nix
     ./rg.nix
     ./rmpc.nix

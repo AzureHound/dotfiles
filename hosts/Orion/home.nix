@@ -30,6 +30,7 @@
     kitty.enable = true;
     # libreoffice.enable = true;
     # nushell.enable = true;
+    quickshell.enable = true;
     qutebrowser.enable = true;
     thunderbird.enable = true;
     zen-browser.enable = true;
@@ -83,6 +84,7 @@
     # "lsfg-vk"
     "OpenRGB"
     "pypr"
+    # "quickshell"
     # "vkBasalt"
   ];
 }
