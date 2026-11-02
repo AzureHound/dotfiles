@@ -50,13 +50,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nixbot = {
-    #   type = "github";
-    #   owner = "Mic92";
-    #   repo = "nixbot";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     hyprland = {
       type = "github";
       owner = "hyprwm";
@@ -77,6 +70,49 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      type = "github";
+      owner = "nix-community";
+      repo = "nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    zen-browser = {
+      type = "github";
+      owner = "0xc000022070";
+      repo = "zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
+    neru = {
+      type = "github";
+      owner = "y3owk1n";
+      repo = "neru";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    vicinae = {
+      type = "github";
+      owner = "vicinaehq";
+      repo = "vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    jelly = {
+      type = "github";
+      owner = "AzureHound";
+      repo = "jelly";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # nixbot = {
+    #   type = "github";
+    #   owner = "Mic92";
+    #   repo = "nixbot";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     homebrew = {
       type = "github";
       owner = "zhaofengli";
@@ -91,39 +127,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neru = {
+    millennium = {
       type = "github";
-      owner = "y3owk1n";
-      repo = "neru";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      type = "github";
-      owner = "nix-community";
-      repo = "nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    vicinae = {
-      type = "github";
-      owner = "vicinaehq";
-      repo = "vicinae";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zen-browser = {
-      type = "github";
-      owner = "0xc000022070";
-      repo = "zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
-    jelly = {
-      type = "github";
-      owner = "AzureHound";
-      repo = "jelly";
+      owner = "re1n0";
+      repo = "nixos-millennium";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -131,13 +138,6 @@
       type = "github";
       owner = "Gerg-L";
       repo = "spicetify-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    millennium = {
-      type = "github";
-      owner = "re1n0";
-      repo = "nixos-millennium";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
