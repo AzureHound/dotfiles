@@ -60,5 +60,7 @@ in
   ];
 
   # ignore .desktop
-  ign.desktop = [ "zen-beta.desktop" ];
+  ign.desktop = [
+    "zen-beta.desktop"
+  ];
 }
