@@ -19,6 +19,7 @@
     # aerospace.enable = true;
     # chromium.enable = true;
     ghostty.enable = true;
+    vicinae.enable = true;
     zen-browser.enable = true;
     zsh.enable = true;
   };
