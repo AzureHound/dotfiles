@@ -27,6 +27,7 @@ in
             forceSSL = mkDefault true;
             enableACME = mkDefault false;
             useACMEHost = mkDefault config.networking.domain;
+            extraConfig = "if ($ai_crawler) { return 403; }";
           };
         })
       );
@@ -69,6 +70,11 @@ in
           proxy_cache_valid 200 1d;
           proxy_cache_use_stale error timeout updating http_502 http_503 http_504;
           proxy_cache_lock on;
+
+          map $http_user_agent $ai_crawler {
+            default 0;
+            "~*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|CCBot|Bytespider|Amazonbot|meta-externalagent|FacebookBot|PerplexityBot|cohere-ai|Diffbot|ImagesiftBot|Omgilibot|Timpibot|PetalBot|YouBot|AI2Bot|Scrapy)" 1;
+          }
 
           add_header 'Referrer-Policy' 'origin-when-cross-origin';
           add_header X-Frame-Options "SAMEORIGIN" always;
