@@ -53,7 +53,6 @@ in
 
     networking.firewall = {
       trustedInterfaces = [ "${tailscale.interfaceName}" ];
-      checkReversePath = "loose";
     };
 
     services.tailscale = {
@@ -69,6 +68,10 @@ in
       ++ lib.optional (cfg.mode == "client") "--accept-routes=true"
       ++ lib.optional (cfg.mode == "server") "--advertise-exit-node"
       ++ lib.optional (cfg.mode == "server" && cfg.lan != [ ]) "--advertise-routes=${concatStringsSep "," cfg.lan}";
+
+    # https://wiki.nixos.org/wiki/Tailscale#Native_nftables_Support_(Modern_Setup)
+    systemd.services.tailscaled.environment = mkIf config.networking.nftables.enable {
+      TS_DEBUG_FIREWALL_MODE = "nftables";
     };
   };
 }
