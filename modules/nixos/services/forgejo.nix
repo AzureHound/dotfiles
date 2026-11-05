@@ -10,6 +10,7 @@ let
   inherit (lib.modules) mkIf mkForce;
   inherit (self.lib) mkServiceOption mkSecret;
 
+  socket = "http://unix:${config.services.forgejo.settings.server.HTTP_ADDR}";
   rdomain = config.networking.domain;
 
   cfg = config.pixel.services.forgejo;
@@ -171,7 +172,23 @@ in
         };
       };
 
-      nginx.virtualHosts.${cfg.domain}.locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port}";
+      nginx = {
+        appendHttpConfig = ''
+          limit_req_zone $binary_remote_addr zone=forgejo_heavy:10m rate=30r/m;
+        '';
+
+        virtualHosts.${cfg.domain}.locations = {
+          "/".proxyPass = socket;
+
+          "~ ^/[^/]+/[^/]+/(blame|commits|compare|raw)/" = {
+            proxyPass = socket;
+            extraConfig = ''
+              limit_req zone=forgejo_heavy burst=20 nodelay;
+              limit_req_status 429;
+            '';
+          };
+        };
+      };
     };
 
     # Theme
