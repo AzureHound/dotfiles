@@ -48,7 +48,6 @@ in
     };
 
     networking.firewall.allowedTCPPorts = [
-      config.services.forgejo.settings.server.HTTP_PORT
       config.services.forgejo.settings.server.SSH_PORT
     ];
 
