@@ -2,23 +2,24 @@
 
 let
   inherit (lib.modules) mkIf mkForce;
-  inherit (lib.options) mkOption;
 
   cfg = config.pixel.profiles.hetzner;
+
+  inherit (config.networking) hostName;
+  fleet = config.pixel.fleet.${hostName} or { };
+  ipv4 = fleet.ipv4 or null;
+  ipv6 = fleet.ipv6 or null;
 in
 
 {
-  options.pixel.profiles.hetzner = {
-    ipv4 = mkOption {
-      type = lib.types.str;
-    };
-
-    ipv6 = mkOption {
-      type = lib.types.str;
-    };
-  };
-
   config = mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = ipv4 != null && ipv6 != null;
+        message = "${hostName} needs ipv4 and ipv6 in pixel.fleet";
+      }
+    ];
+
     networking = {
       # https://community.hetzner.com/tutorials/install-and-configure-ntp
       timeServers = [
@@ -50,7 +51,7 @@ in
           ipv4 = {
             addresses = [
               {
-                address = cfg.ipv4;
+                address = ipv4;
                 prefixLength = 32;
               }
             ];
@@ -66,7 +67,7 @@ in
           ipv6 = {
             addresses = [
               {
-                address = cfg.ipv6;
+                address = ipv6;
                 prefixLength = 64;
               }
               {
