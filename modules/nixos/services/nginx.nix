@@ -58,7 +58,18 @@ in
         enable = true;
         # statusPage = true;
 
+        proxyCachePath.static = {
+          enable = true;
+          keysZoneName = "static";
+          maxSize = "2g";
+          inactive = "7d";
+        };
+
         commonHttpConfig = ''
+          proxy_cache_valid 200 1d;
+          proxy_cache_use_stale error timeout updating http_502 http_503 http_504;
+          proxy_cache_lock on;
+
           add_header 'Referrer-Policy' 'origin-when-cross-origin';
           add_header X-Frame-Options "SAMEORIGIN" always;
           add_header X-Content-Type-Options nosniff;
