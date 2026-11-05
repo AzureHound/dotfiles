@@ -34,6 +34,12 @@ deployer host goal *args:
 [no-exit-message]
 deploy host *args: (deployer host "switch" args)
 
+# preview a deploy without switching
+[group('rebuild')]
+[no-exit-message]
+deploy-dry host *args:
+    just builder dry-activate --target-host {{ host }} --use-substitutes {{ args }}
+
 # deploy by setting the boot configuration
 [group('rebuild')]
 [no-exit-message]
