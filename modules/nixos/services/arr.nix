@@ -33,11 +33,6 @@ in
       type = types.str;
       default = "media";
     };
-
-    openFirewall = mkEnableOption "open the firewall for the arr services" // {
-      default = true;
-      defaultText = "true";
-    };
   };
 
   config = mkIf cfg.enable {

@@ -31,6 +31,8 @@ in
       };
     };
 
+    pixel.networking.lan.allowedTCPPorts = [ cfg.port ];
+
     pixel.services = {
       postgresql.enable = true;
     };
@@ -44,7 +46,6 @@ in
       immich = {
         enable = true;
         inherit (cfg) port host;
-        openFirewall = true;
 
         package = pkgs.pkgsCuda.immich;
 

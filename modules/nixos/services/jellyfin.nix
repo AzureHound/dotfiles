@@ -19,6 +19,17 @@ in
   };
 
   config = mkIf cfg.enable {
+    pixel.networking.lan = {
+      allowedTCPPorts = [
+        cfg.port
+        8920
+      ];
+      allowedUDPPorts = [
+        1900
+        7359
+      ];
+    };
+
     users.users.jellyfin.extraGroups = [
       "render"
       "video"
@@ -28,7 +39,6 @@ in
       jellyfin = {
         enable = true;
         group = "media";
-        inherit (config.pixel.services.arr) openFirewall;
 
         hardwareAcceleration = {
           enable = true;

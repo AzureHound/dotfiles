@@ -21,9 +21,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    networking.firewall.allowedTCPPorts = [
-      config.services.qbittorrent.torrentingPort
-    ];
+    networking.firewall.allowedTCPPorts = [ config.services.qbittorrent.torrentingPort ];
+    pixel.networking.lan.allowedTCPPorts = [ cfg.port ];
 
     services = {
       qbittorrent = {

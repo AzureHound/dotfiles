@@ -23,11 +23,12 @@ in
       radarr = {
         inherit (cfg) enable;
         group = "media";
-        inherit (config.pixel.services.arr) openFirewall;
         settings.server.port = cfg.port;
       };
 
       nginx.virtualHosts.${cfg.domain}.locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port}";
     };
+
+    pixel.networking.lan.allowedTCPPorts = [ cfg.port ];
   };
 }
