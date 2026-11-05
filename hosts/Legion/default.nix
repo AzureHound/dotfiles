@@ -31,7 +31,10 @@
       docker.enable = true;
       forgejo.enable = true;
       homepage.enable = true;
-      immich.enable = true;
+      immich = {
+        enable = true;
+        host = "0.0.0.0";
+      };
       karakeep.enable = true;
       microbin.enable = true;
       navidrome.enable = true;
