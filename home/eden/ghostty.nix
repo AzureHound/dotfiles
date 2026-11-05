@@ -31,7 +31,7 @@
       mouse-hide-while-typing = true;
       window-colorspace = "display-p3";
       selection-clear-on-copy = true;
-      shell-integration-features = "ssh-env,ssh-terminfo";
+      shell-integration-features = "ssh-env";
       window-inherit-working-directory = false;
       quit-after-last-window-closed = true;
 
