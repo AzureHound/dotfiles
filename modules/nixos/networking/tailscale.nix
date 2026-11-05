@@ -7,7 +7,8 @@
 }:
 
 let
-  inherit (lib.modules) mkIf;
+  inherit (lib.lists) optional;
+  inherit (lib.modules) mkIf mkDefault;
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.strings) concatStringsSep;
   inherit (lib.types)
@@ -59,15 +60,18 @@ in
       enable = true;
       permitCertUid = "root";
       openFirewall = true;
-      useRoutingFeatures = if cfg.mode == "server" then "both" else "client";
+      useRoutingFeatures = mkDefault (if cfg.mode == "server" then "both" else "client");
       authKeyFile = config.sops.secrets.tailscale.path;
-      extraUpFlags = [
-        "--operator=${name}"
-      ]
-      ++ lib.optional (cfg.exitNode != null) "--exit-node=${cfg.exitNode}"
-      ++ lib.optional (cfg.mode == "client") "--accept-routes=true"
-      ++ lib.optional (cfg.mode == "server") "--advertise-exit-node"
-      ++ lib.optional (cfg.mode == "server" && cfg.lan != [ ]) "--advertise-routes=${concatStringsSep "," cfg.lan}";
+      extraUpFlags = mkDefault (
+        [
+          "--operator=${name}"
+        ]
+        ++ optional (cfg.exitNode != null) "--exit-node=${cfg.exitNode}"
+        ++ optional (cfg.mode == "client") "--accept-routes=true"
+        ++ optional (cfg.mode == "server") "--advertise-exit-node"
+        ++ optional (cfg.mode == "server" && cfg.lan != [ ]) "--advertise-routes=${concatStringsSep "," cfg.lan}"
+      );
+    };
 
     # https://wiki.nixos.org/wiki/Tailscale#Native_nftables_Support_(Modern_Setup)
     systemd.services.tailscaled.environment = mkIf config.networking.nftables.enable {
