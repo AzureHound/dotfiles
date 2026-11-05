@@ -29,5 +29,10 @@ in
     };
 
     pixel.networking.lan.allowedTCPPorts = [ cfg.port ];
+
+    systemd.services.prowlarr.serviceConfig = {
+      User = "prowlarr";
+      Group = "media";
+    };
   };
 }
