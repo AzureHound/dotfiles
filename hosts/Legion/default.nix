@@ -15,6 +15,7 @@
 
     ./disko.nix
     ./hardware.nix
+    ./relay.nix
   ];
 
   boot.loader.raspberry-pi.bootloader = "kernel";
