@@ -17,11 +17,6 @@
         strategy = "contour";
         chars = "fjdkslaghqweioprutymvnczxb";
       };
-
-      theme = {
-        name = "catppuccin_macchiato";
-        font_family = "Maple Mono";
-      };
     };
   };
 }
