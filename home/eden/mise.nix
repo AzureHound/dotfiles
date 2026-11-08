@@ -32,7 +32,6 @@ in
           always_keep_install = false;
 
           minimum_release_age = "2d";
-          plugin_autoupdate_last_check_duration = "1 week";
 
           trusted_config_paths = [ "~/Developer" ];
 
