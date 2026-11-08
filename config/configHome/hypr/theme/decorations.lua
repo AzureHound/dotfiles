@@ -60,7 +60,7 @@ hl.config({
       enabled = false,
       scale = 2,
       range = 26,
-      render_power = 5,
+      render_power = 4,
       color = colors.surface0,
       color_inactive = colors.crust,
     },
