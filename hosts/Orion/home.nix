@@ -77,7 +77,6 @@
   home.scripts = mkScptLink [
     "game-id"
     "rig"
-    "spotdl-sync"
     "windows"
   ];
 
