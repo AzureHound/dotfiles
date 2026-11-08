@@ -38,7 +38,7 @@ require("eza-preview"):setup({
 
 -- full-border
 require("full-border"):setup({
-  type = ui.Border.ROUNDED,
+  set = "rounded",
 })
 
 -- git
