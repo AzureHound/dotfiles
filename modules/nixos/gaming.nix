@@ -44,6 +44,8 @@ in
         # protontricks.enable = true;
 
         package = pkgs.millennium-steam.override {
+          extraArgs = "-gamepadui";
+
           extraEnv = {
             MANGOHUD = "1";
           };
