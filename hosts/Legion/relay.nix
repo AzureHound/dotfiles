@@ -14,7 +14,7 @@ let
 
     locations =
       let
-        upstream = "http://${config.pixel.fleet.Legion.tailscale}:${toString port}";
+        upstream = "http://legion:${toString port}";
       in
       {
         "/" = {
@@ -36,5 +36,10 @@ in
   services.nginx.virtualHosts = {
     "photos.softshell.duckdns.org" = relay immich.port [ ];
     "tv.softshell.duckdns.org" = relay jellyfin.port [ "~ ^/Items/.+/Images/" ];
+  };
+
+  systemd.services.nginx = {
+    after = [ "tailscaled.service" ];
+    wants = [ "tailscaled.service" ];
   };
 }

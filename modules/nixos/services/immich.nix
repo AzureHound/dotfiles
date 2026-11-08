@@ -31,8 +31,6 @@ in
       };
     };
 
-    pixel.networking.lan.allowedTCPPorts = [ cfg.port ];
-
     pixel.services = {
       postgresql.enable = true;
     };
@@ -256,5 +254,7 @@ in
         '';
       };
     };
+
+    networking.firewall.allowedTCPPorts = [ cfg.port ];
   };
 }

@@ -28,7 +28,7 @@ in
       nginx.virtualHosts.${cfg.domain}.locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port}";
     };
 
-    pixel.networking.lan.allowedTCPPorts = [ cfg.port ];
+    networking.firewall.allowedTCPPorts = [ cfg.port ];
 
     systemd.services.prowlarr.serviceConfig = {
       User = "prowlarr";
