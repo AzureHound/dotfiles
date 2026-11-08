@@ -29,6 +29,5 @@ writeShellApplication {
     description = "Update the pinned brew and vicinae extension sources";
     license = lib.licenses.eupl12;
     mainProgram = "update-pins";
-    maintainers = with lib.maintainers; [ isabelroses ];
   };
 }

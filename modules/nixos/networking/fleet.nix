@@ -57,21 +57,10 @@ in
 
   config = {
     pixel.fleet = {
-      freyja = {
-        lan = "wlan0";
-        tailscale = "100.69.230.34";
       };
 
-      minerva = {
-        ipv4 = "91.107.198.173";
-        ipv6 = "2a01:4f8:c012:2f67::1";
       };
 
-      skadi = {
-        # oracle NATs the public address to this private one
-        ipv4 = "10.0.0.11";
-        # oracle doesn't route 2603:c020:c011:9c00:0:c069:1ff7:1ff3 to the internet yet, so ipv6 stays off until the vcn does
-      };
     };
 
     assertions = [
