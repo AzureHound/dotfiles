@@ -45,7 +45,7 @@ in
         statusContextPrefix = "buildbot";
         buildSystems = [ "x86_64-linux" ];
 
-        admins = [ "github:isabelroses" ];
+        admins = [ "github:azurehound" ];
 
         github = {
           enable = true;
