@@ -103,7 +103,7 @@ hl.window_rule({ match = { class = zathura }, size = "(monitor_w*0.35) (monitor_
 local Pip = "^(.*Picture.?in.?[Pp]icture.*)$"
 hl.window_rule({ match = { title = Pip }, float = true })
 hl.window_rule({ match = { title = Pip }, pin = true })
-hl.window_rule({ match = { title = Pip }, opacity = "1 1" })
+hl.window_rule({ match = { title = Pip }, opacity = "1 override" })
 hl.window_rule({ match = { title = Pip }, border_size = 0 })
 hl.window_rule({ match = { title = Pip }, no_initial_focus = true })
 hl.window_rule({ match = { title = Pip }, keep_aspect_ratio = true })
