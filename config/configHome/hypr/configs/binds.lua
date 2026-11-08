@@ -230,7 +230,7 @@ hl.bind(
 -- Groups
 hl.bind(mods.mainMod .. " + G", hl.dsp.group.toggle())
 hl.bind(mods.modShift .. " + G", hl.dsp.window.move({ out_of_group = true }))
-hl.bind(mods.mainMod .. " + " .. mods.hyper .. " + G", hl.dsp.group.lock_active({ action = "toggle" }))
+hl.bind(mods.mainMod .. " + " .. mods.hyper .. " + G", hl.dsp.group.lock({ action = "toggle" }))
 
 -- Moving in group
 hl.bind(mods.hyper .. " + CTRL + TAB", hl.dsp.group.next())
