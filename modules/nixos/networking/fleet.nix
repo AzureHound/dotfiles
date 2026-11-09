@@ -48,9 +48,9 @@ in
         # wakeOnLan = "enp4s0";
       };
 
-      Notebook = {};
+      Notebook = { };
 
-      Orion = {};
+      Orion = { };
     };
 
     networking.interfaces = optionalAttrs (wakeOnLan != null) {
