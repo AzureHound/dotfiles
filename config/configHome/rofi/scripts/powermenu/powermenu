@@ -59,20 +59,25 @@ run_cmd() {
 }
 
 chosen="$(run_rofi)"
-case ${chosen} in
-$shutdown)
-  run_cmd --shutdown
-  ;;
-$reboot)
-  run_cmd --reboot
-  ;;
-$lock)
-  run_cmd --lock
-  ;;
-$suspend)
-  run_cmd --suspend
-  ;;
-$logout)
-  run_cmd --logout
+exit_code=$?
+
+if [[ $exit_code -ge 10 ]]; then
+  exit_code=$((exit_code - 9))
+fi
+
+case $exit_code in
+1) run_cmd --lock ;;
+2) run_cmd --suspend ;;
+3) run_cmd --logout ;;
+4) run_cmd --reboot ;;
+5) run_cmd --shutdown ;;
+0)
+  case ${chosen} in
+  $shutdown) run_cmd --shutdown ;;
+  $reboot) run_cmd --reboot ;;
+  $lock) run_cmd --lock ;;
+  $suspend) run_cmd --suspend ;;
+  $logout) run_cmd --logout ;;
+  esac
   ;;
 esac
