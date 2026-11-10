@@ -213,3 +213,12 @@ function Linemode:size_and_mtime()
   local size = self._file:size()
   return string.format("%s %s", size and ya.readable_size(size) or "-", time)
 end
+
+-- Overrides
+local office = require("office")
+local libre = ya.target_os() ~= "macos" and os.execute("command -v libreoffice >/dev/null 2>&1")
+
+if not libre then
+  office.peek = function() end
+  office.preload = function() return 0 end
+end

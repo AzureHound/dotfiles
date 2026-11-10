@@ -103,10 +103,7 @@ prepend_preloaders = [
   { mime = "{audio,video,image}/*", run = "mediainfo" },
 
   { url = "*.docx", run = "office" },
-  { mime = "application/ms-*", run = "office" },
-  { mime = "application/msword", run = "office" },
-  { mime = "application/oasis.opendocument.*", run = "office" },
-  { mime = "application/openxmlformats-officedocument.*", run = "office" },
+  { mime = "application/{ms-*,msword,oasis.opendocument.*,openxmlformats-officedocument.*}", run = "office" },
 ]
 
 prepend_previewers = [
@@ -118,10 +115,7 @@ prepend_previewers = [
   { mime = "{audio,video,image}/*", run = "mediainfo" },
 
   { url = "*.docx", run = "office" },
-  { mime = "application/ms-*", run = "office" },
-  { mime = "application/msword", run = "office" },
-  { mime = "application/oasis.opendocument.*", run = "office" },
-  { mime = "application/openxmlformats-officedocument.*", run = "office" },
+  { mime = "application/{ms-*,msword,oasis.opendocument.*,openxmlformats-officedocument.*}", run = "office" },
 
   { mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch --archive-icon='🗄️ ' --show-file-icons" },
 
