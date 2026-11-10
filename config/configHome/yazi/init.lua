@@ -216,7 +216,7 @@ end
 
 -- Overrides
 local office = require("office")
-local libre = ya.target_os() ~= "macos" and os.execute("command -v libreoffice >/dev/null 2>&1")
+local libre = os.execute("command -v libreoffice >/dev/null 2>&1")
 
 if not libre then
   office.peek = function() end
