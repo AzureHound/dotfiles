@@ -12,6 +12,11 @@ in
 
 {
   config = mkIf (pkgs.stdenv.hostPlatform.isLinux && config.pixel.profiles.graphical.enable) {
+    sops.secrets = {
+      "mail/gmail" = { };
+      "mail/icloud" = { };
+    };
+
     programs = {
       neomutt = {
         enable = true;
@@ -213,10 +218,5 @@ in
       // {
         "isyncrc".target = "isync/mbsyncrc";
       };
-
-    sops.secrets = {
-      "mail/gmail" = { };
-      "mail/icloud" = { };
-    };
   };
 }

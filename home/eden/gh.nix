@@ -1,6 +1,20 @@
 { config, ... }:
 
 {
+  sops = {
+    secrets.gh = { };
+
+    templates."hosts.yml" = {
+      path = "${config.home.homeDirectory}/.config/gh/hosts.yml";
+      content = ''
+        github.com:
+          user: AzureHound
+          oauth_token: ${config.sops.placeholder.gh}
+          git_protocol: ssh
+      '';
+    };
+  };
+
   programs = {
     gh = {
       enable = config.pixel.profiles.development.enable && config.programs.git.enable;
@@ -24,20 +38,6 @@
       settings = {
         pager.diff = "delta --dark --paging=never";
       };
-    };
-  };
-
-  sops = {
-    secrets.gh = { };
-
-    templates."hosts.yml" = {
-      path = "${config.home.homeDirectory}/.config/gh/hosts.yml";
-      content = ''
-        github.com:
-          user: AzureHound
-          oauth_token: ${config.sops.placeholder.gh}
-          git_protocol: ssh
-      '';
     };
   };
 }

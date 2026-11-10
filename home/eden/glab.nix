@@ -11,16 +11,6 @@ in
 
 {
   config = mkIf config.pixel.profiles.development.enable {
-    home = {
-      packages = with pkgs; [
-        glab
-      ];
-
-      shellAliases = {
-        gl = "glab";
-      };
-    };
-
     sops = {
       secrets.gl = { };
 
@@ -50,6 +40,16 @@ in
             co: mr checkout
           '';
         };
+      };
+    };
+
+    home = {
+      packages = with pkgs; [
+        glab
+      ];
+
+      shellAliases = {
+        gl = "glab";
       };
     };
   };
