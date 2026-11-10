@@ -40,14 +40,6 @@ local variables = {
   -- term_ALT = "ghostty --gtk-single-instance=true",
   tmux = term .. " --class multiplexer -e",
   webapp = browser_ALT .. " --new-window",
-
-  binds = {
-    mainMod = "SUPER",
-    hyper = "MOD3",
-    modShift = "SUPER + SHIFT",
-    modCtrl = "SUPER + CTRL",
-    modAlt = "SUPER + ALT",
-  },
 }
 
 return variables
