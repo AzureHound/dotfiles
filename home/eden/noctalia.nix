@@ -313,7 +313,7 @@ in
       };
     };
 
-    quickshell.enable = true;
+    quickshell.enable = config.programs.noctalia.enable;
   };
 
   home.file.".config/noctalia/palettes/CatppuccinMacchiato.json" = mkIf config.programs.noctalia.enable {
