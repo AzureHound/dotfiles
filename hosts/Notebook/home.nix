@@ -30,7 +30,7 @@ in
     foot.enable = true;
     # kitty.enable = true;
     # libreoffice.enable = true;
-    noctalia.enable = true;
+    # noctalia.enable = true;
     qutebrowser.enable = true;
     sway.enable = true;
     thunderbird.enable = true;
