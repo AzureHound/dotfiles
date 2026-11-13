@@ -102,7 +102,7 @@ in
             lib.hm.dag.entryAfter [ "writeBoundary" ] ''
               mkdir -p ${config.home.homeDirectory}/Archive \
                 "${config.home.homeDirectory}/.local/bin" \
-                "${config.xdg.dataHome}/Lyrics"
+                "${config.xdg.dataHome}/lyrics"
             ''
           );
         };
