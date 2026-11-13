@@ -14,7 +14,6 @@
     ./clipse.nix
     ./cursors.nix
     ./direnv.nix
-    ./discord.nix
     ./editorconfig.nix
     ./espanso.nix
     ./eviv2-thumbnailer.nix

@@ -23,7 +23,6 @@
 
   programs = {
     # chromium.enable = true;
-    discord.enable = true;
     firefox.enable = true;
     # fish.enable = true;
     hyprland.enable = true;
@@ -47,6 +46,7 @@
     asciiquarium-transparent
     # davinci-resolve
     # distrobox
+    discord
     # easyeffects
     hyprpicker
     # hyprpolkitagent
