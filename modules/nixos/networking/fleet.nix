@@ -1,7 +1,7 @@
 { lib, config, ... }:
 
 let
-  inherit (lib.attrsets) optionalAttrs;
+  inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption;
   inherit (lib.types)
     attrsOf
@@ -10,7 +10,7 @@ let
     submodule
     ;
 
-  inherit (config.pixel.fleet.${config.networking.hostName}) wakeOnLan;
+  wakeOnLan = config.pixel.fleet.${config.networking.hostName}.wakeOnLan or null;
 
   address =
     description: example:
@@ -53,8 +53,9 @@ in
       Orion = { };
     };
 
-    networking.interfaces = optionalAttrs (wakeOnLan != null) {
-      ${wakeOnLan}.wakeOnLan.enable = true;
+    networking = mkIf (wakeOnLan != null) {
+      interfaces.${wakeOnLan}.wakeOnLan.enable = true;
+      firewall.allowedUDPPorts = [ 9 ];
     };
   };
 }
