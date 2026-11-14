@@ -169,6 +169,7 @@ hl.window_rule({ match = { float = 0 }, no_shadow = true })
 hl.window_rule({ match = { class = "^(.*obsidian.*)$" }, no_screen_share = true })
 hl.window_rule({ match = { class = "^(.*[Ss]potify.*)$" }, no_initial_focus = true })
 hl.window_rule({ match = { title = "^(Sign in to Steam)$" }, no_initial_focus = true })
+hl.window_rule({ match = { title = "Choose a color" }, animation = "fade" })
 hl.window_rule({
   match = { class = "^$", title = "^$", xwayland = 1, float = 1, fullscreen = 0, pin = 0 },
   no_focus = true,
