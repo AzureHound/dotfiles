@@ -50,6 +50,7 @@
       containers.enable = true;
       security.binaries.enable = true;
       emulation.enable = true;
+      networking.useRouterDns = true;
       virtualization = {
         enable = true;
         windows.enable = true;

@@ -2,6 +2,8 @@
 
 let
   inherit (lib.modules) mkDefault mkForce;
+  inherit (lib.lists) optionals;
+  inherit (lib.options) mkEnableOption;
 in
 
 {
@@ -19,7 +21,9 @@ in
     ./wireless.nix
   ];
 
-  networking = {
+  options.pixel.system.networking.useRouterDns = mkEnableOption "use DNS servers handed out by DHCP";
+
+  config.networking = {
     # generate a host ID by hashing the hostname
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
 
@@ -28,7 +32,7 @@ in
     usePredictableInterfaceNames = mkDefault true;
 
     # dns
-    nameservers = [
+    nameservers = optionals (!config.pixel.system.networking.useRouterDns) [
       "1.1.1.1"
       "1.0.0.1"
       "2606:4700:4700::1111"
