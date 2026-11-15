@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  inputs,
   ...
 }:
 
@@ -12,8 +11,6 @@ in
 
 {
   config = mkIf config.pixel.profiles.gaming.enable {
-    nixpkgs.overlays = [ inputs.millennium.overlays.default ];
-
     hardware.xone.enable = true; # Xbox Controller
 
     # Perf Tweaks

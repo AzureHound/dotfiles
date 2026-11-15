@@ -10,7 +10,26 @@ let
     "aarch64-darwin"
   ];
 
-  forAllSystems = fn: lib.attrsets.genAttrs systems (system: fn nixpkgs.legacyPackages.${system});
+  pkgsFor = lib.attrsets.genAttrs systems (
+    system:
+    import nixpkgs {
+      inherit system;
+      config = import ./nixpkgs.nix;
+
+      overlays = [
+        inputs.millennium.overlays.default
+        inputs.neru.overlays.default
+        (final: prev: {
+          neru = prev.neru.overrideAttrs (old: {
+            doInstallCheck = false;
+          });
+        })
+      ];
+
+    }
+  );
+
+  forAllSystems = fn: lib.attrsets.mapAttrs (_: fn) pkgsFor;
 
   mkHosts = lib.attrsets.mapAttrs self.lib.mkHost;
 in
@@ -24,7 +43,7 @@ in
     };
   });
 
-  lib = import ./lib { inherit lib inputs; };
+  lib = import ./lib { inherit lib inputs pkgsFor; };
 
   checks = forAllSystems (pkgs: import ./checks { inherit pkgs inputs; });
 

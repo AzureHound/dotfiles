@@ -13,7 +13,6 @@
     ./img.nix
     ./networking.nix
     ./nix.nix
-    ./nixpkgs.nix
     ./programs.nix
     ./security.nix
     ./space.nix

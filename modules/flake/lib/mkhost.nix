@@ -1,4 +1,9 @@
-{ lib, inputs, ... }:
+{
+  lib,
+  inputs,
+  pkgsFor,
+  ...
+}:
 
 let
   inherit (inputs) self;
@@ -58,9 +63,12 @@ evalHost {
       key = "dotfiles#nixpkgs";
       _file = "${__curPos.file}";
 
-      nixpkgs.hostPlatform = system;
+      nixpkgs.pkgs = pkgsFor.${system};
     }
   ]
+
+  ++ lib.lists.optional (class != "darwin") nixpkgs.nixosModules.readOnlyPkgs
+
   ++ lib.lists.optionals (class == "darwin") [
     {
       key = "dotfiles#nixpkgs-darwin";
