@@ -85,7 +85,7 @@ in
           api.ENABLE_SWAGGER = false;
 
           # the fail2ban jail bans on the 401s in these
-          log."logger.router.MODE" = ",";
+          log.LOGGER_ROUTER_MODE = ",";
 
           DEFAULT.APP_NAME = "Forgejo";
           attachment.ALLOWED_TYPES = "*/*";
