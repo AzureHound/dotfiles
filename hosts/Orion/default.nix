@@ -48,9 +48,12 @@
       };
       bluetooth.enable = true;
       containers.enable = true;
-      security.binaries.enable = true;
       emulation.enable = true;
       networking.useRouterDns = true;
+      security = {
+        auditd.enable = true;
+        binaries.enable = true;
+      };
       virtualization = {
         enable = true;
         windows.enable = true;
