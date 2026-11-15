@@ -222,6 +222,7 @@ in
     # programs
     FFMPEG_DATADIR = "${cfg.configHome}/ffmpeg";
     GNUPGHOME = "${cfg.dataHome}/gnupg";
+    HISTFILE = "${cfg.stateHome}/bash/history";
     INPUTRC = "${cfg.configHome}/readline/inputrc";
     LESSHISTFILE = "${cfg.dataHome}/less/history";
     STEPPATH = "${cfg.dataHome}/step";
@@ -248,6 +249,7 @@ in
     RUSTUP_HOME = "${cfg.dataHome}/rustup";
     SQLITE_HISTORY = "${cfg.dataHome}/sqlite_history";
     WORKON_HOME = "${cfg.dataHome}/virtualenvs";
+    _JAVA_OPTIONS = "-Djava.util.prefs.userRoot='${cfg.configHome}/java'";
   };
 
   xdg = {

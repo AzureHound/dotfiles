@@ -4,7 +4,7 @@
   programs.bash = {
     enable = true;
 
-    historyFile = "${config.xdg.dataHome}/bash/history";
+    historyFile = "${config.xdg.stateHome}/bash/history";
     historyFileSize = 100000;
     historyControl = [
       "erasedups"

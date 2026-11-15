@@ -1,5 +1,9 @@
 { config, ... }:
 
+let
+  cfg = config.xdg;
+in
+
 {
   programs.npm = {
     enable = true;
@@ -16,9 +20,10 @@
   };
 
   home.sessionVariables = {
-    NPM_CONFIG_CACHE = "${config.xdg.cacheHome}/npm";
+    NPM_CONFIG_INIT_MODULE = "${cfg.configHome}/npm/config/npm-init.js";
+    NPM_CONFIG_CACHE = "${cfg.cacheHome}/npm";
     NPM_CONFIG_TMP = "$XDG_RUNTIME_DIR/npm";
-    NPM_PACKAGES = "${config.xdg.dataHome}/.npm-packages";
-    NPM_PACKAGES_BIN = "${config.xdg.dataHome}/.npm-packages/bin";
+    NPM_PACKAGES = "${cfg.dataHome}/.npm-packages";
+    NPM_PACKAGES_BIN = "${cfg.dataHome}/.npm-packages/bin";
   };
 }
