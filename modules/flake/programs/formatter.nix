@@ -130,6 +130,8 @@ treefmt.withConfig {
           "modules/nixos/theme.nix"
           # driver name
           "modules/nixos/hardware/gpu/nvidia.nix"
+          # account name
+          "modules/nixos/services/home-assistant/default.nix"
         ];
       };
 
