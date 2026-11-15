@@ -4,6 +4,7 @@
     ./atuin.nix
     # ./cachix.nix
     ./forgejo.nix
+    ./home-assistant
     ./homepage.nix
     ./immich.nix
     ./jellyfin.nix

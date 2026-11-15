@@ -31,6 +31,10 @@
     services = {
       docker.enable = true;
       forgejo.enable = true;
+      home-assistant = {
+        enable = true;
+        # radio = "/dev/serial/by-id/usb-SONOFF_SONOFF_Dongle_Plus_MG24_a8ad9d6a37a1ef11b4e1976661ce3355-if00-port0";
+      };
       homepage.enable = true;
       immich = {
         enable = true;
@@ -70,4 +74,6 @@
     libraspberrypi
     raspberrypi-eeprom
   ];
+
+  services.openthread-border-router.backboneInterfaces = [ "eth0" ];
 }
