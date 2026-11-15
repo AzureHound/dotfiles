@@ -9,7 +9,7 @@ in
     programs = {
       dconf.enable = true;
       gpu-screen-recorder.enable = true;
-      seahorse.enable = true; # gnome's keyring manager
+      # seahorse.enable = true; # gnome's keyring manager
     };
   };
 }

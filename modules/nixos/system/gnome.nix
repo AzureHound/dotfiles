@@ -12,8 +12,6 @@ in
 {
   config = mkIf config.pixel.profiles.graphical.enable {
     services = {
-      udev.packages = with pkgs; [ gnome-settings-daemon ];
-
       gnome = {
         glib-networking.enable = true;
 
@@ -24,6 +22,10 @@ in
 
         gnome-remote-desktop.enable = mkForce false;
       };
+
+      oo7.enable = true;
+
+      udev.packages = with pkgs; [ gnome-settings-daemon ];
     };
   };
 }
