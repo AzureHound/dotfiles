@@ -1,17 +1,31 @@
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+
+let
+  inherit (lib.modules) mkIf;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+in
+
+{
   programs.ghostty = {
     package = null;
 
     settings = {
-      # background-opacity = 0.90;
+      # background-opacity = mkIf isDarwin 0.90;
       # background-blur = 20;
 
       adjust-cell-height = "20%";
-      font-size = 19;
+      font-family = mkIf isDarwin config.pixel.style.fonts.name;
+      font-size = mkIf isDarwin 19;
 
       window-padding-x = "5,5";
       window-padding-y = "4,5";
       window-padding-balance = true;
+      window-padding-color = mkIf isLinux "extend";
 
       cursor-style = "bar";
       cursor-click-to-move = true;
