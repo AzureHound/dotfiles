@@ -15,17 +15,15 @@ in
 
     xdgOpenUsePortal = true;
 
-    config = {
-      common = {
-        default = [ "gtk" ];
+    config.common = {
+      default = [ "gtk" ];
 
-        "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
-        "org.freedesktop.impl.portal.Secret" = [ "oo7-portal" ];
-      };
+      "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+      "org.freedesktop.impl.portal.Secret" = [ "oo7-portal" ];
     };
 
     extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gtk4
       xdg-desktop-portal-termfilechooser
     ];
   };
