@@ -10,11 +10,6 @@ in
 
 {
   programs.nushell = {
-    shellAliases = {
-      la = "ls -a";
-      mkdir = mkForce "^mkdir -pv";
-    };
-
     environmentVariables = config.home.sessionVariables;
 
     extraConfig = ''
@@ -53,5 +48,10 @@ in
       $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = ""
       $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = ""
     '';
+
+    shellAliases = {
+      la = "ls -a";
+      mkdir = mkForce "^mkdir -pv";
+    };
   };
 }
