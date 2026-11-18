@@ -18,6 +18,7 @@ in
   config = mkIf (pkgs.stdenv.hostPlatform.isLinux && config.pixel.profiles.graphical.enable) {
     dconf.settings = {
       "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+      # "org/gnome/desktop/wm/preferences".button-layout = "appmenu:";
       "org/gnome/nautilus/preferences".show-hidden-files = true;
 
       "org/gtk/settings/file-chooser".show-hidden = true;
