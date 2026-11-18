@@ -78,6 +78,8 @@ in
         }:$PATH"
       '';
 
+      packages = with pkgs; [ pipx ];
+
       shellAliases = {
         cz = "czg";
         wttr = "gust -f";
