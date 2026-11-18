@@ -15,7 +15,6 @@
 
     ./disko.nix
     ./hardware.nix
-    ./relay.nix
   ];
 
   boot.loader.raspberry-pi.bootloader = "kernel";
@@ -26,36 +25,6 @@
     profiles = {
       headless.enable = true;
       server.enable = true;
-    };
-
-    services = {
-      docker.enable = true;
-      filebrowser.enable = true;
-      forgejo.enable = true;
-      home-assistant = {
-        enable = true;
-        # radio = "/dev/serial/by-id/usb-SONOFF_SONOFF_Dongle_Plus_MG24_a8ad9d6a37a1ef11b4e1976661ce3355-if00-port0";
-      };
-      homepage.enable = true;
-      immich = {
-        enable = true;
-        host = "0.0.0.0";
-      };
-      karakeep.enable = true;
-      microbin.enable = true;
-      navidrome.enable = true;
-      nginx.enable = true;
-      opencloud.enable = true;
-      radicale.enable = true;
-      samba.enable = true;
-      search.enable = true;
-      syncthing.enable = true;
-      technitium.enable = true;
-      vaultwarden.enable = true;
-
-      # db
-      postgresql.enable = true;
-      redis.enable = true;
     };
 
     system = {

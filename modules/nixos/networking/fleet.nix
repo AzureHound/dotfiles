@@ -1,16 +1,24 @@
-{ lib, config, ... }:
+{
+  lib,
+  self,
+  config,
+  ...
+}:
 
 let
   inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption;
   inherit (lib.types)
+    anything
     attrsOf
+    listOf
     nullOr
     str
     submodule
     ;
 
-  wakeOnLan = config.pixel.fleet.${config.networking.hostName}.wakeOnLan or null;
+  fleet = config.pixel.fleet.${config.networking.hostName} or { };
+  wakeOnLan = fleet.wakeOnLan or null;
 
   address =
     description: example:
@@ -29,28 +37,37 @@ in
           ipv4 = address "The IPv4 address on the host's primary interface" "203.0.113.10";
           ipv6 = address "The IPv6 address on the host's primary interface" "2001:db8::1";
           wakeOnLan = address "The interface on which to enable Wake-on-LAN" "enp1s0";
+
+          services = mkOption {
+            type = attrsOf (attrsOf anything);
+            default = { };
+          };
+
+          relay = mkOption {
+            type = nullOr (submodule {
+              options = {
+                via = mkOption {
+                  type = str;
+                };
+
+                services = mkOption {
+                  type = listOf str;
+                };
+              };
+            });
+            default = null;
+          };
         };
       });
       default = { };
-      description = "Facts about every host, identical on all of them, so no host has to evaluate another to learn about it";
     };
-
   };
 
   config = {
-    pixel.fleet = {
-      Legion = {
-        ipv4 = "10.10.0.4";
-        # ipv6 = "2a01:4f8:c012:2f67::1";
-      };
+    pixel = {
+      fleet = lib.trivial.importTOML "${self}/hosts/fleet.toml";
 
-      Newton = {
-        # wakeOnLan = "enp4s0";
-      };
-
-      Notebook = { };
-
-      Orion = { };
+      services = fleet.services or { };
     };
 
     networking = mkIf (wakeOnLan != null) {

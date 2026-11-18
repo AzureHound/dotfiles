@@ -48,8 +48,6 @@ in
       printing.enable = true;
       security.binaries.enable = true;
     };
-
-    # services.filebrowser.enable = true;
   };
 
   boot = {
