@@ -67,10 +67,14 @@ in
     home = {
       activation.syncMise = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         export PATH="${
-          lib.makeBinPath [
-            pkgs.go
-            pkgs.nodejs
-          ]
+          lib.makeBinPath (
+            with pkgs;
+            [
+              go
+              nodejs
+              pipx
+            ]
+          )
         }:$PATH"
 
         run ${lib.getExe pkgs.mise} install -y
