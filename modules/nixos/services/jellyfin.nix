@@ -59,7 +59,6 @@ in
     networking.firewall = {
       allowedTCPPorts = [
         cfg.port
-        8920
       ];
       allowedUDPPorts = [
         1900
