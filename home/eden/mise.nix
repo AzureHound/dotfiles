@@ -76,9 +76,6 @@ in
             ]
           )
         }:$PATH"
-
-        run ${lib.getExe pkgs.mise} install -y
-        run ${lib.getExe pkgs.mise} prune -y
       '';
 
       shellAliases = {
