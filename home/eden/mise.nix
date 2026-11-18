@@ -12,6 +12,8 @@ in
 
 {
   config = mkIf config.pixel.profiles.development.enable {
+    sops.secrets.ha_token = { };
+
     programs.mise = {
       enable = true;
 
@@ -23,6 +25,8 @@ in
           "npm:czg" = "latest";
           "npm:five-server" = "latest";
           "npm:torlnk" = "latest";
+
+          "pipx:hastty" = "latest";
         };
 
         settings = {
@@ -80,8 +84,14 @@ in
 
       packages = with pkgs; [ pipx ];
 
+      sessionVariables = {
+        HA_URL = "http://10.10.0.4:8123";
+        HA_TOKEN = "$(cat ${config.sops.secrets.ha_token.path})";
+      };
+
       shellAliases = {
         cz = "czg";
+        ha = "hastty";
         wttr = "gust -f";
       };
     };

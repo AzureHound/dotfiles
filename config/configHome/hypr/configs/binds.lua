@@ -136,6 +136,7 @@ hl.bind(hyper .. " + CTRL + N", hl.dsp.exec_cmd(vars.pypr .. " toggle quick-note
 hl.bind(hyper .. " + B", hl.dsp.exec_cmd(vars.pypr .. " toggle btop"))
 hl.bind(hyper .. " + D", hl.dsp.exec_cmd(vars.pypr .. " toggle lazydocker"))
 hl.bind(hyper .. " + G", hl.dsp.exec_cmd(vars.pypr .. " toggle nvitop"))
+hl.bind(hyper .. " + H", hl.dsp.exec_cmd(vars.pypr .. " toggle ha"))
 -- hl.bind(hyper .. " + I", hl.dsp.exec_cmd(vars.pypr .. " toggle tgpt"))
 hl.bind(hyper .. " + J", hl.dsp.exec_cmd(vars.pypr .. " toggle jelly"))
 hl.bind(hyper .. " + L", hl.dsp.exec_cmd(vars.pypr .. " toggle lofi"))

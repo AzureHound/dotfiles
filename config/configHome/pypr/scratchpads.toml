@@ -71,6 +71,15 @@ unfocus = "hide"
 hysteresis = 0.2
 lazy = true
 
+[scratchpads.ha]
+animation = ""
+command = "[term] Homeassistant hastty"
+class = "Homeassistant"
+size = "73% 77%"
+unfocus = "hide"
+hysteresis = 0.2
+lazy = true
+
 [scratchpads.impala]
 animation = ""
 command = "[term] WiFi impala"
