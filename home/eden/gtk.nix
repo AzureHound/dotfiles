@@ -17,18 +17,11 @@ in
 {
   config = mkIf (pkgs.stdenv.hostPlatform.isLinux && config.pixel.profiles.graphical.enable) {
     dconf.settings = {
-      "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
-      };
-      "org/gnome/nautilus/preferences" = {
-        show-hidden-files = true;
-      };
-      "org/gtk/settings/file-chooser" = {
-        show-hidden = true;
-      };
-      "org/gtk/gtk4/settings/file-chooser" = {
-        show-hidden = true;
-      };
+      "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+      "org/gnome/nautilus/preferences".show-hidden-files = true;
+
+      "org/gtk/settings/file-chooser".show-hidden = true;
+      "org/gtk/gtk4/settings/file-chooser".show-hidden = true;
     };
 
     gtk = {
