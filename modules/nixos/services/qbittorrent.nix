@@ -17,17 +17,22 @@ let
 in
 
 {
-  options.pixel.services.qbittorrent = mkServiceOption "qbittorrent" { port = 3019; } // {
-    webuiPort = mkOption {
-      type = port;
-      default = 4019;
-    };
+  options.pixel.services.qbittorrent =
+    mkServiceOption "qbittorrent" {
+      port = 3019;
+      host = "0.0.0.0";
+    }
+    // {
+      webuiPort = mkOption {
+        type = port;
+        default = 4019;
+      };
 
-    torrentingPort = mkOption {
-      type = port;
-      default = 43125;
+      torrentingPort = mkOption {
+        type = port;
+        default = 43125;
+      };
     };
-  };
 
   config = mkIf cfg.enable {
     services = {

@@ -15,6 +15,7 @@ in
 {
   options.pixel.services.prowlarr = mkServiceOption "prowlarr" {
     port = 3022;
+    host = "0.0.0.0";
     domain = "indexers.${config.networking.domain}";
   };
 
@@ -22,7 +23,10 @@ in
     services = {
       prowlarr = {
         enable = true;
-        settings.server.port = cfg.port;
+        settings.server = {
+          inherit (cfg) port;
+          bindaddress = cfg.host;
+        };
       };
 
       nginx.virtualHosts.${cfg.domain}.locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port}";

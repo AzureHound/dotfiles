@@ -15,6 +15,7 @@ in
 {
   options.pixel.services.radarr = mkServiceOption "radarr" {
     port = 3021;
+    host = "0.0.0.0";
     domain = "movies.${config.networking.domain}";
   };
 
@@ -23,7 +24,10 @@ in
       radarr = {
         inherit (cfg) enable;
         group = "media";
-        settings.server.port = cfg.port;
+        settings.server = {
+          inherit (cfg) port;
+          bindaddress = cfg.host;
+        };
       };
 
       nginx.virtualHosts.${cfg.domain}.locations."/".proxyPass = "http://127.0.0.1:${toString cfg.port}";
