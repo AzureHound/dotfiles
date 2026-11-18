@@ -30,6 +30,7 @@
 
     services = {
       docker.enable = true;
+      filebrowser.enable = true;
       forgejo.enable = true;
       home-assistant = {
         enable = true;
