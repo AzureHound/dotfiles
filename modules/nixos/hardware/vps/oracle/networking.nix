@@ -16,15 +16,13 @@ in
   config = mkIf cfg.enable {
     assertions = [
       {
-        assertion = ipv4 != null;
-        message = "${hostName} needs ipv4 in pixel.fleet";
+        assertion = ipv4 != null && ipv6 != null;
+        message = "${hostName} needs ipv4 and ipv6 in pixel.fleet";
       }
     ];
 
     networking = {
       networkmanager.enable = mkForce false;
-
-      enableIPv6 = ipv6 != null;
 
       nameservers = [ "169.254.169.254" ];
       search = [ "vcn04081257.oraclevcn.com" ];
@@ -34,7 +32,7 @@ in
         interface = "eth0";
       };
 
-      defaultGateway6 = mkIf (ipv6 != null) {
+      defaultGateway6 = {
         address = "fe80::200:17ff:feb0:5c74";
         interface = "eth0";
       };
@@ -58,7 +56,7 @@ in
           ];
         };
 
-        ipv6 = mkIf (ipv6 != null) {
+        ipv6 = {
           addresses = [
             {
               address = ipv6;
