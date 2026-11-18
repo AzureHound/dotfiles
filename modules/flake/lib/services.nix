@@ -10,10 +10,10 @@ let
       port ? null,
       host ? "127.0.0.1",
       domain ? null,
-    }:
+    }@args:
 
     let
-      host' = if port == null then null else host;
+      host' = if args ? port then host else null;
     in
 
     {
@@ -25,15 +25,15 @@ let
         description = "The host for ${name} service";
       };
 
-      ${if port != null then "port" else null} = mkOption {
+      ${if args ? port then "port" else null} = mkOption {
         type = lib.types.port;
-        default = port;
+        default = args.port;
         description = "The port for ${name} service";
       };
 
-      ${if domain != null then "domain" else null} = mkOption {
+      ${if args ? domain then "domain" else null} = mkOption {
         type = str;
-        default = domain;
+        default = args.domain or null;
         defaultText = "networking.domain";
         description = "Domain name for the ${name} service";
       };
