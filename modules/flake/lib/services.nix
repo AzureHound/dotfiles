@@ -1,32 +1,41 @@
 { lib, ... }:
 
 let
-  inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.types) str;
+  inherit (lib.options) mkOption mkEnableOption;
 
   mkServiceOption =
     name:
     {
-      port ? 0,
+      port ? null,
       host ? "127.0.0.1",
-      domain ? "",
+      domain ? null,
     }:
-    {
-      enable = mkEnableOption "Init ${name} service";
 
-      host = mkOption {
+    let
+      host' = if port == null then null else host;
+    in
+
+    {
+      enable = mkEnableOption "Enable the ${name} service";
+
+      ${if host' != null then "host" else null} = mkOption {
         type = str;
-        default = host;
+        default = host';
+        description = "The host for ${name} service";
       };
 
-      port = mkOption {
+      ${if port != null then "port" else null} = mkOption {
         type = lib.types.port;
         default = port;
+        description = "The port for ${name} service";
       };
 
-      domain = mkOption {
+      ${if domain != null then "domain" else null} = mkOption {
         type = str;
         default = domain;
+        defaultText = "networking.domain";
+        description = "Domain name for the ${name} service";
       };
     };
 in
