@@ -12,6 +12,14 @@ let
   cfg = config.pixel.style;
 
   schema = pkgs.gsettings-desktop-schemas;
+
+  squareWindowsCss = ''
+    window, window.csd, window.solid-csd, window.background,
+    window decoration, window.csd decoration, decoration,
+    window > headerbar, window .titlebar, window headerbar {
+      border-radius: 0;
+    }
+  '';
 in
 
 {
@@ -31,16 +39,24 @@ in
       colorScheme = "dark";
       theme = {
         name = "Catppuccin-GTK-Macchiato-Blue-Dark-MB";
-        package = pkgs.magnetic-catppuccin-gtk.override {
-          accent = [ "blue" ];
-          # radius = if config.programs.sway.enable then 0 else null;
-          tweaks = [
-            "macchiato"
-            # "black"
-            # "border"
-            "macos"
-          ];
-        };
+        package =
+          (pkgs.magnetic-catppuccin-gtk.override {
+            accent = [ "blue" ];
+            # radius = if config.programs.sway.enable then 0 else null;
+            tweaks = [
+              "macchiato"
+              # "black"
+              # "border"
+              "macos"
+            ];
+          }).overrideAttrs
+            (oa: {
+              postInstall = oa.postInstall or "" + ''
+                for css in $out/share/themes/*/gtk-{3,4}.0/gtk{,-dark}.css; do
+                  echo ${lib.strings.escapeShellArg squareWindowsCss} >> "$css"
+                done
+              '';
+            });
       };
 
       iconTheme = {
