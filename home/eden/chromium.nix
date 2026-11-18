@@ -2,9 +2,9 @@
 
 let
   inherit (lib.lists) concatLists;
-  inherit (lib.strings) concatMapStrings enableFeature;
+  inherit (lib.strings) concatStringsSep enableFeature;
 
-  features = en: features: "--${en}-features=" + (concatMapStrings (x: x + ",") features);
+  features = en: features: "--${en}-features=" + (concatStringsSep "," features);
 in
 
 {
@@ -33,15 +33,8 @@ in
 
         # Performance
         [
-          (enableFeature true "gpu-rasterization")
-          (enableFeature true "oop-rasterization")
-          (enableFeature true "zero-copy")
-
           # Share a process per site
           "--process-per-site"
-
-          # Parallel downloading
-          (enableFeature true "parallel-downloading")
 
           # vaapi info: https://chromium.googlesource.com/chromium/src/+/refs/heads/main/docs/gpu/vaapi.md
           "--ignore-gpu-blocklist"
@@ -62,8 +55,14 @@ in
           # Stop asking to be the default browser
           "--no-default-browser-check"
 
+          # Stop asking to pick a search engine on new profiles
+          "--disable-search-engine-choice-screen"
+
           # HDR
           (enableFeature true "experimental-web-platform-features")
+
+          # Middle click autoscroll
+          "--enable-blink-features=MiddleClickAutoscroll"
 
           # rm speechd
           (enableFeature false "speech-api")
@@ -78,8 +77,14 @@ in
           # Disable pings
           "--no-pings"
 
+          # Disable domain reliability telemetry reports
+          "--disable-domain-reliability"
+
           # Require HTTPS for component updater
           "--component-updater=require_encryption"
+
+          # Opt out of finch field trials / A-B experiments
+          "--disable-field-trial-config"
 
           # Disable crash upload
           "--no-crash-upload"
@@ -98,43 +103,30 @@ in
 
         [
           (features "enable" [
-            # Wayland
-            "UseOzonePlatform"
-
-            "MiddleClickAutoscroll"
-
-            # Allow manifest v2
-            "AllowLegacyMV2Extensions"
-
-            # See the performance section as to why these are added
+            # nvidia hardware encoding/decoding, these are not default
             "AcceleratedVideoEncoder"
             "AcceleratedVideoDecodeLinuxGL"
             "VaapiOnNvidiaGPUs"
-            "WaylandLinuxDrmSyncobj"
 
             # Enable visited link database partitioning
             "PartitionVisitedLinkDatabase"
 
-            # Enable prefetch privacy changes
-            "PrefetchPrivacyChanges"
-
             # Enable split cache
             "SplitCacheByNetworkIsolationKey"
             "SplitCodeCacheByNetworkIsolationKey"
+            "SplitAuthCacheByNetworkIsolationKey"
 
             # Enable partitioning connections
-            "EnableCrossSiteFlagNetworkIsolationKey"
-            "HttpCacheKeyingExperimentControlGroup"
             "PartitionConnectionsByNetworkIsolationKey"
-
-            # Enable strict origin isolation
-            "StrictOriginIsolation"
 
             # Enable reduce accept language header
             "ReduceAcceptLanguage"
 
-            # Enable content settings partitioning
-            "ContentSettingsPartitioning"
+            # Require permission prompts for WebRTC local network access, blocks sites from probing the LAN via WebRTC by default
+            "LocalNetworkAccessChecksWebRTC"
+
+            # Make ORB-blocked responses error out for script-initiated fetches instead of returning empty successes
+            "OpaqueResponseBlockingErrorsForAllFetches"
 
             # Enable WebBluetooth
             "WebBluetooth"
@@ -144,59 +136,40 @@ in
             # Disable autofill
             "AutofillPaymentCardBenefits"
             "AutofillPaymentCvcStorage"
-            "AutofillPaymentCardBenefits"
 
             # Disable third-party cookie deprecation bypasses
             "TpcdHeuristicsGrants"
-            "TpcdMetadataGrants"
 
             # Disable hyperlink auditing
             "EnableHyperlinkAuditing"
 
-            # Disable showing popular sites
-            "NTPPopularSitesBakedInContent"
-            "UsePopularSitesSuggestions"
-
             # Disable article suggestions
             "EnableSnippets"
-            "ArticlesListVisible"
-            "EnableSnippetsByDse"
-
-            # Disable content feed suggestions
-            "InterestFeedV2"
-
-            # Disable media DRM preprovisioning
-            "MediaDrmPreprovisioning"
 
             # Disable autofill server communication
             "AutofillServerCommunication"
 
             # Disable new privacy sandbox features
-            "PrivacySandboxSettings4"
             "BrowsingTopics"
-            "BrowsingTopicsDocumentAPI"
             "BrowsingTopicsParameters"
 
-            # Disable translate button
-            "AdaptiveButtonInTopToolbarTranslate"
+            # Disable privacy sandbox ad APIs entirely
+            "Fledge"
+            "AttributionReporting"
 
-            # Disable detailed language settings
-            "DetailedLanguageSettings"
-
-            # Disable fetching optimization guides
+            # Disable fetching optimization guide models
+            "OptimizationHints"
             "OptimizationHintsFetching"
 
-            # Partition third-party storage
-            "DisableThirdPartyStoragePartitioningDeprecationTrial2"
+            # Disable the cast service, stops mDNS discovery chatter on the LAN
+            "MediaRouter"
+
+            # Stop websites from auto-adjusting the microphone input volume
+            "WebRtcAllowInputVolumeAdjustment"
 
             # Disable media engagement
             "PreloadMediaEngagementData"
             "MediaEngagementBypassAutoplayPolicies"
-
-            # Allow manifest v2
-            "ExtensionsManifestV3Only"
-            "ExtensionManifestV2Unsupported"
-            "ExtensionManifestV2Disabled"
           ])
         ]
       ];
