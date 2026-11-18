@@ -8,6 +8,8 @@ let
 
     formatting = scopeSelf.callPackage ./formatting.nix { };
 
+    port-collector = scopeSelf.callPackage ./port-collector.nix { };
+
     selflib = scopeSelf.callPackage ./lib.nix { };
   });
 in
