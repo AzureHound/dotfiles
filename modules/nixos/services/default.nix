@@ -3,6 +3,7 @@
     ./arr.nix
     ./atuin.nix
     # ./cachix.nix
+    ./filebrowser.nix
     ./forgejo.nix
     ./home-assistant
     ./homepage.nix
