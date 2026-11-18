@@ -4,6 +4,11 @@
 }:
 
 callPackage ./mk-test-check.nix { } "nix-flake-tests" {
+  testJournalJailRegexes = {
+    expr = (self.lib.fail2ban.journalJail "forgejo" [ "a <ADDR>" "b <ADDR>" ] { }).filter.Definition.failregex;
+    expected = "a <ADDR>\n    b <ADDR>";
+  };
+
   testGiturl = {
     expr = self.lib.helpers.giturl {
       domain = "github.com";

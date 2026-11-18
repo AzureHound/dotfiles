@@ -8,7 +8,7 @@
 
 let
   inherit (lib.modules) mkIf mkForce;
-  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (self.lib) mkServiceOption mkSecret journalJail;
 
   socket = "http://unix:${config.services.forgejo.settings.server.HTTP_ADDR}";
   rdomain = config.networking.domain;
@@ -53,6 +53,11 @@ in
     ];
 
     services = {
+      fail2ban.jails.forgejo = journalJail "forgejo" [
+        ''^.*Failed authentication attempt for .* from <ADDR>(?::\d+)?:''
+        ''^.*router: completed \S+ \S+ for <ADDR>:\d+, 401 Unauthorized''
+      ] { maxretry = 10; };
+
       forgejo = {
         enable = true;
         package = pkgs.forgejo;
