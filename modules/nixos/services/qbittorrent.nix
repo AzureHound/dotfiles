@@ -7,6 +7,8 @@
 
 let
   inherit (lib.modules) mkIf;
+  inherit (lib.options) mkOption;
+  inherit (lib.types) port;
   inherit (self.lib) mkServiceOption;
 
   inherit (config.pixel.services) arr;
@@ -15,9 +17,16 @@ let
 in
 
 {
-  options.pixel.services.qbittorrent = mkServiceOption "qbittorrent" {
-    port = 4019;
-    domain = "torrent.${config.networking.domain}";
+  options.pixel.services.qbittorrent = mkServiceOption "qbittorrent" { port = 3019; } // {
+    webuiPort = mkOption {
+      type = port;
+      default = 4019;
+    };
+
+    torrentingPort = mkOption {
+      type = port;
+      default = 43125;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -26,8 +35,7 @@ in
         enable = true;
         group = arr.mediaGroup;
 
-        webuiPort = cfg.port;
-        torrentingPort = 43125;
+        inherit (cfg) webuiPort torrentingPort;
 
         serverConfig = {
           LegalNotice.Accepted = true;

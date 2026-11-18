@@ -117,7 +117,11 @@ in
           cache = {
             ENABLED = true;
             ADAPTER = "redis";
-            HOST = "redis://:forgejo@localhost:6371";
+            HOST =
+              let
+                inherit (config.pixel.services) redis;
+              in
+              "redis://:forgejo@${redis.host}:${toString redis.port}";
           };
 
           oauth2_client = {

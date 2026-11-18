@@ -14,7 +14,7 @@ let
 in
 
 {
-  options.pixel.services.redis = mkServiceOption "redis" { };
+  options.pixel.services.redis = mkServiceOption "redis" { port = 6371; };
 
   config = mkIf cfg.redis.enable {
     services.redis = {
@@ -25,7 +25,8 @@ in
           forgejo = {
             enable = true;
             user = "forgejo";
-            port = 6371;
+            inherit (cfg.redis) port;
+            bind = cfg.redis.host;
             databases = 16;
             logLevel = "debug";
             requirePass = "forgejo";

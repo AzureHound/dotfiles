@@ -8,6 +8,7 @@
 
 let
   inherit (lib.modules) mkIf;
+  inherit (lib.options) mkOption;
   inherit (self.lib) mkServiceOption mkSecret;
 
   rdomain = config.networking.domain;
@@ -16,10 +17,18 @@ let
 in
 
 {
-  options.pixel.services.immich = mkServiceOption "immich" {
-    port = 3007;
-    domain = "photos.${rdomain}";
-  };
+  options.pixel.services.immich =
+    mkServiceOption "immich" {
+      port = 3007;
+      domain = "photos.${rdomain}";
+    }
+    // {
+      machineLearningPort = mkOption {
+        type = lib.types.port;
+        default = 3003;
+        readOnly = true;
+      };
+    };
 
   config = mkIf cfg.enable {
     sops.secrets = {
@@ -179,7 +188,7 @@ in
               modelName = "PP-OCRv6_medium";
             };
 
-            urls = [ "http://127.0.0.1:3003" ];
+            urls = [ "http://127.0.0.1:${toString cfg.machineLearningPort}" ];
           };
 
           map = {
