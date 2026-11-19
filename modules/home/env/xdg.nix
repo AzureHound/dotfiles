@@ -250,6 +250,33 @@ in
     SQLITE_HISTORY = "${cfg.dataHome}/sqlite_history";
     WORKON_HOME = "${cfg.dataHome}/virtualenvs";
     _JAVA_OPTIONS = "-Djava.util.prefs.userRoot='${cfg.configHome}/java'";
+
+    NEWT_COLORS = ''
+      root=#cad3f5,#24273a
+      roottext=#cad3f5,#24273a
+      window=#cad3f5,#24273a
+      border=#8aadf4,#24273a
+      shadow=#181926,#181926
+
+      title=#8aadf4,#24273a
+      label=#cad3f5,#24273a
+      helpline=#cad3f5,#24273a
+
+      button=#24273a,#8aadf4
+      actbutton=#24273a,#8aadf4
+      compactbutton=#cad3f5,#24273a
+
+      listbox=#cad3f5,#24273a
+      actlistbox=#cad3f5,#24273a
+      actsellistbox=#24273a,#8aadf4
+
+      textbox=#cad3f5,#24273a
+      acttextbox=#24273a,#8aadf4
+      entry=#cad3f5,#24273a
+
+      checkbox=#cad3f5,#363a4f
+      actcheckbox=#24273a,#8aadf4
+    '';
   };
 
   xdg = {
