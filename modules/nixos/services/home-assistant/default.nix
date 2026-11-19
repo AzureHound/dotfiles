@@ -67,7 +67,6 @@ in
 
           # misc
           "pi_hole"
-          "gatus"
         ];
 
         extraPackages = ps: [ ps.psycopg2 ];
