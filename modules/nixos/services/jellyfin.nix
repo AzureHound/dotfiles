@@ -7,17 +7,19 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.jellyfin;
 in
 
 {
-  options.pixel.services.jellyfin = mkServiceOption "jellyfin" {
-    port = 8096;
-    host = null;
-    domain = "tv.${config.networking.domain}";
-  };
+  imports = [
+    (mkService "jellyfin" {
+      port = 8096;
+      host = null;
+      domain = "tv.${config.networking.domain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     users.users.jellyfin.extraGroups = [

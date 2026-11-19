@@ -1,19 +1,20 @@
 {
   lib,
   pkgs,
+  self,
   config,
   ...
 }:
 
 let
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkEnableOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.docker;
 in
 
 {
-  options.pixel.services.docker.enable = mkEnableOption "docker";
+  imports = [ (mkService "docker" { }) ];
 
   config = mkIf cfg.enable {
     virtualisation.docker = {

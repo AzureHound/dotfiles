@@ -1,20 +1,22 @@
 {
   lib,
-  pkgs,
   self,
+  pkgs,
   config,
   ...
 }:
 
 let
   inherit (lib.modules) mkIf mkMerge;
-  inherit (self.lib.services) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services;
 in
 
 {
-  options.pixel.services.redis = mkServiceOption "redis" { port = 6371; };
+  imports = [
+    (mkService "redis" { port = 6371; })
+  ];
 
   config = mkIf cfg.redis.enable {
     services.redis = {

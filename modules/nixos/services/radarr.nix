@@ -7,17 +7,19 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.radarr;
 in
 
 {
-  options.pixel.services.radarr = mkServiceOption "radarr" {
-    port = 3021;
-    host = "0.0.0.0";
-    domain = "movies.${config.networking.domain}";
-  };
+  imports = [
+    (mkService "radarr" {
+      port = 3021;
+      host = "0.0.0.0";
+      domain = "movies.${config.networking.domain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     services = {

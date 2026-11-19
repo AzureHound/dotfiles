@@ -7,15 +7,17 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.ollama;
 in
 
 {
-  options.pixel.services.ollama = mkServiceOption "ollama" {
-    port = 11434;
-  };
+  imports = [
+    (mkService "ollama" {
+      port = 11434;
+    })
+  ];
 
   config = mkIf cfg.enable {
     services.ollama = {

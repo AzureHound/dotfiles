@@ -1,5 +1,6 @@
 {
   lib,
+  self,
   name,
   config,
   ...
@@ -7,8 +8,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkOption mkEnableOption;
-  inherit (lib) types;
+  inherit (self.lib) mkService;
 
   rdomain = config.networking.domain;
 
@@ -16,24 +16,13 @@ let
 in
 
 {
-  options.pixel.services.stump = {
-    enable = mkEnableOption "stump";
-
-    port = mkOption {
-      type = types.port;
-      default = 10001;
-    };
-
-    domain = mkOption {
-      type = types.str;
-      default = "comics.${rdomain}";
-    };
-
-    mediaDir = mkOption {
-      type = types.str;
-      default = "/media/comics";
-    };
-  };
+  imports = [
+    (mkService "stump" {
+      port = 10001;
+      domain = "comics.${rdomain}";
+      mediaDir = "/media/comics";
+    })
+  ];
 
   config = mkIf cfg.enable {
     users.users.stump.extraGroups = [ config.users.users.${name}.group ];

@@ -7,7 +7,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption mkSecret journalJail;
+  inherit (self.lib) mkSecret journalJail mkService;
 
   # https://github.com/dani-garcia/vaultwarden/wiki/Fail2Ban-Setup
   jail =
@@ -24,10 +24,12 @@ let
 in
 
 {
-  options.pixel.services.vaultwarden = mkServiceOption "vaultwarden" {
-    port = 3013;
-    domain = "vault.${rdomain}";
-  };
+  imports = [
+    (mkService "vaultwarden" {
+      port = 3013;
+      domain = "vault.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets = {

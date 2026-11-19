@@ -8,32 +8,19 @@
 
 let
   inherit (lib.modules) mkIf mkForce;
-  inherit (lib.options) mkOption mkEnableOption;
-  inherit (lib) types;
-  inherit (self.lib) mkSecret;
+  inherit (self.lib) mkService mkSecret;
 
   cfg = config.pixel.services.stash;
 in
 
 {
-  options.pixel.services.stash = {
-    enable = mkEnableOption "stash";
-
-    port = mkOption {
-      type = types.port;
-      default = 9999;
-    };
-
-    domain = mkOption {
-      type = types.str;
-      default = "spice.${config.networking.domain}";
-    };
-
-    mediaDir = mkOption {
-      type = types.str;
-      default = "/media/spice";
-    };
-  };
+  imports = [
+    (mkService "stash" {
+      port = 9999;
+      domain = "spice.${config.networking.domain}";
+      mediaDir = "/media/spice";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets = {

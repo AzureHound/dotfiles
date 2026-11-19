@@ -8,8 +8,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkOption;
-  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (self.lib) mkSecret mkService;
 
   rdomain = config.networking.domain;
 
@@ -17,18 +16,13 @@ let
 in
 
 {
-  options.pixel.services.immich =
-    mkServiceOption "immich" {
+  imports = [
+    (mkService "immich" {
       port = 3007;
       domain = "photos.${rdomain}";
-    }
-    // {
-      machineLearningPort = mkOption {
-        type = lib.types.port;
-        default = 3003;
-        readOnly = true;
-      };
-    };
+      machineLearningPort = 3003;
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets = {
@@ -38,10 +32,6 @@ in
         owner = "immich";
         group = "immich";
       };
-    };
-
-    pixel.services = {
-      postgresql.enable = true;
     };
 
     users.users.immich.extraGroups = [

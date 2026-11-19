@@ -2,6 +2,7 @@
   lib,
   self,
   config,
+  options,
   ...
 }:
 
@@ -9,13 +10,14 @@ let
   inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption;
   inherit (lib.types)
-    anything
     attrsOf
     listOf
     nullOr
     str
     submodule
     ;
+
+  data = lib.trivial.importTOML "${self}/hosts/fleet.toml";
 
   fleet = config.pixel.fleet.${config.networking.hostName} or { };
   wakeOnLan = fleet.wakeOnLan or null;
@@ -39,7 +41,7 @@ in
           wakeOnLan = address "The interface on which to enable Wake-on-LAN" "enp1s0";
 
           services = mkOption {
-            type = attrsOf (attrsOf anything);
+            inherit (options.pixel.services) type;
             default = { };
           };
 
@@ -65,9 +67,9 @@ in
 
   config = {
     pixel = {
-      fleet = lib.trivial.importTOML "${self}/hosts/fleet.toml";
+      fleet = data;
 
-      services = fleet.services or { };
+      services = data.${config.networking.hostName}.services or { };
     };
 
     networking = mkIf (wakeOnLan != null) {

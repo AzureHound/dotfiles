@@ -7,7 +7,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib.services) mkServiceOption;
+  inherit (self.lib) mkService;
 
   rdomain = config.networking.domain;
 
@@ -15,16 +15,14 @@ let
 in
 
 {
-  options.pixel.services.atuin = mkServiceOption "atuin" {
-    port = 3004;
-    domain = "atuin.${rdomain}";
-  };
+  imports = [
+    (mkService "atuin" {
+      port = 3004;
+      domain = "atuin.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
-    pixel.services = {
-      postgresql.enable = true;
-    };
-
     services = {
       atuin = {
         enable = true;

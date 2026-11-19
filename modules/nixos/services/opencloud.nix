@@ -7,7 +7,7 @@
 
 let
   inherit (lib.modules) mkIf mkForce;
-  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (self.lib) mkService mkSecret;
 
   rdomain = config.networking.domain;
 
@@ -15,10 +15,12 @@ let
 in
 
 {
-  options.pixel.services.opencloud = mkServiceOption "opencloud" {
-    port = 9200;
-    domain = "cloud.${rdomain}";
-  };
+  imports = [
+    (mkService "opencloud" {
+      port = 9200;
+      domain = "cloud.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets.opencloud-env = mkSecret {

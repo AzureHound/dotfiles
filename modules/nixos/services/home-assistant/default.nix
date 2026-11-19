@@ -1,7 +1,7 @@
 {
   lib,
-  pkgs,
   self,
+  pkgs,
   self',
   config,
   ...
@@ -9,9 +9,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkOption;
-  inherit (lib.types) nullOr path;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.home-assistant;
   hassDir = config.services.home-assistant.configDir;
@@ -19,22 +17,16 @@ let
 in
 
 {
-  options.pixel.services.home-assistant =
-    mkServiceOption "home-assistant" {
+  imports = [
+    (mkService "home-assistant" {
       port = 8123;
       host = "0.0.0.0";
       domain = "home.${config.networking.domain}";
-    }
-    // {
-      radio = mkOption {
-        type = nullOr path;
-        default = null;
-      };
-    };
+      radio = null;
+    })
+  ];
 
   config = mkIf cfg.enable {
-    pixel.services.postgresql.enable = true;
-
     networking.firewall = {
       allowedTCPPorts = [ cfg.port ];
       allowedUDPPorts = [

@@ -18,6 +18,6 @@ lib.fixedPoints.makeExtensible (final: {
   inherit (final.hardware) isx86Linux;
   inherit (final.helpers) mkPubs giturl;
   inherit (final.secrets) mkSecret;
-  inherit (final.services) mkServiceOption;
+  inherit (final.services) mkService;
   inherit (final.validators) anyHome;
 })

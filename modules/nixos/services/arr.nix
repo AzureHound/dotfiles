@@ -1,49 +1,38 @@
-{ lib, config, ... }:
+{
+  lib,
+  self,
+  config,
+  ...
+}:
 
 let
   inherit (lib.attrsets) genAttrs;
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkEnableOption mkOption;
-  inherit (lib) types;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.arr;
 in
 
 {
-  options.pixel.services.arr = {
-    enable = mkEnableOption "arr services";
-
-    mediaDir = mkOption {
-      type = types.str;
-      default = "/media";
-    };
-
-    contentDir = mkOption {
-      type = types.str;
-      default = "${cfg.mediaDir}/content";
-      defaultText = "\${cfg.mediaDir}/content";
-    };
-
-    mediaOwner = mkOption {
-      type = types.str;
-      default = "root";
-    };
-
-    mediaGroup = mkOption {
-      type = types.str;
-      default = "media";
-    };
-  };
+  imports = [
+    (mkService "arr" {
+      mediaDir = "/media";
+      contentDir = "/media/content";
+      mediaOwner = "root";
+      mediaGroup = "media";
+    })
+    {
+      pixel.services = {
+        jellyfin.enable = mkIf cfg.enable true;
+        # prowlarr.enable = mkIf cfg.enable true;
+        qbittorrent.enable = mkIf cfg.enable true;
+        # radarr.enable = mkIf cfg.enable false;
+        # sonarr.enable = mkIf cfg.enable true;
+      };
+    }
+  ];
 
   config = mkIf cfg.enable {
-    pixel.services = {
-      jellyfin.enable = true;
-      # prowlarr.enable = true;
-      qbittorrent.enable = true;
-      # radarr.enable = false;
-      # sonarr.enable = true;
-    };
-
     users.groups.media = { };
 
     systemd.tmpfiles.settings."media" =

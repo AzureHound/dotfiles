@@ -7,16 +7,18 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.filebrowser;
 in
 
 {
-  options.pixel.services.filebrowser = mkServiceOption "filebrowser" {
-    port = 9000;
-    domain = "files.${config.networking.domain}";
-  };
+  imports = [
+    (mkService "filebrowser" {
+      port = 9000;
+      domain = "files.${config.networking.domain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     services = {

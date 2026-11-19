@@ -8,11 +8,13 @@
 
 let
   inherit (lib.modules) mkIf mkForce;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 in
 
 {
-  options.pixel.services.postgresql = mkServiceOption "postgresql" { };
+  imports = [
+    (mkService "postgresql" { })
+  ];
 
   config = mkIf config.pixel.services.postgresql.enable {
     services.postgresql = {

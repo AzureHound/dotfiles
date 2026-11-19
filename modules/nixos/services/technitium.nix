@@ -7,7 +7,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   rdomain = config.networking.domain;
 
@@ -15,10 +15,12 @@ let
 in
 
 {
-  options.pixel.services.technitium = mkServiceOption "technitium" {
-    port = 5380;
-    domain = "dns.${rdomain}";
-  };
+  imports = [
+    (mkService "technitium" {
+      port = 5380;
+      domain = "dns.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     networking.firewall = {

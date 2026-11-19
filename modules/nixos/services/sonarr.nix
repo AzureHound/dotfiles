@@ -7,17 +7,19 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.sonarr;
 in
 
 {
-  options.pixel.services.sonarr = mkServiceOption "sonarr" {
-    port = 3020;
-    host = "0.0.0.0";
-    domain = "shows.${config.networking.domain}";
-  };
+  imports = [
+    (mkService "sonarr" {
+      port = 3020;
+      host = "0.0.0.0";
+      domain = "shows.${config.networking.domain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     services = {

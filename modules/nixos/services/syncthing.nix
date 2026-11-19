@@ -9,7 +9,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (self.lib) mkService mkSecret;
 
   rdomain = config.networking.domain;
 
@@ -18,10 +18,12 @@ let
 in
 
 {
-  options.pixel.services.syncthing = mkServiceOption "syncthing" {
-    port = 8384;
-    domain = "sync.${rdomain}";
-  };
+  imports = [
+    (mkService "syncthing" {
+      port = 8384;
+      domain = "sync.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets.passwd = mkSecret {

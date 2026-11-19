@@ -7,7 +7,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (self.lib) mkService mkSecret;
 
   rdomain = config.networking.domain;
 
@@ -15,10 +15,12 @@ let
 in
 
 {
-  options.pixel.services.searx = mkServiceOption "searx" {
-    port = 8888;
-    domain = "search.${rdomain}";
-  };
+  imports = [
+    (mkService "searx" {
+      port = 8888;
+      domain = "search.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets.searx-env = mkSecret {

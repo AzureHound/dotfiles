@@ -7,8 +7,11 @@
 }:
 
 let
-  inherit (lib.modules) mkIf mkForce;
-  inherit (self.lib) mkServiceOption mkSecret journalJail;
+  inherit (lib.modules)
+    mkIf
+    mkForce
+    ;
+  inherit (self.lib) mkSecret journalJail mkService;
 
   socket = "http://unix:${config.services.forgejo.settings.server.HTTP_ADDR}";
   rdomain = config.networking.domain;
@@ -17,10 +20,12 @@ let
 in
 
 {
-  options.pixel.services.forgejo = mkServiceOption "forgejo" {
-    port = 3011;
-    domain = "git.${rdomain}";
-  };
+  imports = [
+    (mkService "forgejo" {
+      port = 3011;
+      domain = "git.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets = {
@@ -36,11 +41,6 @@ in
         owner = "forgejo";
         group = "forgejo";
       };
-    };
-
-    pixel.services = {
-      redis.enable = true;
-      postgresql.enable = true;
     };
 
     systemd.services.forgejo = {

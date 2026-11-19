@@ -7,17 +7,19 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.prowlarr;
 in
 
 {
-  options.pixel.services.prowlarr = mkServiceOption "prowlarr" {
-    port = 3022;
-    host = "0.0.0.0";
-    domain = "indexers.${config.networking.domain}";
-  };
+  imports = [
+    (mkService "prowlarr" {
+      port = 3022;
+      host = "0.0.0.0";
+      domain = "indexers.${config.networking.domain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     services = {

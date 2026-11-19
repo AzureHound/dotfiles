@@ -7,16 +7,18 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   cfg = config.pixel.services.open-webui;
 in
 
 {
-  options.pixel.services.open-webui = mkServiceOption "open-webui" {
-    port = 8040;
-    domain = "ai.${config.networking.domain}";
-  };
+  imports = [
+    (mkService "open-webui" {
+      port = 8040;
+      domain = "ai.${config.networking.domain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     services = {

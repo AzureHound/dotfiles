@@ -7,7 +7,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   rdomain = config.networking.domain;
 
@@ -15,10 +15,12 @@ let
 in
 
 {
-  options.pixel.services.karakeep = mkServiceOption "karakeep" {
-    port = 3014;
-    domain = "bookmarks.${rdomain}";
-  };
+  imports = [
+    (mkService "karakeep" {
+      port = 3014;
+      domain = "bookmarks.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     services = {

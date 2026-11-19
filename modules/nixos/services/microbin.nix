@@ -7,7 +7,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib.services) mkServiceOption;
+  inherit (self.lib) mkService;
 
   rdomain = config.networking.domain;
 
@@ -15,10 +15,12 @@ let
 in
 
 {
-  options.pixel.services.microbin = mkServiceOption "microbin" {
-    port = 8069;
-    domain = "bin.${rdomain}";
-  };
+  imports = [
+    (mkService "microbin" {
+      port = 8069;
+      domain = "bin.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     services = {

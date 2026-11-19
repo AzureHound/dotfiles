@@ -7,9 +7,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkOption;
-  inherit (lib.types) port;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   inherit (config.pixel.services) arr;
 
@@ -17,22 +15,14 @@ let
 in
 
 {
-  options.pixel.services.qbittorrent =
-    mkServiceOption "qbittorrent" {
+  imports = [
+    (mkService "qbittorrent" {
       port = 3019;
       host = "0.0.0.0";
-    }
-    // {
-      webuiPort = mkOption {
-        type = port;
-        default = 4019;
-      };
-
-      torrentingPort = mkOption {
-        type = port;
-        default = 43125;
-      };
-    };
+      webuiPort = 4019;
+      torrentingPort = 43125;
+    })
+  ];
 
   config = mkIf cfg.enable {
     services = {

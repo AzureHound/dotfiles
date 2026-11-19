@@ -8,7 +8,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 
   rdomain = config.networking.domain;
 
@@ -16,15 +16,16 @@ let
 in
 
 {
-  options.pixel.services.homepage = mkServiceOption "homepage" {
-    domain = rdomain;
-  };
+  imports = [
+    (mkService "homepage" {
+      domain = rdomain;
+    })
+    {
+      pixel.services.nginx.enable = mkIf cfg.enable true;
+    }
+  ];
 
   config = mkIf cfg.enable {
-    pixel.services = {
-      nginx.enable = true;
-    };
-
     users.users.nginx.extraGroups = [ config.users.users.${name}.group ];
 
     services.nginx.virtualHosts.${cfg.domain} = {

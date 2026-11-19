@@ -8,7 +8,7 @@
 
 let
   inherit (lib.modules) mkIf mkForce;
-  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (self.lib) mkService mkSecret;
 
   rdomain = config.networking.domain;
 
@@ -16,10 +16,12 @@ let
 in
 
 {
-  options.pixel.services.navidrome = mkServiceOption "navidrome" {
-    port = 4533;
-    domain = "sounds.${rdomain}";
-  };
+  imports = [
+    (mkService "navidrome" {
+      port = 4533;
+      domain = "sounds.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets.navidrome-env = mkSecret {

@@ -7,7 +7,7 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption mkSecret;
+  inherit (self.lib) mkService mkSecret;
 
   rdomain = config.networking.domain;
 
@@ -15,10 +15,12 @@ let
 in
 
 {
-  options.pixel.services.radicale = mkServiceOption "radicale" {
-    port = 5232;
-    domain = "cal.${rdomain}";
-  };
+  imports = [
+    (mkService "radicale" {
+      port = 5232;
+      domain = "cal.${rdomain}";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets.radicale-htpasswd = mkSecret {

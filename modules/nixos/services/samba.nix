@@ -8,11 +8,11 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (self.lib) mkServiceOption;
+  inherit (self.lib) mkService;
 in
 
 {
-  options.pixel.services.samba = mkServiceOption "samba" { };
+  imports = [ (mkService "samba" { }) ];
 
   config = mkIf config.pixel.services.samba.enable {
     systemd.tmpfiles.settings."samba" = {
@@ -36,7 +36,7 @@ in
 
         storage = {
           "path" = "/media/smb";
-          "browseable" = "yes";
+          "browsable" = "yes";
           "read only" = "no";
           "guest ok" = "no";
           "create mask" = "0644";

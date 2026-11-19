@@ -8,32 +8,19 @@
 
 let
   inherit (lib.modules) mkIf;
-  inherit (lib.options) mkOption mkEnableOption;
-  inherit (lib) types;
-  inherit (self.lib) mkSecret;
+  inherit (self.lib) mkService mkSecret;
 
   cfg = config.pixel.services.slskd;
 in
 
 {
-  options.pixel.services.slskd = {
-    enable = mkEnableOption "slskd";
-
-    port = mkOption {
-      type = types.port;
-      default = 5030;
-    };
-
-    domain = mkOption {
-      type = types.str;
-      default = "slskd.${config.networking.domain}";
-    };
-
-    mediaDir = mkOption {
-      type = types.str;
-      default = "/media/slskd";
-    };
-  };
+  imports = [
+    (mkService "slskd" {
+      port = 5030;
+      domain = "slskd.${config.networking.domain}";
+      mediaDir = "/media/slskd";
+    })
+  ];
 
   config = mkIf cfg.enable {
     sops.secrets."slskd" = mkSecret {
