@@ -24,7 +24,14 @@ in
     # https://github.com/getchoo/borealis/blob/6e5ad4fb14a0de172c64e0d6a9d6f63ed7df88e6/modules/nixos/mixins/nginx.nix#L5
     services.nginx.virtualHosts = mkOption {
       type = types.attrsOf (
-        types.submodule (_: {
+        types.submodule (vhost: {
+          options = {
+            securityHeaders = mkOption {
+              type = types.bool;
+              default = true;
+            };
+          };
+
           freeformType = types.attrsOf types.anything;
 
           config = {
@@ -32,7 +39,14 @@ in
             forceSSL = mkDefault true;
             enableACME = mkDefault false;
             useACMEHost = mkDefault config.networking.domain;
-            extraConfig = "if ($ai_crawler) { return 403; }";
+            extraConfig = ''
+              if ($ai_crawler) { return 403; }
+            ''
+            + lib.optionalString vhost.config.securityHeaders ''
+              add_header 'Referrer-Policy' 'origin-when-cross-origin';
+              add_header Content-Security-Policy "frame-ancestors 'self'" always;
+              add_header X-Content-Type-Options nosniff;
+            '';
           };
         })
       );
@@ -91,10 +105,6 @@ in
               default 0;
               "~*(GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-Web|anthropic-ai|CCBot|Bytespider|Amazonbot|meta-externalagent|FacebookBot|PerplexityBot|cohere-ai|Diffbot|ImagesiftBot|Omgilibot|Timpibot|PetalBot|YouBot|AI2Bot|Scrapy)" 1;
             }
-
-            add_header 'Referrer-Policy' 'origin-when-cross-origin';
-            add_header X-Frame-Options "SAMEORIGIN" always;
-            add_header X-Content-Type-Options nosniff;
           '';
 
           recommendedTlsSettings = true;

@@ -77,12 +77,15 @@ in
       };
 
       # https://github.com/dani-garcia/vaultwarden/wiki/Proxy-examples
-      nginx.virtualHosts.${cfg.domain}.locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString cfg.port}";
-        proxyWebsockets = true;
-        extraConfig = ''
-          proxy_pass_header Authorization;
-        '';
+      nginx.virtualHosts.${cfg.domain} = {
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString cfg.port}";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_pass_header Authorization;
+          '';
+        };
+        securityHeaders = false;
       };
     };
   };
