@@ -1,9 +1,5 @@
-{ lib, config, ... }:
-
-let
-  inherit (lib.modules) mkDefault;
-in
+{ config, ... }:
 
 {
-  hardware.graphics.enable = mkDefault (config.pixel.profiles.graphical.enable || config.pixel.device.gpu != null);
+  hardware.graphics.enable = config.pixel.profiles.graphical.enable || config.pixel.device.gpu != null;
 }
