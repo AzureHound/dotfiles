@@ -46,28 +46,24 @@ in
           extraEnv = {
             MANGOHUD = "1";
           };
-
-          extraPkgs =
-            pkgs': with pkgs'; [
-              keyutils
-              libxcursor
-              libxi
-              libxinerama
-              libxscrnsaver
-              libkrb5
-              libpng
-              libpulseaudio
-              libvorbis
-              stdenv.cc.cc.lib
-            ];
         };
 
         extraPackages = with pkgs; [
           gamescope-wsi
           # hidapi
+          keyutils
+          libkrb5
+          libpng
+          libpulseaudio
+          libvorbis
+          libxcursor
+          libxi
+          libxinerama
+          libxscrnsaver
           mangohud
           protonup-ng
           steam-run
+          stdenv.cc.cc.lib
         ];
 
         extraCompatPackages = with pkgs; [ proton-ge-bin ];
