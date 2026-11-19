@@ -5,10 +5,8 @@
     ../core
     ./boot
     ./containers
-    ./docker.nix
     ./emulation.nix
     ./env
-    ./gaming.nix
     ./hardware
     ./home.nix
     ./headless.nix
@@ -22,7 +20,5 @@
     ./system
     ./theme.nix
     ./users
-    ./virt.nix
-    ./windows.nix
   ];
 }
