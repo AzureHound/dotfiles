@@ -1,0 +1,92 @@
+{
+  lib,
+  self,
+  config,
+  ...
+}:
+
+let
+  inherit (lib.modules) mkIf;
+  inherit (self.lib) mkSecret mkService;
+
+  rdomain = config.networking.domain;
+  cfg = config.pixel.services.wakapi;
+in
+
+{
+  imports = [
+    (mkService "wakapi" {
+      port = 3006;
+      domain = "wakapi.${rdomain}";
+    })
+  ];
+
+  config = mkIf cfg.enable {
+    sops.secrets.wakapi-env = mkSecret {
+      file = "wakapi";
+      owner = "wakapi";
+      group = "wakapi";
+      key = "env";
+    };
+
+    services = {
+      wakapi = {
+        enable = true;
+        environmentFiles = [ config.sops.secrets.wakapi-env.path ];
+
+        database.createLocally = true;
+
+        settings = {
+          app.avatar_url_template = "https://www.gravatar.com/avatar/{email_hash}.png";
+
+          server = {
+            inherit (cfg) port;
+            public_url = "https://${cfg.domain}";
+          };
+
+          db = {
+            dialect = "postgres";
+            host = "/run/postgresql";
+            port = 5432;
+            name = "wakapi";
+            user = "wakapi";
+          };
+
+          security = {
+            allow_signup = false;
+            disable_frontpage = true;
+            disable_local_auth = true;
+          };
+
+          mail =
+            let
+              mailer = "noreply@${rdomain}";
+            in
+            {
+              enabled = true;
+              sender = "<${mailer}>";
+              provider = "smtp";
+              smtp = {
+                host = "mail.${rdomain}";
+                port = 465;
+                username = mailer;
+                tls = true;
+              };
+            };
+        };
+      };
+
+      nginx.virtualHosts.${cfg.domain} = {
+        locations."/".proxyPass = "http://${cfg.host}:${toString cfg.port}";
+      };
+
+      postgresql = {
+        ensureDatabases = [ "wakapi" ];
+        ensureUsers = lib.lists.singleton {
+          name = "wakapi";
+          ensureDBOwnership = true;
+        };
+      };
+    };
+  };
+}

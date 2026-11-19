@@ -83,5 +83,6 @@ in
     ./syncthing.nix
     ./technitium.nix
     ./vaultwarden.nix
+    ./wakapi.nix
   ];
 }
