@@ -145,6 +145,7 @@ in
       };
 
       systemPackages = with pkgs; [
+        amethyst-mod-manager
         # (bottles.override { removeWarningPopup = true; })
         freetype
         steamcmd
