@@ -60,7 +60,6 @@ in
     ./immich.nix
     ./jellyfin.nix
     ./karakeep.nix
-    ./lego.nix
     ./microbin.nix
     ./navidrome.nix
     # ./nixbot.nix
