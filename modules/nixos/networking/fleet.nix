@@ -22,13 +22,10 @@ let
   fleet = config.pixel.fleet.${config.networking.hostName} or { };
   wakeOnLan = fleet.wakeOnLan or null;
 
-  address =
-    description: example:
-    mkOption {
-      type = nullOr str;
-      default = null;
-      inherit description example;
-    };
+  address = mkOption {
+    type = nullOr str;
+    default = null;
+  };
 in
 
 {
@@ -36,9 +33,9 @@ in
     fleet = mkOption {
       type = attrsOf (submodule {
         options = {
-          ipv4 = address "The IPv4 address on the host's primary interface" "203.0.113.10";
-          ipv6 = address "The IPv6 address on the host's primary interface" "2001:db8::1";
-          wakeOnLan = address "The interface on which to enable Wake-on-LAN" "enp1s0";
+          ipv4 = address;
+          ipv6 = address;
+          wakeOnLan = address;
 
           services = mkOption {
             inherit (options.pixel.services) type;
