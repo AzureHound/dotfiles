@@ -7,17 +7,13 @@
 }:
 
 lib.fixedPoints.makeExtensible (final: {
-  fail2ban = import ./fail2ban.nix { inherit lib; };
   helpers = import ./helpers.nix { inherit lib; };
   mkHost = import ./mkhost.nix { inherit inputs lib pkgsFor; };
-  secrets = import ./secrets.nix { inherit inputs; };
-  services = import ./services.nix { inherit lib; };
+  modules = import ./modules.nix { inherit lib inputs; };
   validators = import ./validators.nix { inherit lib; };
 
-  inherit (final.fail2ban) journalJail;
   inherit (final.hardware) isx86Linux;
   inherit (final.helpers) mkPubs giturl;
-  inherit (final.secrets) mkSecret;
-  inherit (final.services) mkService;
+  inherit (final.modules) mkService mkSecret journalJail;
   inherit (final.validators) anyHome;
 })
